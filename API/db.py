@@ -69,7 +69,6 @@ class Camera:
     def dispose(self):
         self.conn.close()
 
-
 class Music:
     def __init__(self):
         self.conn = sqlite3.connect(database)
@@ -106,11 +105,9 @@ class Music:
                 cur.execute(query, data)
             except:
                 return False
-        try:
-            self.conn.commit()
-        except:
-            return False
-
+        
+        self.conn.commit()   
+        
         return True
 
     def deleteSpecificDataMusic(self, ID):
@@ -131,7 +128,6 @@ class Music:
 
     def dispose(self):
         self.conn.close()
-
 
 class SensorMotion:
     def __init__(self):
@@ -176,7 +172,7 @@ class SensorMotion:
 
         return True
 
-    def deleteSpecificDataSensorMotion(self, ID=None, TimeStart=None, TimeEnd=None, Quantity=None):
+    def deleteSpecificDataSensorMotion(self, ID, TimeStart=None, TimeEnd=None, Quantity=None):
         cur = self.conn.cursor()
         try:
             query = '''DELETE FROM SensorMotion where ID = ?'''
@@ -185,16 +181,12 @@ class SensorMotion:
         except:
             return False
 
-        try:
-            self.conn.commit()
-        except:
-            return False
-
+        self.conn.commit()
+        
         return True
 
     def dispose(self):
         self.conn.close()
-
 
 class DeviceRas:
     def __init__(self):
@@ -232,10 +224,8 @@ class DeviceRas:
                 cur.execute(query, data)
             except:
                 return False
-        try:
-            self.conn.commit()
-        except:
-            return False
+
+        self.conn.commit()
 
         return True
 
@@ -248,21 +238,123 @@ class DeviceRas:
         except:
             return False
 
-        try:
-            self.conn.commit()
-        except:
-            return False
+        self.conn.commit()
 
         return True
 
     def dispose(self):
         self.conn.close()
 
+class Information:
+    def __init__(self):
+        self.conn = sqlite3.connect(database)
+
+    def getDataInformation(self):
+        cur = self.conn.cursor()
+        cur.execute("SELECT * FROM Information")
+
+        return cur.fetchall()
+
+    def getSpecificInformation(self, Username, Password):
+        cur = self.conn.cursor()
+        try:
+            cur.execute("SELECT * FROM Information where Username = ? or Password = ?",
+                        (Username, Password,))
+        except:
+            return False
+
+        return cur.fetchall()
+
+    def insertSpecificInformation(self, Username, Password):
+        cur = self.conn.cursor()
+        try:
+            query = ''' INSERT INTO Information(Username, Password) VALUES(?,?,) '''
+            data = (Username, Password)
+            cur.execute(query, data)
+        except:
+            return False
+
+        self.conn.commit()
+
+        return True
+
+    def deleteSpecificInformation(self, Username):
+        cur = self.conn.cursor()
+        try:
+            query = '''DELETE FROM DeviceRas where Username = ?'''
+            data = (Username,)
+            cur.execute(query, data)
+        except:
+            return False
+
+        self.conn.commit()
+
+        return True
+
+    def dispose(self):
+        self.conn.close()
+
+class SensorSound:
+    def __init__(self):
+        self.conn = sqlite3.connect(database)
+
+    def getDataSensorSound(self):
+        cur = self.conn.cursor()
+        cur.execute("SELECT * FROM SensorSound")
+
+        return cur.fetchall()
+
+    def getSpecificSensorSound(self, ID=None, TimeStart=None, TimeEnd=None, Parameter=None):
+        cur = self.conn.cursor()
+        try:
+            cur.execute("SELECT * FROM SensorSound where Id = ? or TimeStart like ? or TimeEnd like ? or Parameter = ?",
+                        (ID, unicode(str(TimeStart), "utf-8") + '%', unicode(str(TimeEnd), "utf-8") + '%', Parameter,))
+        except:
+            return False
+
+        return cur.fetchall()
+
+    def insertSpecificSensorSound(self, ID, TimeStart=None, TimeEnd=None, Parameter=None):
+        cur = self.conn.cursor()
+        if ID == None:  # Not Exist
+            try:
+                query = ''' INSERT INTO SensorSound(TimeStart, TimeEnd, Parameter) VALUES(?,?,?) '''
+                data = (TimeStart, TimeEnd, Parameter)
+                cur.execute(query, data)
+            except:
+                return False
+        else:  # Exist - Update
+            try:
+                query = ''' UPDATE SensorSound SET TimeStart = ?, TimeEnd = ?, Parameter = ? WHERE ID = ? '''
+                data = (TimeStart, TimeEnd, Parameter, ID)
+                cur.execute(query, data)
+            except:
+                return False
+
+        self.conn.commit()
+        
+        return True
+
+    def deleteSpecificSensorSound(self, ID, TimeStart=None, TimeEnd=None, Parameter=None):
+        cur = self.conn.cursor()
+        try:
+            query = '''DELETE FROM SensorSound where ID = ?'''
+            data = (ID,)
+            cur.execute(query, data)
+        except:
+            return False
+
+        self.conn.commit()
+        
+        return True
+
+    def dispose(self):
+        self.conn.close()
 
 def main():
     database = "test.db"
     conn = sqlite3.connect(database)
-    Camera().insertSpecificDataCamera(None, '2019', '2020', '_', '300')
+    # Camera().insertSpecificDataCamera(None, '2019', '2020', '_', '300')
     # Camera().deleteSpecificDataCamera(1)
 
 
