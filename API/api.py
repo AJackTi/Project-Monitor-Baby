@@ -15,8 +15,6 @@ app = Flask(__name__)
 api = Api(app)
 
 # http://localhost:5002/cameras
-
-
 class Cameras(Resource):
     # get all data
     def get(self):
@@ -34,8 +32,6 @@ class Cameras(Resource):
         return [i for i in lstReturn]
 
 # http://localhost:5002/camera/6/20190303/20190404/5500
-
-
 class Camera(Resource):
     def get(self, id, timestart, timeend, parameter):
         lstResult = db.Camera().getSpecificDataCamera(id, timestart, timeend, parameter)
@@ -51,11 +47,8 @@ class Camera(Resource):
         return [i for i in lstReturn]
 
 # http://localhost:5002/postcamera/10/20190303/20190404/0000/5500
-
 # http://localhost:5002/postcamera/None/20190303_3030/20190404_3030/0000/5500
 # http://localhost:5002/postcamera/10/20190303_3030/20190404_3030/0000/5500
-
-
 class postCamera(Resource):
     def post(self, id, timestart, timeend, videolink, parameter):
         if ast.literal_eval(id) is None:
@@ -70,8 +63,6 @@ class postCamera(Resource):
                 return {'status': 'fail'}
 
 # http://localhost:5002/deleteCamera/10
-
-
 class deleteCamera(Resource):
     def delete(self, id):
         if db.Camera().deleteSpecificDataCamera(int(id)):
@@ -79,7 +70,144 @@ class deleteCamera(Resource):
         else:
             return {'status': 'fail'}
 
+class DeviceRas(Resource):
+    # get all data
+    def get(self):
+        lstResult = db.DeviceRas().getDataDeviceRas()
+        lstReturn = []
+        subResult = {}
+        for i in lstResult:
+            subResult['ID'] = i[0]
+            subResult['Name'] = i[1]
+            lstReturn.append(subResult)
+            subResult = {}
+        return [i for i in lstReturn]
 
+class DeviceRass(Resource):
+    def get(self, id, name):
+        lstResult = db.DeviceRas().getSpecificDataDeviceRas(id, name)
+        lstReturn = []
+        subResult = {}
+        for i in lstResult:
+            subResult['ID'] = i[0]
+            subResult['Name'] = i[1]
+            lstReturn.append(subResult)
+            subResult = {}
+        return [i for i in lstReturn]
+
+class postDeviceRas(Resource):
+    def post(self, id, name):
+        if ast.literal_eval(id) is None:
+            if db.DeviceRas().insertSpecificDataDeviceRas(None, name):
+                return {'status': 'success'}
+            else:
+                return {'status': 'fail'}
+        else:
+            if db.DeviceRas().insertSpecificDataDeviceRas(id, name):
+                return {'status': 'success'}
+            else:
+                return {'status': 'fail'}
+
+class deleteDeviceRas(Resource):
+    def delete(self, id):
+        if db.DeviceRas().deleteSpecificDataDeviceRas(id):
+            return {'status': 'success'}
+        else:
+            return {'status': 'fail'}
+
+class Information(Resource):
+    # get all data
+    def get(self):
+        lstResult = db.Information().getDataInformation()
+        lstReturn = []
+        subResult = {}
+        for i in lstResult:
+            subResult['ID'] = i[0]
+            subResult['Username'] = i[1]
+            subResult['Password'] = i[2]
+            lstReturn.append(subResult)
+            subResult = {}
+        return [i for i in lstReturn]
+
+class Informations(Resource):
+    def get(self, Username, Password):
+        lstResult = db.Information().getSpecificInformation(Username, Password)
+        lstReturn = []
+        subResult = {}
+        for i in lstResult:
+            subResult['Username'] = i[0]
+            subResult['Password'] = i[1]
+            lstReturn.append(subResult)
+            subResult = {}
+        return [i for i in lstReturn]
+
+class postInformation(Resource):
+    def post(self, id, username, password):
+        if ast.literal_eval(id) is None:
+            if db.Information().insertSpecificInformation(None, username, password):
+                return {'status': 'success'}
+            else:
+                return {'status': 'fail'}
+        else:
+            if db.DeviceRas().insertSpecificDataDeviceRas(id, username, password):
+                return {'status': 'success'}
+            else:
+                return {'status': 'fail'}
+
+class deleteInformation(Resource):
+    def delete(self, id):
+        if db.Information().deleteSpecificInformation(id, username):
+            return {'status': 'success'}
+        else:
+            return {'status': 'fail'}
+
+class Music(Resource):
+    # get all data
+    def get(self):
+        lstResult = db.Music().getDataMusic()
+        lstReturn = []
+        subResult = {}
+        for i in lstResult:
+            subResult['ID'] = i[0]
+            subResult['Name'] = i[1]
+            subResult['Duration'] = i[2]
+            subResult['IsDelete'] = i[3]
+            lstReturn.append(subResult)
+            subResult = {}
+        return [i for i in lstReturn]
+
+class Musics(Resource):
+    def get(self, Username, Password):
+        lstResult = db.Information().getSpecificInformation(Username, Password)
+        lstReturn = []
+        subResult = {}
+        for i in lstResult:
+            subResult['Username'] = i[0]
+            subResult['Password'] = i[1]
+            lstReturn.append(subResult)
+            subResult = {}
+        return [i for i in lstReturn]
+
+class postMusic(Resource):
+    def post(self, id, name, duration, isdelete):
+        if ast.literal_eval(id) is None:
+            if db.Music().insertSpecificMusic(None, name, duration, isdelete):
+                return {'status': 'success'}
+            else:
+                return {'status': 'fail'}
+        else:
+            if db.Music().insertSpecificMusic(id, name, duration, isdelete):
+                return {'status': 'success'}
+            else:
+                return {'status': 'fail'}
+
+class deleteMusic(Resource):
+    def delete(self, id):
+        if db.Music().deleteSpecificMusic(id):
+            return {'status': 'success'}
+        else:
+            return {'status': 'fail'}
+            
 class Enum:
     SAVEDB = 1
     CONNECTDB = 2
