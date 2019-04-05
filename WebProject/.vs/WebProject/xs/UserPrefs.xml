@@ -1,0 +1,40 @@
+﻿<Properties StartupConfiguration="{DF4DE401-56A6-4A65-B43B-00BBB8CB3EBE}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WebProject/Views/SignUp/Index.cshtml">
+    <Files>
+      <File FileName="WebProject/Views/SignUp/Index.cshtml" Line="79" Column="33" />
+      <File FileName="WebProject/wwwroot/js/main.js" Line="55" Column="5" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="WebProject" expanded="True">
+            <Node name="WebProject" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Home" expanded="True" />
+                <Node name="Login" expanded="True" />
+                <Node name="SignUp" expanded="True">
+                  <Node name="Index.cshtml" selected="True" />
+                </Node>
+              </Node>
+              <Node name="wwwroot" expanded="True">
+                <Node name="css" expanded="True" />
+                <Node name="js" expanded="True" />
+                <Node name="scss" expanded="True">
+                  <Node name="layouts" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.WebProject PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
