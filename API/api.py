@@ -115,7 +115,8 @@ class deleteDeviceRas(Resource):
         else:
             return {'status': 'fail'}
 
-class Information(Resource):
+# http://localhost:5002/informations
+class Informations(Resource):
     # get all data
     def get(self):
         lstResult = db.Information().getDataInformation()
@@ -129,9 +130,10 @@ class Information(Resource):
             subResult = {}
         return [i for i in lstReturn]
 
-class Informations(Resource):
-    def get(self, Username, Password):
-        lstResult = db.Information().getSpecificInformation(Username, Password)
+# http://localhost:5002/information/admin/123
+class Information(Resource):
+    def get(self, username, password):
+        lstResult = db.Information().getSpecificInformation(username, password)
         lstReturn = []
         subResult = {}
         for i in lstResult:
@@ -139,20 +141,18 @@ class Informations(Resource):
             subResult['Password'] = i[1]
             lstReturn.append(subResult)
             subResult = {}
-        return [i for i in lstReturn]
-
-class postInformation(Resource):
-    def post(self, id, username, password):
-        if ast.literal_eval(id) is None:
-            if db.Information().insertSpecificInformation(None, username, password):
-                return {'status': 'success'}
-            else:
-                return {'status': 'fail'}
+        if len(lstReturn) == 0:
+            return {'status': 'fail'}
         else:
-            if db.DeviceRas().insertSpecificDataDeviceRas(id, username, password):
-                return {'status': 'success'}
-            else:
-                return {'status': 'fail'}
+            return {'status': 'success'}
+
+# http://localhost:5002/postinformation/admin/321321/dtrong97vn@gmail.com
+class postInformation(Resource):
+    def post(self, username, password, email):
+        if db.Information().insertSpecificInformation(username, password, email):
+            return {'status': 'success'}
+        else:
+            return {'status': 'fail'}
 
 class deleteInformation(Resource):
     def delete(self, id):
@@ -222,6 +222,9 @@ api.add_resource(
 api.add_resource(
     deleteCamera, '/deleteCamera/<id>')  # Route_4
 
+api.add_resource(postInformation, '/postinformation/<username>/<password>/<email>')
+api.add_resource(Informations, '/informations')
+api.add_resource(Information, '/information/<username>/<password>')
 
 def getDateTime():
     return time.strftime("%Y/%m/%d")
@@ -266,4 +269,4 @@ def writeLog(enumNumber, content):
 
 
 if __name__ == '__main__':
-    app.run(port='5002', debug=True)
+    app.run(port='5002')

@@ -2,7 +2,7 @@
 
 import sqlite3
 from sqlite3 import Error
-
+from numpy import matrix
 database = "test.db"
 # conn = sqlite3.connect(database)
 
@@ -258,21 +258,37 @@ class Information:
     def getSpecificInformation(self, Username, Password):
         cur = self.conn.cursor()
         try:
-            cur.execute("SELECT * FROM Information where Username = ? or Password = ?",
+            cur.execute("SELECT * FROM Information where Username = ? and Password = ?",
                         (Username, Password,))
         except:
             return False
 
         return cur.fetchall()
 
-    def insertSpecificInformation(self, Username, Password):
+    def getAllUserNameInformation(self):
         cur = self.conn.cursor()
-        try:
-            query = ''' INSERT INTO Information(Username, Password) VALUES(?,?,) '''
-            data = (Username, Password)
-            cur.execute(query, data)
-        except:
-            return False
+        cur.execute("SELECT Username FROM Information")
+
+        return cur.fetchall()
+
+    def insertSpecificInformation(self, Username, Password, Email):
+        cur = self.conn.cursor()
+        lstUsername = matrix(Information().getAllUserNameInformation()).A1.tolist()
+        if Username in lstUsername: # Update
+            try:
+                query = ''' UPDATE Information set Password = ?, Email = ? WHERE Username = ? '''
+                data = (Password, Email, Username)
+                cur.execute(query, data)
+            except:
+                return False
+        else: # Insert
+            try:
+                query = ''' INSERT INTO Information(Username, Password, Email) VALUES(?,?,?) '''
+                data = (Username, Password, Email)
+                cur.execute(query, data)
+            except Exception as e:
+                print e
+                return False
 
         self.conn.commit()
 
@@ -356,7 +372,8 @@ def main():
     conn = sqlite3.connect(database)
     # Camera().insertSpecificDataCamera(None, '2019', '2020', '_', '300')
     # Camera().deleteSpecificDataCamera(1)
-
+    # print Information().getSpecificInformation('admin','123')
+    Information().insertSpecificInformation('ductrong','123123','admin@hotmail.com')
 
 if __name__ == '__main__':
     main()
