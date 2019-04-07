@@ -14,6 +14,7 @@ db_connect = create_engine('sqlite:///test.db')
 app = Flask(__name__)
 api = Api(app)
 
+# region Camera
 # http://localhost:5002/cameras
 class Cameras(Resource):
     # get all data
@@ -57,7 +58,7 @@ class postCamera(Resource):
             else:
                 return {'status': 'fail'}
         else:
-            if db.Camera().insertSpecificDataCamera(None, timestart, timeend, videolink, parameter):
+            if db.Camera().insertSpecificDataCamera(id, timestart, timeend, videolink, parameter):
                 return {'status': 'success'}
             else:
                 return {'status': 'fail'}
@@ -70,10 +71,12 @@ class deleteCamera(Resource):
         else:
             return {'status': 'fail'}
 
+# endregion
+# region DeviceRas
 class DeviceRas(Resource):
     # get all data
-    def get(self):
-        lstResult = db.DeviceRas().getDataDeviceRas()
+    def get(self, id, name):
+        lstResult = db.DeviceRas().getSpecificDataDeviceRas(id, name)
         lstReturn = []
         subResult = {}
         for i in lstResult:
@@ -84,8 +87,8 @@ class DeviceRas(Resource):
         return [i for i in lstReturn]
 
 class DeviceRass(Resource):
-    def get(self, id, name):
-        lstResult = db.DeviceRas().getSpecificDataDeviceRas(id, name)
+    def get(self):
+        lstResult = db.DeviceRas().getDataDeviceRas()
         lstReturn = []
         subResult = {}
         for i in lstResult:
@@ -114,7 +117,8 @@ class deleteDeviceRas(Resource):
             return {'status': 'success'}
         else:
             return {'status': 'fail'}
-
+# endregion
+# region Information
 # http://localhost:5002/informations
 class Informations(Resource):
     # get all data
@@ -160,11 +164,12 @@ class deleteInformation(Resource):
             return {'status': 'success'}
         else:
             return {'status': 'fail'}
-
+# endregion
+# region Music
 class Music(Resource):
     # get all data
-    def get(self):
-        lstResult = db.Music().getDataMusic()
+    def get(self, id, name, duration, isdelete):
+        lstResult = db.Music().getSpecificDataMusic(id, name, duration, isdelete)
         lstReturn = []
         subResult = {}
         for i in lstResult:
@@ -177,13 +182,15 @@ class Music(Resource):
         return [i for i in lstReturn]
 
 class Musics(Resource):
-    def get(self, Username, Password):
-        lstResult = db.Information().getSpecificInformation(Username, Password)
+    def get(self):
+        lstResult = db.Music().getDataMusic()()
         lstReturn = []
         subResult = {}
         for i in lstResult:
-            subResult['Username'] = i[0]
-            subResult['Password'] = i[1]
+            subResult['ID'] = i[0]
+            subResult['Name'] = i[1]
+            subResult['Duration'] = i[2]
+            subResult['IsDelete'] = i[3]
             lstReturn.append(subResult)
             subResult = {}
         return [i for i in lstReturn]
@@ -207,24 +214,158 @@ class deleteMusic(Resource):
             return {'status': 'success'}
         else:
             return {'status': 'fail'}
-            
+# endregion         
+# region SensorMotion
+class SensorMotions(Resource):
+    # get all data
+    def get(self):
+        lstResult = db.SensorMotion().getDataSensorMotion()
+        lstReturn = []
+        subResult = {}
+        for i in lstResult:
+            subResult['ID'] = i[0]
+            subResult['TimeStart'] = i[1]
+            subResult['TimeEnd'] = i[2]
+            subResult['Quantity'] = i[3]
+            lstReturn.append(subResult)
+            subResult = {}
+        return [i for i in lstReturn]
+
+class SensorMotion(Resource):
+    def get(self, id, timestart, timeend, quantity):
+        lstResult = db.SensorMotion().getSpecificDataSensorMotion(id, timestart, timeend, quantity)
+        lstReturn = []
+        subResult = {}
+        for i in lstResult:
+            subResult['ID'] = i[0]
+            subResult['TimeStart'] = i[1]
+            subResult['TimeEnd'] = i[2]
+            subResult['quantity'] = i[3]
+            lstReturn.append(subResult)
+            subResult = {}
+        return [i for i in lstReturn]
+
+class postSensorMotion(Resource):
+    def post(self, id, timestart, timeend, quantity):
+        if ast.literal_eval(id) is None:
+            if db.SensorMotion().insertSpecificDataSensorMotion(None, timestart, timeend, quantity):
+                return {'status': 'success'}
+            else:
+                return {'status': 'fail'}
+        else:
+            if db.SensorMotion().insertSpecificDataSensorMotion(id, timestart, timeend, quantity):
+                return {'status': 'success'}
+            else:
+                return {'status': 'fail'}
+
+class deleteSensorMotion(Resource):
+    def delete(self, id):
+        if db.SensorMotion().deleteSpecificDataSensorMotion(int(id)):
+            return {'status': 'success'}
+        else:
+            return {'status': 'fail'}
+
+# endregion
+# region SensorSound
+class SensorSounds(Resource):
+    # get all data
+    def get(self):
+        lstResult = db.SensorSound().getDataSensorSound()
+        lstReturn = []
+        subResult = {}
+        for i in lstResult:
+            subResult['ID'] = i[0]
+            subResult['TimeStart'] = i[1]
+            subResult['TimeEnd'] = i[2]
+            subResult['Parameter'] = i[3]
+            lstReturn.append(subResult)
+            subResult = {}
+        return [i for i in lstReturn]
+
+class SensorSound(Resource):
+    def get(self, id, timestart, timeend, parameter):
+        lstResult = db.SensorSound().getSpecificSensorSound(id, timestart, timeend, parameter)
+        lstReturn = []
+        subResult = {}
+        for i in lstResult:
+            subResult['ID'] = i[0]
+            subResult['TimeStart'] = i[1]
+            subResult['TimeEnd'] = i[2]
+            subResult['Parameter'] = i[3]
+            lstReturn.append(subResult)
+            subResult = {}
+        return [i for i in lstReturn]
+
+class postSensorSound(Resource):
+    def post(self, id, timestart, timeend, parameter):
+        if ast.literal_eval(id) is None:
+            if db.SensorSound().insertSpecificSensorSound(None, timestart, timeend, parameter):
+                return {'status': 'success'}
+            else:
+                return {'status': 'fail'}
+        else:
+            if db.SensorSound().insertSpecificSensorSound(id, timestart, timeend, parameter):
+                return {'status': 'success'}
+            else:
+                return {'status': 'fail'}
+
+class deleteSensorSound(Resource):
+    def delete(self, id):
+        if db.SensorSound().deleteSpecificSensorSound(int(id)):
+            return {'status': 'success'}
+        else:
+            return {'status': 'fail'}
+# endregion
+
 class Enum:
     SAVEDB = 1
     CONNECTDB = 2
     DELETEDB = 3
 
+# region API
+# region Camera
+api.add_resource(Cameras, '/cameras')  
+api.add_resource(Camera, '/camera/<id>/<timestart>/<timeend>/<parameter>')  
+api.add_resource(postCamera, '/postcamera/<id>/<timestart>/<timeend>/<videolink>/<parameter>')  
+api.add_resource(deleteCamera, '/deleteCamera/<id>')  
+# endregion
 
-api.add_resource(Cameras, '/cameras')  # Route_1
-api.add_resource(
-    Camera, '/camera/<id>/<timestart>/<timeend>/<parameter>')  # Route_2
-api.add_resource(
-    postCamera, '/postcamera/<id>/<timestart>/<timeend>/<videolink>/<parameter>')  # Route_3
-api.add_resource(
-    deleteCamera, '/deleteCamera/<id>')  # Route_4
+# region Music
+api.add_resource(Musics, '/musics')
+api.add_resource(Music, '/music/<id>/<name>/duration/<isdelete>')
+api.add_resource(postMusic, '/postMusic/<id>/<name>/duration/<isdelete>')
+api.add_resource(deleteMusic, '/deleteCamera/<id>')
+# endregion
 
+# region SensorMotion
+api.add_resource(SensorMotions, '/sensormotions')  
+api.add_resource(SensorMotion, '/sensormotion/<id>/<timestart>/<timeend>/<quantity>')  
+api.add_resource(postSensorMotion, '/postsensormotion/<id>/<timestart>/<timeend>/<quantity>')  
+api.add_resource(deleteSensorMotion, '/deletesensormotion/<id>')  
+# endregion
+
+# region DeviceRas
+api.add_resource(DeviceRass, '/devicerass')  
+api.add_resource(DeviceRas, '/deviceras/<id>/<name>')  
+api.add_resource(postDeviceRas, '/postcamera/<id>/<name>')  
+api.add_resource(deleteDeviceRas, '/deleteCamera/<id>')  
+# endregion
+
+# region Information
 api.add_resource(postInformation, '/postinformation/<username>/<password>/<email>')
 api.add_resource(Informations, '/informations')
 api.add_resource(Information, '/information/<username>/<password>')
+# endregion
+
+# region SensorSound
+api.add_resource(SensorSounds, '/sensorsounds')  
+api.add_resource(SensorSound, '/sensorsound/<id>/<timestart>/<timeend>/<parameter>')  
+api.add_resource(postSensorSound, '/postsensorsound/<id>/<timestart>/<timeend>/<parameter>')  
+api.add_resource(deleteSensorSound, '/deletesensorsound/<id>')  
+# endregion
+
+# endregion
+
 
 def getDateTime():
     return time.strftime("%Y/%m/%d")

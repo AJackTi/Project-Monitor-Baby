@@ -6,7 +6,6 @@ from numpy import matrix
 database = "test.db"
 # conn = sqlite3.connect(database)
 
-
 class Camera:
     def __init__(self):
         self.conn = sqlite3.connect(database)
@@ -72,12 +71,12 @@ class Camera:
 class Music:
     def __init__(self):
         self.conn = sqlite3.connect(database)
-
-    def getDataMusic():
+    # Music().getDataMusic()
+    def getDataMusic(self):
         cur = self.conn.cursor()
         cur.execute("SELECT * FROM music")
         return cur.fetchall()
-
+    # Music().getSpecificDataMusic(1)
     def getSpecificDataMusic(self, ID=None, Name=None, Duration=None, IsDelete=None):
         cur = self.conn.cursor()
         try:
@@ -89,6 +88,8 @@ class Music:
         return cur.fetchall()
 
     # Update or Insert
+    # Music().insertSpecificDataMusic(1,'xyz','15:00')
+    # Music().insertSpecificDataMusic(None,'xyz','15:00')
     def insertSpecificDataMusic(self, ID, Name=None, Duration=None, IsDelete=None):
         cur = self.conn.cursor()
         if ID == None:  # Not Exist
@@ -109,7 +110,7 @@ class Music:
         self.conn.commit()   
         
         return True
-
+    # Music().deleteSpecificDataMusic(2)
     def deleteSpecificDataMusic(self, ID):
         cur = self.conn.cursor()
         try:
@@ -132,15 +133,18 @@ class Music:
 class SensorMotion:
     def __init__(self):
         self.conn = sqlite3.connect(database)
-
+    # SensorMotion().getDataSensorMotion()
     def getDataSensorMotion(self):
         cur = self.conn.cursor()
         cur.execute("SELECT * FROM SensorMotion")
 
         return cur.fetchall()
 
+    # SensorMotion().getSpecificDataSensorMotion(1)
     def getSpecificDataSensorMotion(self, ID=None, TimeStart=None, TimeEnd=None, Quantity=None):
         cur = self.conn.cursor()
+        if ID == None:
+            return SensorMotion().getDataSensorMotion()
         try:
             cur.execute("SELECT * FROM SensorMotion where Id = ? or TimeStart like ? or TimeEnd like ? or Quantity = ?",
                         (ID, unicode(str(TimeStart), "utf-8") + '%', unicode(str(TimeEnd), "utf-8") + '%', Quantity,))
@@ -148,7 +152,7 @@ class SensorMotion:
             return False
 
         return cur.fetchall()
-
+    # SensorMotion().insertSpecificDataSensorMotion(1,'20190505', '20190606', 255)
     def insertSpecificDataSensorMotion(self, ID, TimeStart=None, TimeEnd=None, Quantity=None):
         cur = self.conn.cursor()
         if ID == None:  # Not Exist
@@ -171,7 +175,7 @@ class SensorMotion:
             return False
 
         return True
-
+    # SensorMotion().deleteSpecificDataSensorMotion(1)
     def deleteSpecificDataSensorMotion(self, ID, TimeStart=None, TimeEnd=None, Quantity=None):
         cur = self.conn.cursor()
         try:
@@ -313,13 +317,13 @@ class Information:
 class SensorSound:
     def __init__(self):
         self.conn = sqlite3.connect(database)
-
+    # SensorSound().getDataSensorSound()
     def getDataSensorSound(self):
         cur = self.conn.cursor()
         cur.execute("SELECT * FROM SensorSound")
 
         return cur.fetchall()
-
+    # SensorSound().getSpecificSensorSound(1)
     def getSpecificSensorSound(self, ID=None, TimeStart=None, TimeEnd=None, Parameter=None):
         cur = self.conn.cursor()
         try:
@@ -329,7 +333,8 @@ class SensorSound:
             return False
 
         return cur.fetchall()
-
+    # SensorSound().insertSpecificSensorSound(1,'20190000', '20190101',500)
+    # SensorSound().insertSpecificSensorSound(None,'20190000', '20190101',500)
     def insertSpecificSensorSound(self, ID, TimeStart=None, TimeEnd=None, Parameter=None):
         cur = self.conn.cursor()
         if ID == None:  # Not Exist
@@ -350,7 +355,7 @@ class SensorSound:
         self.conn.commit()
         
         return True
-
+    # SensorSound().deleteSpecificSensorSound(2)
     def deleteSpecificSensorSound(self, ID, TimeStart=None, TimeEnd=None, Parameter=None):
         cur = self.conn.cursor()
         try:
@@ -373,7 +378,7 @@ def main():
     # Camera().insertSpecificDataCamera(None, '2019', '2020', '_', '300')
     # Camera().deleteSpecificDataCamera(1)
     # print Information().getSpecificInformation('admin','123')
-    Information().insertSpecificInformation('ductrong','123123','admin@hotmail.com')
+    # Information().insertSpecificInformation('ductrong','123123','admin@hotmail.com')
 
 if __name__ == '__main__':
     main()
