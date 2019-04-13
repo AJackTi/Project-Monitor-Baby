@@ -1,0 +1,33 @@
+﻿<Properties StartupConfiguration="{94A64CC4-7F03-4B73-98F9-A612ABC360CA}|Default">
+  <MonoDevelop.Ide.ItemProperties.WebAPI PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="WebAPI/DB/GetDB.cs">
+    <Files>
+      <File FileName="WebAPI/DB/PostDB.cs" Line="54" Column="15" />
+      <File FileName="WebAPI/DB/GetDB.cs" Line="15" Column="23" />
+      <File FileName="WebAPI/Controllers/InformationsController.cs" Line="18" Column="10" NotebookId="1" />
+      <File FileName="WebAPI/DB/InitDB.cs" Line="1" Column="14" NotebookId="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="WebAPI" expanded="True">
+            <Node name="WebAPI" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="DB" expanded="True">
+                <Node name="GetDB.cs" selected="True" />
+              </Node>
+              <Node name="Properties" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

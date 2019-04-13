@@ -1,0 +1,16 @@
+/Users/ajackti/Documents/GitHub/Project-Monitor-Baby/API/WebAPI/WebAPI/bin/Debug/netcoreapp2.1/WebAPI.deps.json
+/Users/ajackti/Documents/GitHub/Project-Monitor-Baby/API/WebAPI/WebAPI/bin/Debug/netcoreapp2.1/WebAPI.runtimeconfig.json
+/Users/ajackti/Documents/GitHub/Project-Monitor-Baby/API/WebAPI/WebAPI/bin/Debug/netcoreapp2.1/WebAPI.runtimeconfig.dev.json
+/Users/ajackti/Documents/GitHub/Project-Monitor-Baby/API/WebAPI/WebAPI/bin/Debug/netcoreapp2.1/WebAPI.dll
+/Users/ajackti/Documents/GitHub/Project-Monitor-Baby/API/WebAPI/WebAPI/bin/Debug/netcoreapp2.1/WebAPI.pdb
+/Users/ajackti/Documents/GitHub/Project-Monitor-Baby/API/WebAPI/WebAPI/obj/Debug/netcoreapp2.1/WebAPI.csprojAssemblyReference.cache
+/Users/ajackti/Documents/GitHub/Project-Monitor-Baby/API/WebAPI/WebAPI/obj/Debug/netcoreapp2.1/WebAPI.csproj.CoreCompileInputs.cache
+/Users/ajackti/Documents/GitHub/Project-Monitor-Baby/API/WebAPI/WebAPI/obj/Debug/netcoreapp2.1/WebAPI.RazorAssemblyInfo.cache
+/Users/ajackti/Documents/GitHub/Project-Monitor-Baby/API/WebAPI/WebAPI/obj/Debug/netcoreapp2.1/WebAPI.RazorAssemblyInfo.cs
+/Users/ajackti/Documents/GitHub/Project-Monitor-Baby/API/WebAPI/WebAPI/obj/Debug/netcoreapp2.1/WebAPI.AssemblyInfoInputs.cache
+/Users/ajackti/Documents/GitHub/Project-Monitor-Baby/API/WebAPI/WebAPI/obj/Debug/netcoreapp2.1/WebAPI.AssemblyInfo.cs
+/Users/ajackti/Documents/GitHub/Project-Monitor-Baby/API/WebAPI/WebAPI/obj/Debug/netcoreapp2.1/WebAPI.RazorTargetAssemblyInfo.cache
+/Users/ajackti/Documents/GitHub/Project-Monitor-Baby/API/WebAPI/WebAPI/obj/Debug/netcoreapp2.1/WebAPI.dll
+/Users/ajackti/Documents/GitHub/Project-Monitor-Baby/API/WebAPI/WebAPI/obj/Debug/netcoreapp2.1/WebAPI.pdb
+/Users/ajackti/Documents/GitHub/Project-Monitor-Baby/API/WebAPI/WebAPI/bin/Debug/netcoreapp2.1/SQLite.NET.dll
+/Users/ajackti/Documents/GitHub/Project-Monitor-Baby/API/WebAPI/WebAPI/obj/Debug/netcoreapp2.1/WebAPI.csproj.CopyComplete
