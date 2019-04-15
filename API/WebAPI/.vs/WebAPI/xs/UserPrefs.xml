@@ -1,20 +1,22 @@
 ﻿<Properties StartupConfiguration="{94A64CC4-7F03-4B73-98F9-A612ABC360CA}|Default">
   <MonoDevelop.Ide.ItemProperties.WebAPI PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="WebAPI/Controllers/InformationsController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WebAPI/DB/DeleteDB.cs">
     <Files>
-      <File FileName="WebAPI/DB/PostDB.cs" Line="54" Column="15" />
+      <File FileName="WebAPI/DB/PostDB.cs" Line="21" Column="38" />
       <File FileName="WebAPI/DB/GetDB.cs" Line="109" Column="46" />
       <File FileName="WebAPI/Controllers/InformationsController.cs" Line="29" Column="1" NotebookId="1" />
-      <File FileName="WebAPI/DB/InitDB.cs" Line="19" Column="1" NotebookId="1" />
+      <File FileName="WebAPI/DB/DeleteDB.cs" Line="8" Column="1" NotebookId="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="WebAPI" expanded="True" selected="True">
+          <Node name="WebAPI" expanded="True">
             <Node name="WebAPI" expanded="True">
               <Node name="Dependencies" expanded="True" />
               <Node name="Controllers" expanded="True" />
-              <Node name="DB" expanded="True" />
+              <Node name="DB" expanded="True">
+                <Node name="DeleteDB.cs" selected="True" />
+              </Node>
               <Node name="Properties" expanded="True" />
             </Node>
           </Node>

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace WebAPI.DB
 {
-    public class PostDB
+    public class DeleteDB
     {
         private InitDB initDB;
         private SQLiteCommand sql_cmd;
@@ -14,43 +14,31 @@ namespace WebAPI.DB
         private SQLiteDataAdapter DB;
         private DataSet DS = new DataSet();
         private DataTable DT = new DataTable();
-        public PostDB()
+        public DeleteDB()
         {
             initDB = new InitDB();
             DB = new SQLiteDataAdapter();
             //initDB.SetConnection();
             sql_cmd = new SQLiteCommand();
         }
-        private bool PostInfo(IEnumerable<dynamic> listInput, IEnumerable<dynamic> listParameter, string dbName)
+
+        private bool DeleteInfo(IEnumerable<dynamic> listInput, IEnumerable<dynamic> listParameter, string dbName)
         {
             sql_con = initDB.SetConnection();
             sql_con.Open();
             sql_cmd = sql_con.CreateCommand();
-            string CommandText = "INSERT INTO " + dbName + "(";
+            string CommandText = "DELETE FROM " + dbName + "WHERE ";
             for (int i = 0; i < listParameter.Count(); i++)
             {
+                CommandText += listParameter.ToList()[i] + "=" + listInput.ToList()[i];
                 if (i != listParameter.Count()-1)
                 {
-                    CommandText += listParameter.ToList()[i] + ", ";
-                }
-                else
-                {
-                    CommandText += listParameter.ToList()[i] + ") VALUES(";
-                }
-            }
-            for (int i = 0; i < listInput.Count(); i++)
-            {
-                if (i != listInput.Count() - 1)
-                {
-                    CommandText += listInput.ToList()[i] + ", ";
-                }
-                else
-                {
-                    CommandText += listParameter.ToList()[i] + ")";
+                    CommandText += " and ";
                 }
             }
             DB = new SQLiteDataAdapter(CommandText, sql_con);
-            DS.Reset();
+            // Check it's deleted successfully
+            //DS.Reset();
             //DB.Fill(DS);
             //DT = DS.Tables[0];
             //return DT;
