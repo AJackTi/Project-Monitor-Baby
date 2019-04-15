@@ -8,12 +8,12 @@ namespace WebAPI.DB
 {
     public class PostDB
     {
-        private InitDB initDB;
-        private SQLiteCommand sql_cmd;
-        private SQLiteConnection sql_con;
-        private SQLiteDataAdapter DB;
-        private DataSet DS = new DataSet();
-        private DataTable DT = new DataTable();
+        private static InitDB initDB;
+        private static SQLiteCommand sql_cmd;
+        private static SQLiteConnection sql_con;
+        private static SQLiteDataAdapter DB;
+        private static DataSet DS = new DataSet();
+        private static DataTable DT = new DataTable();
         public PostDB()
         {
             initDB = new InitDB();
@@ -21,7 +21,7 @@ namespace WebAPI.DB
             //initDB.SetConnection();
             sql_cmd = new SQLiteCommand();
         }
-        private bool PostInfo(IEnumerable<dynamic> listInput, IEnumerable<dynamic> listParameter, string dbName)
+        public static bool PostInfo(IEnumerable<dynamic> listInput, IEnumerable<dynamic> listParameter, string dbName)
         {
             sql_con = initDB.SetConnection();
             sql_con.Open();
@@ -54,6 +54,7 @@ namespace WebAPI.DB
             //DB.Fill(DS);
             //DT = DS.Tables[0];
             //return DT;
+            sql_con.Close();
             return false;
         }
     }

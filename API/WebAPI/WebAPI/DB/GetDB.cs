@@ -30,6 +30,7 @@ namespace WebAPI.DB
             DS.Reset();
             DB.Fill(DS);
             DT = DS.Tables[0];
+            sql_con.Close();
             return DT;
         }
 
@@ -92,8 +93,10 @@ namespace WebAPI.DB
             // Have data
             if (ConvertDataTableToString(DT)!=string.Empty)
             {
+                sql_con.Close();
                 return true;
             }
+            sql_con.Close();
             // Dont have
             return false;
         }
@@ -137,8 +140,10 @@ namespace WebAPI.DB
             // Have data
             if (ConvertDataTableToString(DT) != string.Empty)
             {
+                sql_con.Close();
                 return true;
             }
+            sql_con.Close();
             // Dont have
             return false;
         }

@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
             return new string[] { GetDB.ConvertDataTableToString(GetDB.GetAll("information")) };
         }
 
-        // GET api/informations/5
+        // GET api/informations/username/password
         [HttpGet("{username}/{password}")]
         public string Get(string username, string password)
         {
@@ -31,22 +31,33 @@ namespace WebAPI.Controllers
             return "false";
         }
 
-        // POST api/informations
-        [HttpPost]
-        public void Post([FromBody]string value)
+        // POST api/informations/username/password
+        [HttpPost("{username}/{password}")]
+        public JsonResult Post(string username, string password)
         {
+            if (GetDB.GetWithInfoExactly(new List<dynamic> { "Username", "Password" }, new List<dynamic> { username, password }, new List<dynamic> { "Username", "Password" }, "information"))
+            {
+                return Json("false");
+            }
+            if (!PostDB.PostInfo(new List<dynamic> { username, password }, new List<dynamic> { "Username", "Password" }, "information"))
+            {
+                return Json("false");
+            }
+            return Json("true");
         }
 
-        // PUT api/informations/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        // PUT api/informations/username/passwors
+        [HttpPut("{username}/{password}")]
+        public void Put(string username, string password)
         {
+
         }
 
-        // DELETE api/informations/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // DELETE api/informations/username/password
+        [HttpDelete("{username}/{password}")]
+        public void Delete(string username, string password)
         {
+
         }
     }
 }

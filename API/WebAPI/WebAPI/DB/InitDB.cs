@@ -8,11 +8,10 @@ namespace WebAPI.DB
     {
         private SQLiteConnection sql_con;
         private SQLiteCommand sql_cmd;
-        private SQLiteDataAdapter DB;
         private DataSet DS = new DataSet();
         private DataTable DT = new DataTable();
         public SQLiteConnection SetConnection(string database="test.db")
-        {
+            {
             sql_con = new SQLiteConnection
                 ("Data Source="+ database + ";Version=3;New=False;Compress=True;");
             return sql_con;
