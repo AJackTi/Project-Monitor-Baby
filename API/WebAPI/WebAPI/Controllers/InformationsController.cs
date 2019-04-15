@@ -24,7 +24,7 @@ namespace WebAPI.Controllers
         public string Get(string username, string password)
         {
             // Exist
-            if(GetDB.GetWithInfo(new List<dynamic>{ "Username", "Password" }, new List<dynamic>{ "16", "ductrong", "123123", "admin@hotmail.com", null }, new List<dynamic>{ "ID", "Username", "Password", "Email", "IsActive" }, "information"))
+            if(GetDB.GetWithInfoExactly(new List<dynamic>{ "Username", "Password" }, new List<dynamic>{ username, password }, new List<dynamic>{ "Username", "Password" }, "information"))
             {
                 return "true";
             }
