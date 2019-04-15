@@ -12,33 +12,38 @@ namespace WebAPI.Controllers
         {
             getDB = new GetDB();
         }
-        // GET: api/values
+        // GET: api/informations
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { GetDB.ConvertDataTableToString(GetDB.GetAll("test.db")) };
+            return new string[] { GetDB.ConvertDataTableToString(GetDB.GetAll("information")) };
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        // GET api/informations/5
+        [HttpGet("{username}/{password}")]
+        public string Get(string username, string password)
         {
-            return "value";
+            // Exist
+            if(GetDB.GetWithInfo(new List<dynamic>{ "Username", "Password" }, new List<dynamic>{ "16", "ductrong", "123123", "admin@hotmail.com", null }, new List<dynamic>{ "ID", "Username", "Password", "Email", "IsActive" }, "information"))
+            {
+                return "true";
+            }
+            return "false";
         }
 
-        // POST api/values
+        // POST api/informations
         [HttpPost]
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT api/values/5
+        // PUT api/informations/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE api/values/5
+        // DELETE api/informations/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

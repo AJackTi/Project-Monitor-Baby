@@ -20,12 +20,12 @@ namespace WebAPI.DB
             //initDB.SetConnection();
             sql_cmd = new SQLiteCommand();
         }
-        public static DataTable GetAll(string dbName)
+        public static DataTable GetAll(string dbTable)
         {
             sql_con = initDB.SetConnection();
             sql_con.Open();
             sql_cmd = sql_con.CreateCommand();
-            string CommandText = "select * from " + dbName;
+            string CommandText = "select * from " + dbTable;
             DB = new SQLiteDataAdapter(CommandText, sql_con);
             DS.Reset();
             DB.Fill(DS);
@@ -54,7 +54,7 @@ namespace WebAPI.DB
             return data;
         }
 
-        public static bool GetWithInfo(IEnumerable<dynamic> listOutput, IEnumerable<dynamic> listInput, IEnumerable<dynamic> listParameter, string dbName)
+        public static bool GetWithInfo(List<dynamic> listOutput, List<dynamic> listInput, List<dynamic> listParameter, string dbTable)
         {
             sql_con = initDB.SetConnection();
             sql_con.Open();
@@ -64,15 +64,19 @@ namespace WebAPI.DB
             foreach (dynamic item in listOutput)
             {
                 CommandText += item;
-                if (listOutput.ToList().IndexOf(item) != listOutput.Count())
+                if (listOutput.ToList().IndexOf(item) != listOutput.Count()-1)
                 {
                     CommandText += ", ";
                 }
             }
-            CommandText += " from " + dbName + " ";
+            CommandText += " from " + dbTable + " where ";
             for (int i = 0; i < listInput.Count(); i++)
             {
-                CommandText += "where " + listParameter.ToList()[i].toString() + "=" + listInput.ToList()[i].toString();
+                CommandText += listParameter.ToList()[i] + "='" + listInput.ToList()[i]+"'";
+                if (i!=listInput.Count()-1)
+                {
+                    CommandText += " or ";
+                }
             }
             DB = new SQLiteDataAdapter(CommandText, sql_con);
             DS.Reset();
@@ -80,9 +84,9 @@ namespace WebAPI.DB
             DT = DS.Tables[0];
             if (ConvertDataTableToString(DT)!=string.Empty)
             {
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
     }
 }
