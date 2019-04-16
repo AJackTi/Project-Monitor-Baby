@@ -131,6 +131,29 @@
         $('body').css('background-position', "center");
         $('body').css('background-repeat', "no-repeat");
         $('body').css('background-attachment', "fixed");
+
+        $(document).ready(function () {
+            $('#btnLogin').click(function () {
+                if ($('#txtUsername').attr("value") == "" && $('txtPassword').attr("value") == "") {
+                    alert("Empty Username and Password");
+                }
+                $.ajax({
+                    url: 'http://localhost:5002/information/',
+                    type: 'GET',
+                    datatype: "json",
+                    data: ({
+                        email: $('#txtUsername').val(),
+                        password: $('txtPassword').val()
+                    }),
+                    success: function () {
+                        console.log('ok');
+                    },
+                    error: function () {
+                        console.log('not ok');
+                    }
+                })
+            })
+        });
     </script>
 </body>
 </html>
