@@ -8,6 +8,7 @@
     <title>Login V4</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="viewport" content="width=device-width" />
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="~/images/icons/favicon.ico" />
@@ -122,8 +123,7 @@
     <script src="~/vendor/countdowntime/countdowntime.js"></script>
     <!--===============================================================================================-->
     <script src="~/js/main.js"></script>
-    <script type="text/javascript">
-        // background - image: url("~/images/signup-bg.jpg");
+    <script type="text/javascript">// background - image: url("~/images/signup-bg.jpg");
         var myArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         var rand = myArray[Math.floor(Math.random() * myArray.length)];
         console.log(rand);
@@ -134,26 +134,30 @@
 
         $(document).ready(function () {
             $('#btnLogin').click(function () {
-                if ($('#txtUsername').attr("value") == "" && $('txtPassword').attr("value") == "") {
+                debugger;
+                if ($('#txtUsername').val() == "" && $('#txtPassword').val() == "") {
                     alert("Empty Username and Password");
                 }
-                $.ajax({
-                    url: 'http://localhost:5002/information/',
-                    type: 'GET',
-                    datatype: "json",
-                    data: ({
-                        email: $('#txtUsername').val(),
-                        password: $('txtPassword').val()
-                    }),
-                    success: function () {
-                        console.log('ok');
-                    },
-                    error: function () {
-                        console.log('not ok');
-                    }
-                })
+                else {
+                    var username = $('#txtUsername').val();
+                    var password = $('#txtPassword').val();
+                    var api_url = 'http://192.168.1.7:5002/information/' + username + '/' + password;
+                    $.ajax({
+                        url: api_url,
+                        contentType: "application/json",
+                        datatype: "json",
+                        success: function (result) {
+                            console.log(result);
+                            alert(result);
+                            window.location.href = "https://localhost:5001/Home/Dashboard";
+                        },
+                        error: function (result) {
+                            console.log(result);
+                            alert(result);
+                        }
+                    })
+                }
             })
-        });
-    </script>
+        });</script>
 </body>
 </html>
