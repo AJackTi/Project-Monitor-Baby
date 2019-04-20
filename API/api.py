@@ -9,6 +9,7 @@ from flask_restful import Resource, Api
 from bottle import post, request
 import ast
 import db
+import socket
 
 db_connect = create_engine('sqlite:///test.db')
 app = Flask(__name__)
@@ -410,4 +411,4 @@ def writeLog(enumNumber, content):
 
 
 if __name__ == '__main__':
-    app.run(port='5002')
+    app.run(host=socket.gethostbyname(socket.gethostname()), port='5002')
