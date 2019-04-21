@@ -40,13 +40,6 @@
     <div class="wrapper">
         <div class="sidebar" data-color="purple" data-image="/assets/img/sidebar-5.jpg">
 
-            <!--
-
-                Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
-                Tip 2: you can also add an image using data-image tag
-
-            -->
-
             <div class="sidebar-wrapper">
                 <div class="logo">
                     <a href="http://www.creative-tim.com" class="simple-text">
@@ -56,7 +49,7 @@
 
                 <ul class="nav">
                     <li class="active">
-                        <a href=~/dashboard.html">
+                        <a href=/Home/Dashboard">
                             <i class="pe-7s-graph"></i>
                             <p>Dashboard</p>
                         </a>
@@ -193,18 +186,73 @@
                                     <p class="category">Last Campaign Performance</p>
                                 </div>
                                 <div class="content">
-                                    <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+                                    @*<div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>*@
 
                                     <div class="footer">
-                                        <div class="legend">
-                                            <i class="fa fa-circle text-info"></i> Open
-                                            <i class="fa fa-circle text-danger"></i> Bounce
-                                            <i class="fa fa-circle text-warning"></i> Unsubscribe
-                                        </div>
-                                        <hr>
-                                        <div class="stats">
-                                            <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
-                                        </div>
+                                        <script>
+                                            var Highcharts = require('highcharts/highmaps');
+                                            Highcharts.chart('container', {
+                                        chart: {
+                                        plotBackgroundColor: null,
+                                        plotBorderWidth: null,
+                                        plotShadow: false,
+                                        type: 'pie'
+                                        },
+                                        title: {
+                                        text: 'Browser market shares in January, 2018'
+                                        },
+                                        tooltip: {
+                                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                        },
+                                        plotOptions: {
+                                        pie: {
+                                        allowPointSelect: true,
+                                        cursor: 'pointer',
+                                        dataLabels: {
+                                        enabled: true,
+                                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                        style: {
+                                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                        }
+                                        }
+                                        }
+                                        },
+                                        series: [{
+                                        name: 'Brands',
+                                        colorByPoint: true,
+                                        data: [{
+                                        name: 'Chrome',
+                                        y: 61.41,
+                                        sliced: true,
+                                        selected: true
+                                        }, {
+                                        name: 'Internet Explorer',
+                                        y: 11.84
+                                        }, {
+                                        name: 'Firefox',
+                                        y: 10.85
+                                        }, {
+                                        name: 'Edge',
+                                        y: 4.67
+                                        }, {
+                                        name: 'Safari',
+                                        y: 4.18
+                                        }, {
+                                        name: 'Sogou Explorer',
+                                        y: 1.64
+                                        }, {
+                                        name: 'Opera',
+                                        y: 1.6
+                                        }, {
+                                        name: 'QQ',
+                                        y: 1.2
+                                        }, {
+                                        name: 'Other',
+                                        y: 2.61
+                                        }]
+                                        }]
+                                        });
+                                        </script>
                                     </div>
                                 </div>
                             </div>
