@@ -28,7 +28,6 @@
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="~/assets/css/demo.css" rel="stylesheet" />
 
-
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
@@ -192,56 +191,68 @@
                                 </div>
                                 <div class="content">
                                     @*<div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>*@
-                                    <div id="soundchart">
+                                    <div id="soundchart" style="min-width: 100px; max-width:200px;height:200px;margin: 0 auto;">
 
                                     </div>
                                     <script>
-                                        Highcharts.chart('soundchart', {
+                                        Highcharts.chart('container', {
                                             chart: {
-                                                type: 'variablepie'
+                                                plotBackgroundColor: null,
+                                                plotBorderWidth: null,
+                                                plotShadow: false,
+                                                type: 'pie'
                                             },
                                             title: {
-                                                text: 'Countries compared by population density and total area.'
+                                                text: 'Browser market shares in January, 2018'
                                             },
                                             tooltip: {
-                                                headerFormat: '',
-                                                pointFormat: '<span style="color:{point.color}">\u25CF</span> <b> {point.name}</b><br/>' +
-                                                    'Area (square km): <b>{point.y}</b><br/>' +
-                                                    'Population density (people per square km): <b>{point.z}</b><br/>'
+                                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                            },
+                                            plotOptions: {
+                                                pie: {
+                                                    allowPointSelect: true,
+                                                    cursor: 'pointer',
+                                                    dataLabels: {
+                                                        enabled: true,
+                                                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                                        style: {
+                                                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                                        }
+                                                    }
+                                                }
                                             },
                                             series: [{
-                                                minPointSize: 10,
-                                                innerSize: '20%',
-                                                zMin: 0,
-                                                name: 'countries',
+                                                name: 'Brands',
+                                                colorByPoint: true,
                                                 data: [{
-                                                    name: 'Spain',
-                                                    y: 505370,
-                                                    z: 92.9
+                                                    name: 'Chrome',
+                                                    y: 61.41,
+                                                    sliced: true,
+                                                    selected: true
                                                 }, {
-                                                    name: 'France',
-                                                    y: 551500,
-                                                    z: 118.7
+                                                    name: 'Internet Explorer',
+                                                    y: 11.84
                                                 }, {
-                                                    name: 'Poland',
-                                                    y: 312685,
-                                                    z: 124.6
+                                                    name: 'Firefox',
+                                                    y: 10.85
                                                 }, {
-                                                    name: 'Czech Republic',
-                                                    y: 78867,
-                                                    z: 137.5
+                                                    name: 'Edge',
+                                                    y: 4.67
                                                 }, {
-                                                    name: 'Italy',
-                                                    y: 301340,
-                                                    z: 201.8
+                                                    name: 'Safari',
+                                                    y: 4.18
                                                 }, {
-                                                    name: 'Switzerland',
-                                                    y: 41277,
-                                                    z: 214.5
+                                                    name: 'Sogou Explorer',
+                                                    y: 1.64
                                                 }, {
-                                                    name: 'Germany',
-                                                    y: 357022,
-                                                    z: 235.6
+                                                    name: 'Opera',
+                                                    y: 1.6
+                                                }, {
+                                                    name: 'QQ',
+                                                    y: 1.2
+                                                }, {
+                                                    name: 'Other',
+                                                    y: 2.61
                                                 }]
                                             }]
                                         });
@@ -253,23 +264,10 @@
                         <div class="col-md-8">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title">Users Behavior</h4>
-                                    <p class="category">24 Hours performance</p>
+                                    <h4 class="title">Motion When Sleeping</h4>
                                 </div>
                                 <div class="content">
-                                    @*<div id="chartHours" class="ct-chart"></div>
-                                        <div class="footer">
-                                            <div class="legend">
-                                                <i class="fa fa-circle text-info"></i> Open
-                                                <i class="fa fa-circle text-danger"></i> Click
-                                                <i class="fa fa-circle text-warning"></i> Click Second Time
-                                            </div>
-                                            <hr>
-                                            <div class="stats">
-                                                <i class="fa fa-history"></i> Updated 3 minutes ago
-                                            </div>
-                                        </div>*@
-                                    <div id="motionchart" style="min-width: 310px; max-width:800px;height:400px;margin: 0 auto;"></div>
+                                    <div id="motionchart" style="min-width: 100px; max-width:600px;height:300px;margin: 0 auto;"></div>
                                     <script>
                                         Highcharts.chart('motionchart', {
 
@@ -348,29 +346,78 @@
                                 <div class="header">
                                     <h4 class="title">2014 Sales</h4>
                                     <p class="category">All products including Taxes</p>
+                                    <div id="cameraChart"></div>
                                 </div>
-                                <div class="content">
-                                    <div id="chartActivity" class="ct-chart"></div>
-
-                                    <div class="footer">
-                                        <div class="legend">
-                                            <i class="fa fa-circle text-info"></i> Tesla Model S
-                                            <i class="fa fa-circle text-danger"></i> BMW 5 Series
-                                        </div>
-                                        <hr>
-                                        <div class="stats">
-                                            <i class="fa fa-check"></i> Data information certified
-                                        </div>
-                                    </div>
-                                </div>
+                                <script>
+                                    Highcharts.chart('cameraChart', {
+                                        chart: {
+                                            plotBackgroundColor: null,
+                                            plotBorderWidth: null,
+                                            plotShadow: false,
+                                            type: 'pie'
+                                        },
+                                        title: {
+                                            text: 'Sound Chart Of This Month'
+                                        },
+                                        tooltip: {
+                                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                        },
+                                        plotOptions: {
+                                            pie: {
+                                                allowPointSelect: true,
+                                                cursor: 'pointer',
+                                                dataLabels: {
+                                                    enabled: true,
+                                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                                    style: {
+                                                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        series: [{
+                                            name: 'Brands',
+                                            colorByPoint: true,
+                                            data: [{
+                                                name: 'Chrome',
+                                                y: 61.41,
+                                                sliced: true,
+                                                selected: true
+                                            }, {
+                                                name: 'Internet Explorer',
+                                                y: 11.84
+                                            }, {
+                                                name: 'Firefox',
+                                                y: 10.85
+                                            }, {
+                                                name: 'Edge',
+                                                y: 4.67
+                                            }, {
+                                                name: 'Safari',
+                                                y: 4.18
+                                            }, {
+                                                name: 'Sogou Explorer',
+                                                y: 1.64
+                                            }, {
+                                                name: 'Opera',
+                                                y: 1.6
+                                            }, {
+                                                name: 'QQ',
+                                                y: 1.2
+                                            }, {
+                                                name: 'Other',
+                                                y: 2.61
+                                            }]
+                                        }]
+                                    });
+                                </script>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="card ">
                                 <div class="header">
-                                    <h4 class="title">Tasks</h4>
-                                    <p class="category">Backend development</p>
+                                    <h4 class="title">Advice For Parents with My Baby</h4>
                                 </div>
                                 <div class="content">
                                     <div class="table-full-width">
@@ -383,10 +430,10 @@
                                                             <label for="checkbox1"></label>
                                                         </div>
                                                     </td>
-                                                    <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                                    <td>Understanding Baby Sleep Music</td>
                                                     <td class="td-actions text-right">
                                                         <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                            <i class="fa fa-edit"></i>
+                                                            <i class="fa fa-eye ui-content" role="main"> <a href="#" class="ui-btn ui-btn-b ui-btn-icon-left ui-icon-info ui-corner-all" id="foo"></a></i>
                                                         </button>
                                                         <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
                                                             <i class="fa fa-times"></i>
@@ -403,7 +450,7 @@
                                                     <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
                                                     <td class="td-actions text-right">
                                                         <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                            <i class="fa fa-edit"></i>
+                                                            <i class="fa fa-eye"></i>
                                                         </button>
                                                         <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
                                                             <i class="fa fa-times"></i>
@@ -422,7 +469,7 @@
                                                     </td>
                                                     <td class="td-actions text-right">
                                                         <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                            <i class="fa fa-edit"></i>
+                                                            <i class="fa fa-eye"></i>
                                                         </button>
                                                         <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
                                                             <i class="fa fa-times"></i>
@@ -439,7 +486,7 @@
                                                     <td>Create 4 Invisible User Experiences you Never Knew About</td>
                                                     <td class="td-actions text-right">
                                                         <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                            <i class="fa fa-edit"></i>
+                                                            <i class="fa fa-eye"></i>
                                                         </button>
                                                         <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
                                                             <i class="fa fa-times"></i>
@@ -456,7 +503,7 @@
                                                     <td>Read "Following makes Medium better"</td>
                                                     <td class="td-actions text-right">
                                                         <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                            <i class="fa fa-edit"></i>
+                                                            <i class="fa fa-eye"></i>
                                                         </button>
                                                         <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
                                                             <i class="fa fa-times"></i>
@@ -473,7 +520,7 @@
                                                     <td>Unfollow 5 enemies from twitter</td>
                                                     <td class="td-actions text-right">
                                                         <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                            <i class="fa fa-edit"></i>
+                                                            <i class="fa fa-eye"></i>
                                                         </button>
                                                         <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
                                                             <i class="fa fa-times"></i>
@@ -483,12 +530,6 @@
                                             </tbody>
                                         </table>
                                     </div>
-
-                                    <div class="footer">
-                                        <hr>
-                                        <div class="stats">
-                                            <i class="fa fa-history"></i> Updated 3 minutes ago
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -496,41 +537,6 @@
                     </div>
                 </div>
             </div>
-
-
-            <footer class="footer">
-                <div class="container-fluid">
-                    <nav class="pull-left">
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Company
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Portfolio
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Blog
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <p class="copyright pull-right">
-                        &copy;
-                        <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-                    </p>
-                </div>
-            </footer>
-
         </div>
     </div>
 
@@ -563,7 +569,7 @@
 
         $.notify({
             icon: 'pe-7s-gift',
-            message: "Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer."
+            message: "Welcome to My Website to Manage Sleep Cycles"
 
         }, {
                 type: 'info',

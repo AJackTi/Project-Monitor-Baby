@@ -10,10 +10,15 @@ from bottle import post, request
 import ast
 import db
 import socket
+from flask_cors import CORS
 
 db_connect = create_engine('sqlite:///test.db')
 app = Flask(__name__)
 api = Api(app)
+hostName = socket.gethostbyname(socket.gethostname()) + ":5002"
+CORS(app, origins=hostName, allow_headers=[
+    "Content-Type", "Authorization", "Access-Control-Allow-Credentials"],
+    supports_credentials=True)
 
 # region Camera
 # http://localhost:5002/cameras
@@ -325,44 +330,44 @@ class Enum:
 
 # region API
 # region Camera
-api.add_resource(Cameras, '/cameras')  
-api.add_resource(Camera, '/camera/<id>/<timestart>/<timeend>/<parameter>')  
-api.add_resource(postCamera, '/postcamera/<id>/<timestart>/<timeend>/<videolink>/<parameter>')  
-api.add_resource(deleteCamera, '/deleteCamera/<id>')  
+api.add_resource(Cameras, '/api/cameras')  
+api.add_resource(Camera, '/api/camera/<id>/<timestart>/<timeend>/<parameter>')  
+api.add_resource(postCamera, '/api/postcamera/<id>/<timestart>/<timeend>/<videolink>/<parameter>')  
+api.add_resource(deleteCamera, '/api/deleteCamera/<id>')  
 # endregion
 
 # region Music
-api.add_resource(Musics, '/musics')
-api.add_resource(Music, '/music/<id>/<name>/duration/<isdelete>')
-api.add_resource(postMusic, '/postMusic/<id>/<name>/duration/<isdelete>')
-api.add_resource(deleteMusic, '/deleteCamera/<id>')
+api.add_resource(Musics, '/api/musics')
+api.add_resource(Music, '/api/music/<id>/<name>/duration/<isdelete>')
+api.add_resource(postMusic, '/api/postMusic/<id>/<name>/duration/<isdelete>')
+api.add_resource(deleteMusic, '/api/deleteCamera/<id>')
 # endregion
 
 # region SensorMotion
-api.add_resource(SensorMotions, '/sensormotions')  
-api.add_resource(SensorMotion, '/sensormotion/<id>/<timestart>/<timeend>/<quantity>')  
-api.add_resource(postSensorMotion, '/postsensormotion/<id>/<timestart>/<timeend>/<quantity>')  
-api.add_resource(deleteSensorMotion, '/deletesensormotion/<id>')  
+api.add_resource(SensorMotions, '/api/sensormotions')  
+api.add_resource(SensorMotion, '/api/sensormotion/<id>/<timestart>/<timeend>/<quantity>')  
+api.add_resource(postSensorMotion, '/api/postsensormotion/<id>/<timestart>/<timeend>/<quantity>')  
+api.add_resource(deleteSensorMotion, '/api/deletesensormotion/<id>')  
 # endregion
 
 # region DeviceRas
-api.add_resource(DeviceRass, '/devicerass')  
-api.add_resource(DeviceRas, '/deviceras/<id>/<name>')  
-api.add_resource(postDeviceRas, '/postcamera/<id>/<name>')  
-api.add_resource(deleteDeviceRas, '/deleteCamera/<id>')  
+api.add_resource(DeviceRass, '/api/devicerass')  
+api.add_resource(DeviceRas, '/api/deviceras/<id>/<name>')  
+api.add_resource(postDeviceRas, '/api/postcamera/<id>/<name>')  
+api.add_resource(deleteDeviceRas, '/api/deleteCamera/<id>')  
 # endregion
 
 # region Information
-api.add_resource(postInformation, '/postinformation/<username>/<password>/<email>')
-api.add_resource(Informations, '/informations')
-api.add_resource(Information, '/information/<username>/<password>')
+api.add_resource(postInformation, '/api/postinformation/<username>/<password>/<email>')
+api.add_resource(Informations, '/api/informations')
+api.add_resource(Information, '/api/information/<username>/<password>')
 # endregion
 
 # region SensorSound
-api.add_resource(SensorSounds, '/sensorsounds')  
-api.add_resource(SensorSound, '/sensorsound/<id>/<timestart>/<timeend>/<parameter>')  
-api.add_resource(postSensorSound, '/postsensorsound/<id>/<timestart>/<timeend>/<parameter>')  
-api.add_resource(deleteSensorSound, '/deletesensorsound/<id>')  
+api.add_resource(SensorSounds, '/api/sensorsounds')  
+api.add_resource(SensorSound, '/api/sensorsound/<id>/<timestart>/<timeend>/<parameter>')  
+api.add_resource(postSensorSound, '/api/postsensorsound/<id>/<timestart>/<timeend>/<parameter>')  
+api.add_resource(deleteSensorSound, '/api/deletesensorsound/<id>')  
 # endregion
 
 # endregion
@@ -411,4 +416,6 @@ def writeLog(enumNumber, content):
 
 
 if __name__ == '__main__':
+    cors = CORS(app, resources={r"/api/*": {"origins": "*"}}, support_credentials=True)
     app.run(host=socket.gethostbyname(socket.gethostname()), port='5002')
+    

@@ -141,7 +141,7 @@
                 else {
                     var username = $('#txtUsername').val();
                     var password = $('#txtPassword').val();
-                    var api_url = 'http://192.168.1.7:5002/information/' + username + '/' + password;
+                    var api_url = 'http://192.168.1.12:5002/information/' + username + '/' + password;
                     $.ajax({
                         url: api_url,
                         contentType: "application/json",
@@ -149,11 +149,13 @@
                         success: function (result) {
                             console.log(result);
                             alert(result);
-                            window.location.href = "https://localhost:5001/Home/Dashboard";
+                            window.location.href = "https://localhost:44319/Home/Dashboard";
                         },
                         error: function (result) {
                             console.log(result);
-                            alert(result);
+                            alert("Error When Logging In");
+                            continue;
+                            window.location.href = "https://localhost:44319/Home/Login";
                         }
                     })
                 }
