@@ -9,7 +9,7 @@
     <link rel="icon" type="~/image/png" href="~/assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <title>Light Bootstrap Dashboard by Creative Tim</title>
+    <title>Management Project Smart Baby</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -38,6 +38,21 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
+    <base href="https://demos.telerik.com/kendo-ui/datetimepicker/index">
+    <style>
+        html {
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+    <title></title>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.material.mobile.min.css" />
+
+    <script src="https://kendo.cdn.telerik.com/2019.1.220/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2019.1.220/js/kendo.all.min.js"></script>
+
 </head>
 <body>
 
@@ -46,9 +61,12 @@
 
             <div class="sidebar-wrapper">
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
-                    </a>
+
+                    <div class="logo">
+                        <a target="_blank" href="https://github.com/AjackTi/Project-Monitor-Baby" class="simple-text">
+                            TEAM 4
+                        </a>
+                    </div>
                 </div>
 
                 <ul class="nav">
@@ -67,25 +85,19 @@
                     <li>
                         <a href="~/table.html">
                             <i class="pe-7s-note2"></i>
-                            <p>Table List</p>
+                            <p>Advice</p>
                         </a>
                     </li>
                     <li>
                         <a href="~/typography.html">
-                            <i class="pe-7s-news-paper"></i>
-                            <p>Typography</p>
+                            <i class="pe-7s-camera"></i>
+                            <p>Live Camera</p>
                         </a>
                     </li>
                     <li>
                         <a href="~/icons.html">
-                            <i class="pe-7s-science"></i>
-                            <p>Icons</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="~/maps.html">
-                            <i class="pe-7s-map-marker"></i>
-                            <p>Maps</p>
+                            <i class="pe-7s-refresh"></i>
+                            <p>Transform</p>
                         </a>
                     </li>
                     <li>
@@ -144,11 +156,6 @@
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="">
-                                    <p>Account</p>
-                                </a>
-                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <p>
@@ -182,80 +189,93 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-4" style="width: 353px;">
                             <div class="card">
 
                                 <div class="header">
-                                    <h4 class="title">Email Statistics</h4>
-                                    <p class="category">Last Campaign Performance</p>
+                                    <h4 class="title">Motion Chart</h4>
+                                    <p class="category">Motion Detection</p>
                                 </div>
-                                <div class="content">
-                                    @*<div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>*@
-                                    <div id="soundchart" style="min-width: 100px; max-width:200px;height:200px;margin: 0 auto;">
+                                <div class="content" style="height: 466px;">
+                                    <div id="motionChart"></div>
+                                    <div id="example">
+
+                                        <div class="demo-section k-content">
+                                            <input id="datetimepickerMotion" title="datetimepickerMotion" style="width: 100%;" />
+                                        </div>
+
+                                        <script>
+                                            $(document).ready(function () {
+                                                // create DateTimePicker from input HTML element
+                                                $("#datetimepickerMotion").kendoDateTimePicker({
+                                                    value: new Date(),
+                                                    dateInput: true
+                                                });
+                                                $("#datetimepickerMotion").change(function () {
+                                                    $.ajax({
+                                                        type: 'GET',
+                                                        dataType: 'json',
+                                                        url: 'http://192.168.1.12:5002/api/cameras',
+//                                                        contentType: 'application/json; charset=utf-8',
+                                                        success: function (result) {
+                                                            console.log(result);
+                                                        }
+                                                    })
+                                                    var startDate = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'MM/dd/yyyy');
+                                                    var startTime = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'hh:mm tt');
+                                                    console.log(startDate, startTime);
+                                                })
+
+                                                //var endtDate = kendo.toString($("#endDate").data("kendoDateTimePicker").value(), 'MM/dd/yyyy');
+                                                //var endTime = kendo.toString($("#endDate").data("kendoDateTimePicker").value(), 'hh:mm tt')
+                                            });
+                                        </script>
 
                                     </div>
                                     <script>
-                                        Highcharts.chart('container', {
+                                        // Set up the chart
+                                        var chart = new Highcharts.Chart({
                                             chart: {
-                                                plotBackgroundColor: null,
-                                                plotBorderWidth: null,
-                                                plotShadow: false,
-                                                type: 'pie'
+                                                renderTo: 'motionChart',
+                                                type: 'column',
+                                                options3d: {
+                                                    enabled: true,
+                                                    alpha: 15,
+                                                    beta: 15,
+                                                    depth: 50,
+                                                    viewDistance: 25
+                                                }
                                             },
                                             title: {
-                                                text: 'Browser market shares in January, 2018'
+                                                text: 'Chart rotation demo'
                                             },
-                                            tooltip: {
-                                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                            subtitle: {
+                                                text: 'Test options by dragging the sliders below'
                                             },
                                             plotOptions: {
-                                                pie: {
-                                                    allowPointSelect: true,
-                                                    cursor: 'pointer',
-                                                    dataLabels: {
-                                                        enabled: true,
-                                                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                                                        style: {
-                                                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                                                        }
-                                                    }
+                                                column: {
+                                                    depth: 25
                                                 }
                                             },
                                             series: [{
-                                                name: 'Brands',
-                                                colorByPoint: true,
-                                                data: [{
-                                                    name: 'Chrome',
-                                                    y: 61.41,
-                                                    sliced: true,
-                                                    selected: true
-                                                }, {
-                                                    name: 'Internet Explorer',
-                                                    y: 11.84
-                                                }, {
-                                                    name: 'Firefox',
-                                                    y: 10.85
-                                                }, {
-                                                    name: 'Edge',
-                                                    y: 4.67
-                                                }, {
-                                                    name: 'Safari',
-                                                    y: 4.18
-                                                }, {
-                                                    name: 'Sogou Explorer',
-                                                    y: 1.64
-                                                }, {
-                                                    name: 'Opera',
-                                                    y: 1.6
-                                                }, {
-                                                    name: 'QQ',
-                                                    y: 1.2
-                                                }, {
-                                                    name: 'Other',
-                                                    y: 2.61
-                                                }]
+                                                data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
                                             }]
                                         });
+
+                                        function showValues() {
+                                            $('#alpha-value').html(chart.options.chart.options3d.alpha);
+                                            $('#beta-value').html(chart.options.chart.options3d.beta);
+                                            $('#depth-value').html(chart.options.chart.options3d.depth);
+                                        }
+
+                                        // Activate the sliders
+                                        $('#sliders input').on('input change', function () {
+                                            chart.options.chart.options3d[this.id] = parseFloat(this.value);
+                                            showValues();
+                                            chart.redraw(false);
+                                        });
+
+                                        showValues();
                                     </script>
                                 </div>
                             </div>
@@ -264,73 +284,110 @@
                         <div class="col-md-8">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title">Motion When Sleeping</h4>
+                                    <h4 class="title">Camera Chart</h4>
+                                    <p class="category">Camera Detect Motion Analysic</p>
                                 </div>
                                 <div class="content">
-                                    <div id="motionchart" style="min-width: 100px; max-width:600px;height:300px;margin: 0 auto;"></div>
+                                    <div id="cameraChart"></div>
+
+                                    <div id="example">
+
+                                        <div class="demo-section k-content">
+                                            <div style="display: inline-block; width: 100%">
+                                                <input id="datetimepickerCamera1" title="datetimepickerCamera1" style="width: 50%; float: left;" />
+                                                <input id="datetimepickerCamera2" title="datetimepickerCamera2" style="width: 50%; float: right;" />
+                                            </div>
+                                        </div>
+
+                                        <script>
+                                            $(document).ready(function () {
+                                                // create DateTimePicker from input HTML element
+                                                $("#datetimepickerCamera1").kendoDateTimePicker({
+                                                    value: new Date(),
+                                                    dateInput: true
+                                                });
+                                                $("#datetimepickerCamera2").kendoDateTimePicker({
+                                                    value: new Date(),
+                                                    dateInput: true
+                                                });
+                                            });
+                                        </script>
+
+                                    </div>
+
                                     <script>
-                                        Highcharts.chart('motionchart', {
-
+                                        Highcharts.chart('cameraChart', {
+                                            chart: {
+                                                zoomType: 'xy'
+                                            },
                                             title: {
-                                                text: 'Solar Employment Growth by Sector, 2010-2016'
+                                                text: 'Average Monthly Temperature and Rainfall in Tokyo'
                                             },
-
                                             subtitle: {
-                                                text: 'Source: thesolarfoundation.com'
+                                                text: 'Source: WorldClimate.com'
                                             },
-
-                                            yAxis: {
+                                            xAxis: [{
+                                                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                                                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                                                crosshair: true
+                                            }],
+                                            yAxis: [{ // Primary yAxis
+                                                labels: {
+                                                    format: '{value}°C',
+                                                    style: {
+                                                        color: Highcharts.getOptions().colors[1]
+                                                    }
+                                                },
                                                 title: {
-                                                    text: 'Number of Employees'
+                                                    text: 'Temperature',
+                                                    style: {
+                                                        color: Highcharts.getOptions().colors[1]
+                                                    }
                                                 }
+                                            }, { // Secondary yAxis
+                                                title: {
+                                                    text: 'Rainfall',
+                                                    style: {
+                                                        color: Highcharts.getOptions().colors[0]
+                                                    }
+                                                },
+                                                labels: {
+                                                    format: '{value} mm',
+                                                    style: {
+                                                        color: Highcharts.getOptions().colors[0]
+                                                    }
+                                                },
+                                                opposite: true
+                                            }],
+                                            tooltip: {
+                                                shared: true
                                             },
                                             legend: {
                                                 layout: 'vertical',
-                                                align: 'right',
-                                                verticalAlign: 'middle'
+                                                align: 'left',
+                                                x: 120,
+                                                verticalAlign: 'top',
+                                                y: 100,
+                                                floating: true,
+                                                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || 'rgba(255,255,255,0.25)'
                                             },
-
-                                            plotOptions: {
-                                                series: {
-                                                    label: {
-                                                        connectorAllowed: false
-                                                    },
-                                                    pointStart: 2010
-                                                }
-                                            },
-
                                             series: [{
-                                                name: 'Installation',
-                                                data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
-                                            }, {
-                                                name: 'Manufacturing',
-                                                data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
-                                            }, {
-                                                name: 'Sales & Distribution',
-                                                data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
-                                            }, {
-                                                name: 'Project Development',
-                                                data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
-                                            }, {
-                                                name: 'Other',
-                                                data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
-                                            }],
+                                                name: 'Rainfall',
+                                                type: 'column',
+                                                yAxis: 1,
+                                                data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+                                                tooltip: {
+                                                    valueSuffix: ' mm'
+                                                }
 
-                                            responsive: {
-                                                rules: [{
-                                                    condition: {
-                                                        maxWidth: 500
-                                                    },
-                                                    chartOptions: {
-                                                        legend: {
-                                                            layout: 'horizontal',
-                                                            align: 'center',
-                                                            verticalAlign: 'bottom'
-                                                        }
-                                                    }
-                                                }]
-                                            }
-
+                                            }, {
+                                                name: 'Temperature',
+                                                type: 'spline',
+                                                data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+                                                tooltip: {
+                                                    valueSuffix: '°C'
+                                                }
+                                            }]
                                         });
                                     </script>
                                 </div>
@@ -344,12 +401,37 @@
                         <div class="col-md-6">
                             <div class="card ">
                                 <div class="header">
-                                    <h4 class="title">2014 Sales</h4>
-                                    <p class="category">All products including Taxes</p>
-                                    <div id="cameraChart"></div>
+                                    <h4 class="title">Sound Chart</h4>
+                                    <p class="category">Sound Detection</p>
+                                    <div id="soundChart"></div>
+                                    <div id="example">
+
+                                        <div class="demo-section k-content">
+                                            <div style="display: inline-block; width: 100%">
+                                                <input id="datetimepickerSound1" title="datetimepickerSound1" style="width: 50%; float: left;" />
+                                                <input id="datetimepickerSound2" title="datetimepickerSound2" style="width: 50%; float: right;" />
+                                            </div>
+                                        </div>
+
+                                        <script>
+                                            $(document).ready(function () {
+                                                // create DateTimePicker from input HTML element
+                                                $("#datetimepickerSound1").kendoDateTimePicker({
+                                                    value: new Date(),
+                                                    dateInput: true
+                                                });
+
+                                                $("#datetimepickerSound2").kendoDateTimePicker({
+                                                    value: new Date(),
+                                                    dateInput: true
+                                                });
+                                            });
+                                        </script>
+
+                                    </div>
                                 </div>
                                 <script>
-                                    Highcharts.chart('cameraChart', {
+                                    Highcharts.chart('soundChart', {
                                         chart: {
                                             plotBackgroundColor: null,
                                             plotBorderWidth: null,
@@ -357,7 +439,7 @@
                                             type: 'pie'
                                         },
                                         title: {
-                                            text: 'Sound Chart Of This Month'
+                                            text: 'Sound Chart Between '
                                         },
                                         tooltip: {
                                             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -419,7 +501,7 @@
                                 <div class="header">
                                     <h4 class="title">Advice For Parents with My Baby</h4>
                                 </div>
-                                <div class="content">
+                                <div class="content" style="height: 462px">
                                     <div class="table-full-width">
                                         <table class="table">
                                             <tbody>
@@ -530,7 +612,6 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -538,6 +619,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 
@@ -561,22 +643,5 @@
 
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="~/assets/js/demo.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        demo.initChartist();
-
-        $.notify({
-            icon: 'pe-7s-gift',
-            message: "Welcome to My Website to Manage Sleep Cycles"
-
-        }, {
-                type: 'info',
-                timer: 4000
-            });
-
-    });
-</script>
 
 </html>
