@@ -11,6 +11,10 @@ import ast
 import db
 import socket
 from flask_cors import CORS
+# from OpenSSL import SSL
+# context = SSL.Context(SSL.SSLv23_METHOD)
+# context.use_privatekey_file('server.key')
+# context.use_certificate_file('server.crt')
 
 db_connect = create_engine('sqlite:///test.db')
 app = Flask(__name__)
@@ -36,7 +40,7 @@ class Cameras(Resource):
             subResult['Parameter'] = i[4]
             lstReturn.append(subResult)
             subResult = {}
-        return [i for i in lstReturn]
+        return jsonify(lstReturn)
 
 # http://localhost:5002/camera/6/20190303/20190404/5500
 class Camera(Resource):
