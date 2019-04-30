@@ -215,9 +215,13 @@
                                                     $.ajax({
                                                         type: 'GET',
                                                         dataType: 'json',
-                                                        url: 'http://192.168.1.12:5002/api/cameras',
-//                                                        contentType: 'application/json; charset=utf-8',
+                                                        cache: false,
+                                                        url: 'https://192.168.1.7:5002/api/cameras',
+                                                        contentType: 'application/json; charset=utf-8',
                                                         success: function (result) {
+                                                            console.log(result);
+                                                        },
+                                                        error: function (result) {
                                                             console.log(result);
                                                         }
                                                     })

@@ -11,10 +11,10 @@ import ast
 import db
 import socket
 from flask_cors import CORS
-# from OpenSSL import SSL
-# context = SSL.Context(SSL.SSLv23_METHOD)
-# context.use_privatekey_file('server.key')
-# context.use_certificate_file('server.crt')
+from OpenSSL import SSL
+context = SSL.Context(SSL.SSLv23_METHOD)
+context.use_privatekey_file('server.key')
+context.use_certificate_file('server.crt')
 
 db_connect = create_engine('sqlite:///test.db')
 app = Flask(__name__)
@@ -421,5 +421,6 @@ def writeLog(enumNumber, content):
 
 if __name__ == '__main__':
     cors = CORS(app, resources={r"/api/*": {"origins": "*"}}, support_credentials=True)
-    app.run(host=socket.gethostbyname(socket.gethostname()), port='5002')
+    context = ('server.crt', 'server.key')
+    app.run(host=socket.gethostbyname(socket.gethostname()), port='5002', ssl_context=context, threaded=True, debug=True)
     
