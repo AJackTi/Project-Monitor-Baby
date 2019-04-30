@@ -211,25 +211,32 @@
                                                     value: new Date(),
                                                     dateInput: true
                                                 });
-                                                $("#datetimepickerMotion").change(function () {
-                                                    $.ajax({
-                                                        type: 'GET',
-                                                        dataType: 'json',
-                                                        cache: false,
-                                                        url: 'https://192.168.1.7:5002/api/cameras',
-                                                        contentType: 'application/json; charset=utf-8',
-                                                        success: function (result) {
-                                                            console.log(result);
-                                                        },
-                                                        error: function (result) {
-                                                            console.log(result);
-                                                        }
-                                                    })
-                                                    var startDate = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'MM/dd/yyyy');
-                                                    var startTime = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'hh:mm tt');
-                                                    console.log(startDate, startTime);
-                                                })
 
+                                                var today = new Date();
+                                                var dd = String(today.getDate()).padStart(2, '0');
+                                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                var yyyy = today.getFullYear();
+
+                                                today = yyyy + '-' + mm + '-' + dd;
+
+                                                $.ajax({
+                                                    type: 'GET',
+                                                    dataType: 'json',
+                                                    cache: false,
+                                                    url: 'https://192.168.1.7:5002/api/sensormotions',
+                                                    contentType: 'application/json; charset=utf-8',
+                                                    success: function (result) {
+                                                        console.log(result);
+                                                        setupMotionChart(result);
+                                                    },
+                                                    error: function (result) {
+                                                        console.log(result);
+                                                    }
+
+                                                });
+                                                var startDate = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'MM/dd/yyyy');
+                                                var startTime = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'hh:mm tt');
+                                                console.log(startDate, startTime);
                                                 //var endtDate = kendo.toString($("#endDate").data("kendoDateTimePicker").value(), 'MM/dd/yyyy');
                                                 //var endTime = kendo.toString($("#endDate").data("kendoDateTimePicker").value(), 'hh:mm tt')
                                             });
@@ -237,49 +244,52 @@
 
                                     </div>
                                     <script>
-                                        // Set up the chart
-                                        var chart = new Highcharts.Chart({
-                                            chart: {
-                                                renderTo: 'motionChart',
-                                                type: 'column',
-                                                options3d: {
-                                                    enabled: true,
-                                                    alpha: 15,
-                                                    beta: 15,
-                                                    depth: 50,
-                                                    viewDistance: 25
-                                                }
-                                            },
-                                            title: {
-                                                text: 'Chart rotation demo'
-                                            },
-                                            subtitle: {
-                                                text: 'Test options by dragging the sliders below'
-                                            },
-                                            plotOptions: {
-                                                column: {
-                                                    depth: 25
-                                                }
-                                            },
-                                            series: [{
-                                                data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-                                            }]
-                                        });
+                                        function setupMotionChart(data) {
+                                            // Set up the chart
+                                            var chart = new Highcharts.Chart({
+                                                chart: {
+                                                    renderTo: 'motionChart',
+                                                    type: 'column',
+                                                    options3d: {
+                                                        enabled: true,
+                                                        alpha: 15,
+                                                        beta: 15,
+                                                        depth: 50,
+                                                        viewDistance: 25
+                                                    }
+                                                },
+                                                title: {
+                                                    text: 'Chart rotation demo'
+                                                },
+                                                subtitle: {
+                                                    text: 'Test options by dragging the sliders below'
+                                                },
+                                                plotOptions: {
+                                                    column: {
+                                                        depth: 25
+                                                    }
+                                                },
+                                                series: [{
+                                                    data: data.map(a => a.Parameter)
+                                                }]
+                                            });
 
-                                        function showValues() {
-                                            $('#alpha-value').html(chart.options.chart.options3d.alpha);
-                                            $('#beta-value').html(chart.options.chart.options3d.beta);
-                                            $('#depth-value').html(chart.options.chart.options3d.depth);
+                                            function showValues() {
+                                                $('#alpha-value').html(chart.options.chart.options3d.alpha);
+                                                $('#beta-value').html(chart.options.chart.options3d.beta);
+                                                $('#depth-value').html(chart.options.chart.options3d.depth);
+                                            }
+
+                                            // Activate the sliders
+                                            $('#sliders input').on('input change', function () {
+                                                chart.options.chart.options3d[this.id] = parseFloat(this.value);
+                                                showValues();
+                                                chart.redraw(false);
+                                            });
+
+                                            showValues();
                                         }
 
-                                        // Activate the sliders
-                                        $('#sliders input').on('input change', function () {
-                                            chart.options.chart.options3d[this.id] = parseFloat(this.value);
-                                            showValues();
-                                            chart.redraw(false);
-                                        });
-
-                                        showValues();
                                     </script>
                                 </div>
                             </div>
