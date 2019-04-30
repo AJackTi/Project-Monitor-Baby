@@ -141,13 +141,17 @@ class SensorMotion:
         return cur.fetchall()
 
     # SensorMotion().getSpecificDataSensorMotion(1)
-    def getSpecificDataSensorMotion(self, ID=None, TimeStart=None, TimeEnd=None, Quantity=None):
+    def getSpecificDataSensorMotion(self, TimeStart=None, TimeEnd=None):
+        print TimeStart, TimeEnd == None
         cur = self.conn.cursor()
-        if ID == None:
-            return SensorMotion().getDataSensorMotion()
+        TimeStart = TimeStart.split('%20')
+        TimeEnd = TimeEnd.split('%20')
         try:
-            cur.execute("SELECT * FROM SensorMotion where Id = ? or TimeStart like ? or TimeEnd like ? or Quantity = ?",
-                        (ID, unicode(str(TimeStart), "utf-8") + '%', unicode(str(TimeEnd), "utf-8") + '%', Quantity,))
+            if TimeEnd != None:
+                cur.execute("SELECT * FROM SensorMotion where date(TimeStart) LIKE date(?) and date(TimeEnd) LIKE date(?)",
+                        (str(TimeStart), str(TimeEnd),))
+            else:
+                cur.execute("SELECT * FROM SensorMotion where date(TimeStart) LIKE date(?) and date('now')", (str(TimeStart),))
         except:
             return False
 
@@ -291,7 +295,6 @@ class Information:
                 data = (Username, Password, Email)
                 cur.execute(query, data)
             except Exception as e:
-                print e
                 return False
 
         self.conn.commit()
@@ -379,6 +382,7 @@ def main():
     # Camera().deleteSpecificDataCamera(1)
     # print Information().getSpecificInformation('admin','123')
     # Information().insertSpecificInformation('ductrong','123123','admin@hotmail.com')
+    SensorMotion().getSpecificDataSensorMotion('2019-04-30%2012:00', None)
 
 if __name__ == '__main__':
     main()

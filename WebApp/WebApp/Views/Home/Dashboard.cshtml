@@ -212,12 +212,17 @@
                                                     dateInput: true
                                                 });
 
-                                                var today = new Date();
-                                                var dd = String(today.getDate()).padStart(2, '0');
-                                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                                                var yyyy = today.getFullYear();
+                                                // prototype replace all
+//                                                SELECT * FROM SensorMotion WHERE date(TimeStart) like date('2019-04-30') and date('2019-04-30 14:30:07.534000')
 
-                                                today = yyyy + '-' + mm + '-' + dd;
+                                                String.prototype.replaceAll = function (search, replacement) {
+                                                    var target = this;
+                                                    return target.replace(new RegExp(search, 'g'), replacement);
+                                                };
+
+                                                var startDate = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                var startTime = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'hh:mm tt');
+                                                console.log(startDate.replaceAll('/','-') + ' ' + startTime);
 
                                                 $.ajax({
                                                     type: 'GET',
@@ -234,9 +239,10 @@
                                                     }
 
                                                 });
-                                                var startDate = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'MM/dd/yyyy');
-                                                var startTime = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'hh:mm tt');
-                                                console.log(startDate, startTime);
+
+                                               
+                                                
+
                                                 //var endtDate = kendo.toString($("#endDate").data("kendoDateTimePicker").value(), 'MM/dd/yyyy');
                                                 //var endTime = kendo.toString($("#endDate").data("kendoDateTimePicker").value(), 'hh:mm tt')
                                             });

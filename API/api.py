@@ -242,8 +242,8 @@ class SensorMotions(Resource):
         return [i for i in lstReturn]
 
 class SensorMotion(Resource):
-    def get(self, id, timestart, timeend, quantity):
-        lstResult = db.SensorMotion().getSpecificDataSensorMotion(id, timestart, timeend, quantity)
+    def get(self, timestart, timeend):
+        lstResult = db.SensorMotion().getSpecificDataSensorMotion(timestart, timeend)
         lstReturn = []
         subResult = {}
         for i in lstResult:
@@ -253,7 +253,7 @@ class SensorMotion(Resource):
             subResult['quantity'] = i[3]
             lstReturn.append(subResult)
             subResult = {}
-        return [i for i in lstReturn]
+        return jsonify(lstReturn)
 
 class postSensorMotion(Resource):
     def post(self, id, timestart, timeend, quantity):
@@ -349,9 +349,9 @@ api.add_resource(deleteMusic, '/api/deleteCamera/<id>')
 
 # region SensorMotion
 api.add_resource(SensorMotions, '/api/sensormotions')  
-api.add_resource(SensorMotion, '/api/sensormotion/<id>/<timestart>/<timeend>/<quantity>')  
+api.add_resource(SensorMotion, '/api/sensormotion/<timestart>/<timeend>')  
 api.add_resource(postSensorMotion, '/api/postsensormotion/<id>/<timestart>/<timeend>/<quantity>')  
-api.add_resource(deleteSensorMotion, '/api/deletesensormotion/<id>')  
+api.add_resource(deleteSensorMotion, '/api/deletesensormotion/<id>')
 # endregion
 
 # region DeviceRas
