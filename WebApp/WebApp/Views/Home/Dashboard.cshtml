@@ -189,12 +189,12 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
+                        @* Motion Chart *@
                         <div class="col-md-4" style="width: 353px;">
                             <div class="card">
 
                                 <div class="header">
                                     <h4 class="title">Motion Chart</h4>
-                                    <p class="category">Motion Detection</p>
                                 </div>
                                 <div class="content" style="height: 466px;">
                                     <div id="motionChart"></div>
@@ -213,7 +213,7 @@
                                                 });
 
                                                 // prototype replace all
-//                                                SELECT * FROM SensorMotion WHERE date(TimeStart) like date('2019-04-30') and date('2019-04-30 14:30:07.534000')
+                                                //SELECT * FROM SensorMotion WHERE date(TimeStart) like date('2019-04-30') and date('2019-04-30 14:30:07.534000')
 
                                                 String.prototype.replaceAll = function (search, replacement) {
                                                     var target = this;
@@ -221,36 +221,55 @@
                                                 };
 
                                                 var startDate = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
-                                                var startTime = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'hh:mm tt');
-                                                console.log(startDate.replaceAll('/','-') + ' ' + startTime);
-
+                                                var startTime = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                //console.log(startDate.replaceAll('/', '-') + ' ' + startTime);
+                                                //debugger;
                                                 $.ajax({
                                                     type: 'GET',
                                                     dataType: 'json',
                                                     cache: false,
-                                                    url: 'https://192.168.1.7:5002/api/sensormotions',
+                                                    url: 'https://192.168.1.7:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/None',
                                                     contentType: 'application/json; charset=utf-8',
                                                     success: function (result) {
-                                                        console.log(result);
+                                                        //console.log(result);
                                                         setupMotionChart(result);
                                                     },
                                                     error: function (result) {
-                                                        console.log(result);
+                                                        //console.log(result);
                                                     }
 
                                                 });
 
-                                               
-                                                
-
-                                                //var endtDate = kendo.toString($("#endDate").data("kendoDateTimePicker").value(), 'MM/dd/yyyy');
-                                                //var endTime = kendo.toString($("#endDate").data("kendoDateTimePicker").value(), 'hh:mm tt')
+                                                $('#datetimepickerMotion').change(function () {
+                                                    //debugger;
+                                                    var startDate = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                    var startTime = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                    //console.log('https://192.168.1.7:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/None');
+                                                    $.ajax({
+                                                        type: 'GET',
+                                                        dataType: 'json',
+                                                        cache: false,
+                                                        url: 'https://192.168.1.7:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/None',
+                                                        contentType: 'application/json; charset=utf-8',
+                                                        success: function (result) {
+                                                            //console.log(result);
+                                                            setupMotionChart(result);
+                                                        },
+                                                        error: function (result) {
+                                                            //console.log(result);
+                                                        }
+                                                    });
+                                                });
                                             });
                                         </script>
 
                                     </div>
                                     <script>
                                         function setupMotionChart(data) {
+                                            var startDate = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                            var startTime = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'hh:mm tt');
+
+                                            //console.log('Loading ... ');
                                             // Set up the chart
                                             var chart = new Highcharts.Chart({
                                                 chart: {
@@ -265,10 +284,7 @@
                                                     }
                                                 },
                                                 title: {
-                                                    text: 'Chart rotation demo'
-                                                },
-                                                subtitle: {
-                                                    text: 'Test options by dragging the sliders below'
+                                                    text: 'Motion detection between ' + startDate + ' ' + startTime + ' And Now'
                                                 },
                                                 plotOptions: {
                                                     column: {
@@ -276,7 +292,7 @@
                                                     }
                                                 },
                                                 series: [{
-                                                    data: data.map(a => a.Parameter)
+                                                    data: data.map(a => a.quantity)
                                                 }]
                                             });
 
@@ -300,12 +316,13 @@
                                 </div>
                             </div>
                         </div>
+                        @* End Motion Chart *@
 
+                        @* Camera Chart *@
                         <div class="col-md-8">
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title">Camera Chart</h4>
-                                    <p class="category">Camera Detect Motion Analysic</p>
                                 </div>
                                 <div class="content">
                                     <div id="cameraChart"></div>
@@ -330,94 +347,133 @@
                                                     value: new Date(),
                                                     dateInput: true
                                                 });
+
+                                                // prototype replace all
+
+                                                String.prototype.replaceAll = function (search, replacement) {
+                                                    var target = this;
+                                                    return target.replace(new RegExp(search, 'g'), replacement);
+                                                };
+
+                                                var startDate = kendo.toString($("#datetimepickerCamera1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                var startTime = kendo.toString($("#datetimepickerCamera1").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                var endDate = kendo.toString($("#datetimepickerCamera2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                var endTime = kendo.toString($("#datetimepickerCamera2").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                //console.log(startDate.replaceAll('/', '-') + ' ' + startTime);
+                                                //console.log(endDate.replaceAll('/', '-') + ' ' + endTime);
+                                                //console.log('https://192.168.1.7:5002/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime);
+                                                //debugger;
+                                                $.ajax({
+                                                    type: 'GET',
+                                                    dataType: 'json',
+                                                    cache: false,
+                                                    url: 'https://192.168.1.7:5002/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                    contentType: 'application/json; charset=utf-8',
+                                                    success: function (result) {
+                                                        //console.log(result);
+                                                        setUpCameraChart(result);
+                                                    },
+                                                    error: function (result) {
+                                                        //console.log(result);
+                                                    }
+
+                                                });
+
+                                                $('#datetimepickerCamera1, #datetimepickerCamera2').change(function () {
+                                                    //debugger;
+                                                    var startDate = kendo.toString($("#datetimepickerCamera1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                    var startTime = kendo.toString($("#datetimepickerCamera1").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                    var endDate = kendo.toString($("#datetimepickerCamera2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                    var endTime = kendo.toString($("#datetimepickerCamera2").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                    //console.log(startDate + ' ' + startTime + ' ' + endDate + ' ' + endTime);
+                                                    //console.log('https://192.168.1.7:5002/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime);
+                                                    $.ajax({
+                                                        type: 'GET',
+                                                        dataType: 'json',
+                                                        cache: false,
+                                                        url: 'https://192.168.1.7:5002/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                        contentType: 'application/json; charset=utf-8',
+                                                        success: function (result) {
+                                                            //console.log(result);
+                                                            setUpCameraChart(result);
+                                                        },
+                                                        error: function (result) {
+                                                            //console.log(result);
+                                                        }
+                                                    });
+                                                });
                                             });
                                         </script>
 
                                     </div>
 
                                     <script>
-                                        Highcharts.chart('cameraChart', {
-                                            chart: {
-                                                zoomType: 'xy'
-                                            },
-                                            title: {
-                                                text: 'Average Monthly Temperature and Rainfall in Tokyo'
-                                            },
-                                            subtitle: {
-                                                text: 'Source: WorldClimate.com'
-                                            },
-                                            xAxis: [{
-                                                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                                                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                                                crosshair: true
-                                            }],
-                                            yAxis: [{ // Primary yAxis
-                                                labels: {
-                                                    format: '{value}°C',
-                                                    style: {
-                                                        color: Highcharts.getOptions().colors[1]
-                                                    }
-                                                },
-                                                title: {
-                                                    text: 'Temperature',
-                                                    style: {
-                                                        color: Highcharts.getOptions().colors[1]
-                                                    }
-                                                }
-                                            }, { // Secondary yAxis
-                                                title: {
-                                                    text: 'Rainfall',
-                                                    style: {
-                                                        color: Highcharts.getOptions().colors[0]
-                                                    }
-                                                },
-                                                labels: {
-                                                    format: '{value} mm',
-                                                    style: {
-                                                        color: Highcharts.getOptions().colors[0]
-                                                    }
-                                                },
-                                                opposite: true
-                                            }],
-                                            tooltip: {
-                                                shared: true
-                                            },
-                                            legend: {
-                                                layout: 'vertical',
-                                                align: 'left',
-                                                x: 120,
-                                                verticalAlign: 'top',
-                                                y: 100,
-                                                floating: true,
-                                                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || 'rgba(255,255,255,0.25)'
-                                            },
-                                            series: [{
-                                                name: 'Rainfall',
-                                                type: 'column',
-                                                yAxis: 1,
-                                                data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
-                                                tooltip: {
-                                                    valueSuffix: ' mm'
-                                                }
+                                        function setUpCameraChart(data) {
+                                            var startDate = kendo.toString($("#datetimepickerCamera1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                            var startTime = kendo.toString($("#datetimepickerCamera1").data("kendoDateTimePicker").value(), 'hh:mm tt');
+                                            var endDate = kendo.toString($("#datetimepickerCamera2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                            var endTime = kendo.toString($("#datetimepickerCamera2").data("kendoDateTimePicker").value(), 'hh:mm tt');
 
-                                            }, {
-                                                name: 'Temperature',
-                                                type: 'spline',
-                                                data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+                                            Highcharts.chart('cameraChart', {
+                                                chart: {
+                                                    type: 'area'
+                                                },
+                                                title: {
+                                                    text: 'Camera Detection Between ' + startDate + ' ' + startTime + ' And ' + endDate + ' ' + endTime
+                                                },
+                                                xAxis: {
+                                                    allowDecimals: false,
+                                                    labels: {
+                                                        formatter: function () {
+                                                            return this.value; // clean, unformatted number for year
+                                                        }
+                                                    }
+                                                },
+                                                yAxis: {
+                                                    title: {
+                                                        text: 'Camera Detection Times'
+                                                    },
+                                                    labels: {
+                                                        formatter: function () {
+                                                            return this.value;
+                                                        }
+                                                    }
+                                                },
                                                 tooltip: {
-                                                    valueSuffix: '°C'
-                                                }
-                                            }]
-                                        });
+                                                    pointFormat: '{series.name} had <b>{point.y:,.0f}</b><br/>time in {point.x}'
+                                                },
+                                                plotOptions: {
+                                                    area: {
+                                                        pointStart: 0,
+                                                        marker: {
+                                                            enabled: false,
+                                                            symbol: 'circle',
+                                                            radius: 2,
+                                                            states: {
+                                                                hover: {
+                                                                    enabled: true
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                series: [{
+                                                    name: 'Camera Detection',
+                                                    data: data.map(a => a.Parameter),
+                                                    color: 'rgba(244, 91, 91, 0.75);'
+                                                }]
+                                            });
+                                        }
                                     </script>
                                 </div>
                             </div>
                         </div>
+                        @* End Camera Chart *@
                     </div>
 
 
-
                     <div class="row">
+                        @* Sound Sensor Chart *@
                         <div class="col-md-6">
                             <div class="card ">
                                 <div class="header">
@@ -445,78 +501,339 @@
                                                     value: new Date(),
                                                     dateInput: true
                                                 });
+
+                                                String.prototype.replaceAll = function (search, replacement) {
+                                                    var target = this;
+                                                    return target.replace(new RegExp(search, 'g'), replacement);
+                                                };
+
+                                                var startDate = kendo.toString($("#datetimepickerSound1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                var startTime = kendo.toString($("#datetimepickerSound1").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                var endDate = kendo.toString($("#datetimepickerSound2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                var endTime = kendo.toString($("#datetimepickerSound2").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                //console.log('https://192.168.1.7:5002/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime);
+
+                                                //debugger;
+                                                $.ajax({
+                                                    type: 'GET',
+                                                    dataType: 'json',
+                                                    cache: false,
+                                                    url: 'https://192.168.1.7:5002/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                    contentType: 'application/json; charset=utf-8',
+                                                    success: function (result) {
+                                                        //console.log(result);
+                                                        setUpSoundChart(result);
+                                                    },
+                                                    error: function (result) {
+                                                        //console.log(result);
+                                                    }
+
+                                                });
+
+                                                $('#datetimepickerSound1, #datetimepickerSound2').change(function () {
+                                                    //debugger;
+                                                    var startDate = kendo.toString($("#datetimepickerSound1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                    var startTime = kendo.toString($("#datetimepickerSound1").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                    var endDate = kendo.toString($("#datetimepickerSound2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                    var endTime = kendo.toString($("#datetimepickerSound2").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                    //console.log(startDate + ' ' + startTime + ' ' + endDate + ' ' + endTime);
+                                                    //console.log('https://192.168.1.7:5002/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime);
+                                                    $.ajax({
+                                                        type: 'GET',
+                                                        dataType: 'json',
+                                                        cache: false,
+                                                        url: 'https://192.168.1.7:5002/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                        contentType: 'application/json; charset=utf-8',
+                                                        success: function (result) {
+                                                            //console.log(result);
+                                                            setUpSoundChart(result);
+                                                        },
+                                                        error: function (result) {
+                                                            //console.log(result);
+                                                        }
+                                                    });
+                                                });
                                             });
                                         </script>
 
                                     </div>
                                 </div>
                                 <script>
-                                    Highcharts.chart('soundChart', {
-                                        chart: {
-                                            plotBackgroundColor: null,
-                                            plotBorderWidth: null,
-                                            plotShadow: false,
-                                            type: 'pie'
-                                        },
-                                        title: {
-                                            text: 'Sound Chart Between '
-                                        },
-                                        tooltip: {
-                                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                                        },
-                                        plotOptions: {
-                                            pie: {
-                                                allowPointSelect: true,
-                                                cursor: 'pointer',
-                                                dataLabels: {
-                                                    enabled: true,
-                                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                                                    style: {
-                                                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                                                    }
+                                    function setUpSoundChart(data) {
+                                        var startDate = kendo.toString($("#datetimepickerSound1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                        var startTime = kendo.toString($("#datetimepickerSound1").data("kendoDateTimePicker").value(), 'hh:mm tt');
+                                        var endDate = kendo.toString($("#datetimepickerSound2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                        var endTime = kendo.toString($("#datetimepickerSound2").data("kendoDateTimePicker").value(), 'hh:mm tt');
+
+
+                                        Highcharts.chart('soundChart', {
+                                            chart: {
+                                                type: 'line'
+                                            },
+                                            title: {
+                                                text: 'Sound Sensor Between ' + startDate + ' ' + startTime + ' And ' + endDate + ' ' + endTime
+                                            },
+                                            xAxis: {
+                                                categories: data.map(a => a.TimeStart.split(' ')[1].toString('hh:MM:ss TT'))
+                                            },
+                                            yAxis: {
+                                                title: {
+                                                    text: 'Sound Sensor Times'
                                                 }
-                                            }
-                                        },
-                                        series: [{
-                                            name: 'Brands',
-                                            colorByPoint: true,
-                                            data: [{
-                                                name: 'Chrome',
-                                                y: 61.41,
-                                                sliced: true,
-                                                selected: true
-                                            }, {
-                                                name: 'Internet Explorer',
-                                                y: 11.84
-                                            }, {
-                                                name: 'Firefox',
-                                                y: 10.85
-                                            }, {
-                                                name: 'Edge',
-                                                y: 4.67
-                                            }, {
-                                                name: 'Safari',
-                                                y: 4.18
-                                            }, {
-                                                name: 'Sogou Explorer',
-                                                y: 1.64
-                                            }, {
-                                                name: 'Opera',
-                                                y: 1.6
-                                            }, {
-                                                name: 'QQ',
-                                                y: 1.2
-                                            }, {
-                                                name: 'Other',
-                                                y: 2.61
+                                            },
+                                            plotOptions: {
+                                                line: {
+                                                    dataLabels: {
+                                                        enabled: true
+                                                    },
+                                                    enableMouseTracking: false
+                                                }
+                                            },
+                                            series: [{
+                                                name: 'Sound Sensor',
+                                                data: data.map(a => a.Parameter),
+                                                color: 'rgb(169, 255, 151)'
                                             }]
-                                        }]
-                                    });
+                                        });
+                                    }
                                 </script>
                             </div>
                         </div>
+                        @* End Sensor Sound Chart *@
 
+                        @* Combination Chart *@
                         <div class="col-md-6">
+                            <div class="card ">
+                                <div class="header">
+                                    <h4 class="title">Combination Chart</h4>
+                                </div>
+                                <div class="content" style="height: 462px">
+                                    <div class="table-full-width">
+                                        <div id="combinationChart"></div>
+
+                                        <div id="example">
+
+                                            <div class="demo-section k-content">
+                                                <div style="display: inline-block; width: 100%">
+                                                    <input id="datetimepickerCombination1" title="datetimepickerCombination1" style="width: 50%; float: left;" />
+                                                    <input id="datetimepickerCombination2" title="datetimepickerCombination2" style="width: 50%; float: right;" />
+                                                </div>
+                                            </div>
+
+                                            <script>
+                                                $(document).ready(function () {
+                                                    // create DateTimePicker from input HTML element
+                                                    $("#datetimepickerCombination1").kendoDateTimePicker({
+                                                        value: new Date(),
+                                                        dateInput: true
+                                                    });
+
+                                                    $("#datetimepickerCombination2").kendoDateTimePicker({
+                                                        value: new Date(),
+                                                        dateInput: true
+                                                    });
+
+                                                    var startDate = kendo.toString($("#datetimepickerCombination1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                    var startTime = kendo.toString($("#datetimepickerCombination1").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                    var endDate = kendo.toString($("#datetimepickerCombination2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                    var endTime = kendo.toString($("#datetimepickerCombination2").data("kendoDateTimePicker").value(), 'HH:mm');
+
+                                                    debugger;
+
+                                                    var arrSoundSensor = [];
+                                                    var arrMotionSensor = [];
+                                                    var arrCamera = [];
+
+
+                                                    $("#datetimepickerCombination1, #datetimepickerCombination2").change(function () {
+                                                        startDate = kendo.toString($("#datetimepickerCombination1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                        startTime = kendo.toString($("#datetimepickerCombination1").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                        endDate = kendo.toString($("#datetimepickerCombination2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                        endTime = kendo.toString($("#datetimepickerCombination2").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                        // Get Data Of Sound Sensor
+                                                        $.ajax({
+                                                            type: 'GET',
+                                                            dataType: 'json',
+                                                            cache: false,
+                                                            url: 'https://192.168.1.7:5002/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                            contentType: 'application/json; charset=utf-8',
+                                                            success: function (result) {
+                                                                arrSoundSensor = result;
+                                                                console.log(arrSoundSensor);
+                                                            },
+                                                            error: function (result) {
+                                                                console.log(result);
+                                                            }
+
+                                                        });
+                                                        // Get Data Of Camera
+                                                        $.ajax({
+                                                            type: 'GET',
+                                                            dataType: 'json',
+                                                            cache: false,
+                                                            url: 'https://192.168.1.7:5002/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                            contentType: 'application/json; charset=utf-8',
+                                                            success: function (result) {
+                                                                arrCamera = result;
+                                                                console.log(arrCamera);
+                                                            },
+                                                            error: function (result) {
+                                                                console.log(result);
+                                                            }
+                                                        });
+                                                        // Get Data Of Motion Sensor
+                                                        $.ajax({
+                                                            type: 'GET',
+                                                            dataType: 'json',
+                                                            cache: false,
+                                                            url: 'https://192.168.1.7:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/None',
+                                                            contentType: 'application/json; charset=utf-8',
+                                                            success: function (result) {
+                                                                arrMotionSensor = result;
+                                                                console.log(arrMotionSensor);
+                                                            },
+                                                            error: function (result) {
+                                                                console.log(result);
+                                                            }
+                                                        });
+
+                                                        debugger;
+                                                        var result = Calculation(arrMotionSensor, arrSoundSensor, arrCamera);
+                                                        setUpCombinationChart(result);
+                                                        return;
+                                                    })
+
+                                                    // Get Data Of Sound Sensor
+                                                    $.ajax({
+                                                        type: 'GET',
+                                                        dataType: 'json',
+                                                        cache: false,
+                                                        url: 'https://192.168.1.7:5002/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                        contentType: 'application/json; charset=utf-8',
+                                                        success: function (result) {
+                                                            arrSoundSensor = result;
+                                                            console.log(result);
+                                                        },
+                                                        error: function (result) {
+                                                            console.log(result);
+                                                        }
+
+                                                    });
+                                                    // Get Data Of Camera
+                                                    $.ajax({
+                                                        type: 'GET',
+                                                        dataType: 'json',
+                                                        cache: false,
+                                                        url: 'https://192.168.1.7:5002/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                        contentType: 'application/json; charset=utf-8',
+                                                        success: function (result) {
+                                                            arrCamera = result;
+                                                            console.log(result);
+                                                        },
+                                                        error: function (result) {
+                                                            console.log(result);
+                                                        }
+                                                    });
+                                                    // Get Data Of Motion Sensor
+                                                    $.ajax({
+                                                        type: 'GET',
+                                                        dataType: 'json',
+                                                        cache: false,
+                                                        url: 'https://192.168.1.7:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/None',
+                                                        contentType: 'application/json; charset=utf-8',
+                                                        success: function (result) {
+                                                            arrMotionSensor = result;
+                                                            console.log(result);
+                                                        },
+                                                        error: function (result) {
+                                                            console.log(result);
+                                                        }
+                                                    });
+
+                                                    var result = Calculation(arrMotionSensor, arrSoundSensor, arrCamera);
+                                                    setUpCombinationChart(result);
+                                                });
+                                                function Calculation(arrMotionSensor, arrCamera, arrSoundSensor) {
+                                                    // Calculate average of them
+                                                    Array.prototype.sum = function (prop) {
+                                                        var total = 0
+                                                        for (var i = 0, _len = this.length; i < _len; i++) {
+                                                            total += this[i][prop]
+                                                        }
+                                                        return total
+                                                    }
+
+                                                    var total = arrMotionSensor.sum("Quantity") + arrCamera.sum("Parameter") + arrSoundSensor.sum("Parameter");
+
+                                                    var arrResult =
+                                                        [
+                                                            {
+                                                                name: "Motion",
+                                                                y: total / arrMotionSensor.sum("Quantity")
+                                                            },
+                                                            {
+                                                                name: "Camera",
+                                                                y: total / arrCamera.sum("Parameter")
+                                                            },
+                                                            {
+                                                                name: "Sound",
+                                                                y: total / arrSoundSensor.sum("Parameter")
+                                                            }
+                                                        ]
+                                                    return arrResult;
+                                                }
+                                            </script>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <script>
+                                    function setUpCombinationChart(data) {
+                                        var startDate = kendo.toString($("#datetimepickerCombination1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                        var startTime = kendo.toString($("#datetimepickerCombination1").data("kendoDateTimePicker").value(), 'hh:mm tt');
+                                        var endDate = kendo.toString($("#datetimepickerCombination2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                        var endTime = kendo.toString($("#datetimepickerCombination2").data("kendoDateTimePicker").value(), 'hh:mm tt');
+
+                                        Highcharts.chart('combinationChart', {
+                                            chart: {
+                                                plotBackgroundColor: null,
+                                                plotBorderWidth: null,
+                                                plotShadow: false,
+                                                type: 'pie'
+                                            },
+                                            title: {
+                                                text: 'Combination 2 Sensors And A Camera Between ' + startDate + ' ' + startTime + ' And ' + endDate + ' ' + endTime
+                                            },
+                                            tooltip: {
+                                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                            },
+                                            plotOptions: {
+                                                pie: {
+                                                    allowPointSelect: true,
+                                                    cursor: 'pointer',
+                                                    dataLabels: {
+                                                        enabled: true,
+                                                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                                        style: {
+                                                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            series: [{
+                                                name: 'Brands',
+                                                colorByPoint: true,
+                                                data: data
+                                            }]
+                                        });
+
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                        @* End Combination Chart *@
+
+                        @*<div class="col-md-6">
                             <div class="card ">
                                 <div class="header">
                                     <h4 class="title">Advice For Parents with My Baby</h4>
@@ -634,7 +951,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>

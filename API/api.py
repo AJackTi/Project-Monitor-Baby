@@ -42,20 +42,19 @@ class Cameras(Resource):
             subResult = {}
         return jsonify(lstReturn)
 
-# http://localhost:5002/camera/6/20190303/20190404/5500
 class Camera(Resource):
-    def get(self, id, timestart, timeend, parameter):
-        lstResult = db.Camera().getSpecificDataCamera(id, timestart, timeend, parameter)
+    def get(self, timestart, timeend):
+        lstResult = db.Camera().getSpecificDataCamera(timestart, timeend)
         lstReturn = []
         subResult = {}
         for i in lstResult:
             subResult['ID'] = i[0]
             subResult['TimeStart'] = i[1]
             subResult['TimeEnd'] = i[2]
-            subResult['Parameter'] = i[3]
+            subResult['Parameter'] = i[4]
             lstReturn.append(subResult)
             subResult = {}
-        return [i for i in lstReturn]
+        return jsonify(lstReturn)
 
 # http://localhost:5002/postcamera/10/20190303/20190404/0000/5500
 # http://localhost:5002/postcamera/None/20190303_3030/20190404_3030/0000/5500
@@ -243,6 +242,7 @@ class SensorMotions(Resource):
 
 class SensorMotion(Resource):
     def get(self, timestart, timeend):
+        print 'Time: ', timestart, timeend
         lstResult = db.SensorMotion().getSpecificDataSensorMotion(timestart, timeend)
         lstReturn = []
         subResult = {}
@@ -293,8 +293,8 @@ class SensorSounds(Resource):
         return [i for i in lstReturn]
 
 class SensorSound(Resource):
-    def get(self, id, timestart, timeend, parameter):
-        lstResult = db.SensorSound().getSpecificSensorSound(id, timestart, timeend, parameter)
+    def get(self, timestart, timeend):
+        lstResult = db.SensorSound().getSpecificSensorSound(timestart, timeend)
         lstReturn = []
         subResult = {}
         for i in lstResult:
@@ -335,7 +335,7 @@ class Enum:
 # region API
 # region Camera
 api.add_resource(Cameras, '/api/cameras')  
-api.add_resource(Camera, '/api/camera/<id>/<timestart>/<timeend>/<parameter>')  
+api.add_resource(Camera, '/api/camera/<timestart>/<timeend>')  
 api.add_resource(postCamera, '/api/postcamera/<id>/<timestart>/<timeend>/<videolink>/<parameter>')  
 api.add_resource(deleteCamera, '/api/deleteCamera/<id>')  
 # endregion
@@ -369,7 +369,7 @@ api.add_resource(Information, '/api/information/<username>/<password>')
 
 # region SensorSound
 api.add_resource(SensorSounds, '/api/sensorsounds')  
-api.add_resource(SensorSound, '/api/sensorsound/<id>/<timestart>/<timeend>/<parameter>')  
+api.add_resource(SensorSound, '/api/sensorsound/<timestart>/<timeend>')  
 api.add_resource(postSensorSound, '/api/postsensorsound/<id>/<timestart>/<timeend>/<parameter>')  
 api.add_resource(deleteSensorSound, '/api/deletesensorsound/<id>')  
 # endregion

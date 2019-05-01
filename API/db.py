@@ -15,11 +15,13 @@ class Camera:
         cur.execute("SELECT * FROM camera")
         return cur.fetchall()
 
-    def getSpecificDataCamera(self, ID=None, TimeStart=None, TimeEnd=None, Parameter=None):
+    def getSpecificDataCamera(self, TimeStart=None, TimeEnd=None):
         cur = self.conn.cursor()
         try:
-            cur.execute("SELECT * FROM camera where Id = ? or TimeStart like ? or TimeEnd like ? or Parameter = ?",
-                        (ID, unicode(str(TimeStart), "utf-8") + '%', unicode(str(TimeEnd), "utf-8") + '%', Parameter,))
+            if TimeEnd != None:
+                cur.execute("SELECT * FROM camera where datetime(TimeStart) BETWEEN datetime(?) and datetime(?)", (str(TimeStart), str(TimeEnd),))
+            else:
+                cur.execute("SELECT * FROM camera where datetime(TimeStart) BETWEEN datetime(?) and datetime('now', 'localtime')", (str(TimeStart),))
         except:
             return False
 
@@ -142,20 +144,19 @@ class SensorMotion:
 
     # SensorMotion().getSpecificDataSensorMotion(1)
     def getSpecificDataSensorMotion(self, TimeStart=None, TimeEnd=None):
-        print TimeStart, TimeEnd == None
         cur = self.conn.cursor()
-        TimeStart = TimeStart.split('%20')
-        TimeEnd = TimeEnd.split('%20')
         try:
-            if TimeEnd != None:
-                cur.execute("SELECT * FROM SensorMotion where date(TimeStart) LIKE date(?) and date(TimeEnd) LIKE date(?)",
+            if TimeEnd != 'None':
+                cur.execute("SELECT * FROM SensorMotion where datetime(TimeStart) BETWEEN datetime(?) and datetime(?)",
                         (str(TimeStart), str(TimeEnd),))
             else:
-                cur.execute("SELECT * FROM SensorMotion where date(TimeStart) LIKE date(?) and date('now')", (str(TimeStart),))
+                cur.execute("SELECT * FROM SensorMotion where datetime(TimeStart) BETWEEN datetime(?) and datetime('now', 'localtime')", (str(TimeStart),))
         except:
             return False
 
         return cur.fetchall()
+
+
     # SensorMotion().insertSpecificDataSensorMotion(1,'20190505', '20190606', 255)
     def insertSpecificDataSensorMotion(self, ID, TimeStart=None, TimeEnd=None, Quantity=None):
         cur = self.conn.cursor()
@@ -327,15 +328,18 @@ class SensorSound:
 
         return cur.fetchall()
     # SensorSound().getSpecificSensorSound(1)
-    def getSpecificSensorSound(self, ID=None, TimeStart=None, TimeEnd=None, Parameter=None):
+    def getSpecificSensorSound(self, TimeStart=None, TimeEnd=None):
         cur = self.conn.cursor()
         try:
-            cur.execute("SELECT * FROM SensorSound where Id = ? or TimeStart like ? or TimeEnd like ? or Parameter = ?",
-                        (ID, unicode(str(TimeStart), "utf-8") + '%', unicode(str(TimeEnd), "utf-8") + '%', Parameter,))
+            if TimeEnd != None:
+                cur.execute("SELECT * FROM SensorSound where datetime(TimeStart) BETWEEN datetime(?) and datetime(?)", (str(TimeStart), str(TimeEnd),))
+            else:
+                cur.execute("SELECT * FROM SensorSound where datetime(TimeStart) BETWEEN datetime(?) and datetime('now', 'localtime')", (str(TimeStart),))
         except:
             return False
 
         return cur.fetchall()
+
     # SensorSound().insertSpecificSensorSound(1,'20190000', '20190101',500)
     # SensorSound().insertSpecificSensorSound(None,'20190000', '20190101',500)
     def insertSpecificSensorSound(self, ID, TimeStart=None, TimeEnd=None, Parameter=None):
@@ -382,7 +386,7 @@ def main():
     # Camera().deleteSpecificDataCamera(1)
     # print Information().getSpecificInformation('admin','123')
     # Information().insertSpecificInformation('ductrong','123123','admin@hotmail.com')
-    SensorMotion().getSpecificDataSensorMotion('2019-04-30%2012:00', None)
+    # print SensorMotion().getSpecificDataSensorMotion('2019-04-10 14:30', None)
 
 if __name__ == '__main__':
     main()
