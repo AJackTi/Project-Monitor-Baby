@@ -2,6 +2,6 @@
 {
     public static class Common
     {
-        public static string ipRas = "172.16.88.187";
+        public static string ipRas = "192.168.43.135";
     }
 }

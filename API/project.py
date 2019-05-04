@@ -106,7 +106,7 @@ def Process(minutes=1):
                     # Alert to parent
                     Thread(target=playMusic, args=[3]).start()
                     Thread(target=servoControl, args=[3]).start()
-                    SavingData(countSound, countMotion, motiontrack.countCamera, minutes, minutes)
+                    SavingData(countSound, countMotion, motiontrack.countCamera, minutes)
                     countMotion = 0
                     countSound = 0
                     motiontrack.countCamera = 0
