@@ -47,7 +47,6 @@ C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApp\WebApp\obj\Debug\
 C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApp\WebApp\obj\Debug\netcoreapp2.2\WebApp.TagHelpers.output.cache
 C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApp\WebApp\obj\Debug\netcoreapp2.2\WebApp.RazorCoreGenerate.cache
 C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApp\WebApp\obj\Debug\netcoreapp2.2\Razor\Views\Home\Dashboard.g.cshtml.cs
-C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApp\WebApp\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
 C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApp\WebApp\obj\Debug\netcoreapp2.2\Razor\Views\Home\Login.g.cshtml.cs
 C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApp\WebApp\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy.g.cshtml.cs
 C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApp\WebApp\obj\Debug\netcoreapp2.2\Razor\Views\Home\SignUp.g.cshtml.cs

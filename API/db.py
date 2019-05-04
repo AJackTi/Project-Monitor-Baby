@@ -281,6 +281,7 @@ class Information:
         return cur.fetchall()
 
     def insertSpecificInformation(self, Username, Password, Email):
+        print '1'
         cur = self.conn.cursor()
         lstUsername = matrix(Information().getAllUserNameInformation()).A1.tolist()
         if Username in lstUsername: # Update
@@ -291,6 +292,7 @@ class Information:
             except:
                 return False
         else: # Insert
+            print '2'
             try:
                 query = ''' INSERT INTO Information(Username, Password, Email) VALUES(?,?,?) '''
                 data = (Username, Password, Email)
@@ -298,8 +300,9 @@ class Information:
             except Exception as e:
                 return False
 
+        print '3'
         self.conn.commit()
-
+        print '4'
         return True
 
     def deleteSpecificInformation(self, Username):
@@ -385,8 +388,9 @@ def main():
     # Camera().insertSpecificDataCamera(None, '2019', '2020', '_', '300')
     # Camera().deleteSpecificDataCamera(1)
     # print Information().getSpecificInformation('admin','123')
-    # Information().insertSpecificInformation('ductrong','123123','admin@hotmail.com')
+    # Information().insertSpecificInformation('ductrong123','123123','admin@hotmail.com')
     # print SensorMotion().getSpecificDataSensorMotion('2019-04-10 14:30', None)
+    # Information().getSpecificInformation('ductrong', '123123')
 
 if __name__ == '__main__':
     main()
