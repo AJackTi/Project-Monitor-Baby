@@ -1,4 +1,5 @@
-﻿@{
+﻿@using WebApp.Common;
+@{
     Layout = null;
 }
 
@@ -9,7 +10,7 @@
     <link rel="icon" type="~/image/png" href="~/assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <title>Light Bootstrap Dashboard by Creative Tim</title>
+    <title>Management Project Smart Baby</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -28,67 +29,80 @@
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="~/assets/css/demo.css" rel="stylesheet" />
 
-
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="~/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+    <base href="https://demos.telerik.com/kendo-ui/datetimepicker/index">
+    <base href="https://demos.telerik.com/kendo-ui/window/index">
+    <style>
+        html {
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+    <title></title>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.material.mobile.min.css" />
+
+    <script src="https://kendo.cdn.telerik.com/2019.1.220/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2019.1.220/js/kendo.all.min.js"></script>
+
 </head>
 <body>
+    @{
+    var ipAddress = "https://" + Common.ipRas;
 
+    }
     <div class="wrapper">
         <div class="sidebar" data-color="purple" data-image="/assets/img/sidebar-5.jpg">
 
-            <!--
-
-                Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
-                Tip 2: you can also add an image using data-image tag
-
-            -->
-
             <div class="sidebar-wrapper">
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
-                    </a>
+
+                    <div class="logo">
+                        <a target="_blank" href="https://github.com/AjackTi/Project-Monitor-Baby" class="simple-text">
+                            TEAM 4
+                        </a>
+                    </div>
                 </div>
 
                 <ul class="nav">
                     <li class="active">
-                        <a href=~/dashboard.html">
+                        <a href="https://localhost:44319/Home/Dashboard">
                             <i class="pe-7s-graph"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
                     <li>
-                        <a href="~/user.html">
+                        <a href="https://localhost:44319/Home/Login">
                             <i class="pe-7s-user"></i>
                             <p>User Profile</p>
                         </a>
                     </li>
                     <li>
-                        <a href="~/table.html">
+                        <a id="adviceClick">
                             <i class="pe-7s-note2"></i>
-                            <p>Table List</p>
+                            <p>Advice</p>
                         </a>
                     </li>
                     <li>
                         <a href="~/typography.html">
-                            <i class="pe-7s-news-paper"></i>
-                            <p>Typography</p>
+                            <i class="pe-7s-camera"></i>
+                            <p>Live Camera</p>
                         </a>
                     </li>
                     <li>
-                        <a href="~/icons.html">
-                            <i class="pe-7s-science"></i>
-                            <p>Icons</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="~/maps.html">
-                            <i class="pe-7s-map-marker"></i>
-                            <p>Maps</p>
+                        <a href="https://localhost:44319/Home/Transform">
+                            <i class="pe-7s-refresh"></i>
+                            <p>Transform</p>
                         </a>
                     </li>
                     <li>
@@ -102,369 +116,819 @@
         </div>
 
         <div class="main-panel">
-            <nav class="navbar navbar-default navbar-fixed">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#">Dashboard</a>
-                    </div>
-                    <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav navbar-left">
-                            <li>
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-dashboard"></i>
-                                    <p class="hidden-lg hidden-md">Dashboard</p>
-                                </a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-globe"></i>
-                                    <b class="caret hidden-lg hidden-md"></b>
-                                    <p class="hidden-lg hidden-md">
-                                        5 Notifications
-                                        <b class="caret"></b>
-                                    </p>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Notification 1</a></li>
-                                    <li><a href="#">Notification 2</a></li>
-                                    <li><a href="#">Notification 3</a></li>
-                                    <li><a href="#">Notification 4</a></li>
-                                    <li><a href="#">Another notification</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <i class="fa fa-search"></i>
-                                    <p class="hidden-lg hidden-md">Search</p>
-                                </a>
-                            </li>
-                        </ul>
-
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="">
-                                    <p>Account</p>
-                                </a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <p>
-                                        Dropdown
-                                        <b class="caret"></b>
-                                    </p>
-
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <p>Log out</p>
-                                </a>
-                            </li>
-                            <li class="separator hidden-lg"></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
-
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-4">
+                        @* Motion Chart *@
+                        <div class="col-md-4" style="width: 353px;">
                             <div class="card">
 
                                 <div class="header">
-                                    <h4 class="title">Email Statistics</h4>
-                                    <p class="category">Last Campaign Performance</p>
+                                    <h4 class="title">Motion Chart</h4>
                                 </div>
-                                <div class="content">
-                                    <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+                                <div class="content" style="height: 466px;">
+                                    <div id="motionChart"></div>
+                                    <div id="example">
 
-                                    <div class="footer">
-                                        <div class="legend">
-                                            <i class="fa fa-circle text-info"></i> Open
-                                            <i class="fa fa-circle text-danger"></i> Bounce
-                                            <i class="fa fa-circle text-warning"></i> Unsubscribe
+                                        <div class="demo-section k-content">
+                                            <input id="datetimepickerMotion" title="datetimepickerMotion" style="width: 100%;" />
                                         </div>
-                                        <hr>
-                                        <div class="stats">
-                                            <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
-                                        </div>
+
+                                        <script>
+                                            $(document).ready(function () {
+                                                // create DateTimePicker from input HTML element
+                                                $("#datetimepickerMotion").kendoDateTimePicker({
+                                                    value: new Date(),
+                                                    dateInput: true
+                                                });
+
+                                                // prototype replace all
+                                                //SELECT * FROM SensorMotion WHERE date(TimeStart) like date('2019-04-30') and date('2019-04-30 14:30:07.534000')
+
+                                                String.prototype.replaceAll = function (search, replacement) {
+                                                    var target = this;
+                                                    return target.replace(new RegExp(search, 'g'), replacement);
+                                                };
+
+                                                var startDate = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                var startTime = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                //console.log(startDate.replaceAll('/', '-') + ' ' + startTime);
+                                                //debugger;
+                                                $.ajax({
+                                                    type: 'GET',
+                                                    dataType: 'json',
+                                                    cache: false,
+                                                    url: '@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/None',
+                                                    contentType: 'application/json; charset=utf-8',
+                                                    success: function (result) {
+                                                        //console.log(result);
+                                                        setupMotionChart(result);
+                                                    },
+                                                    error: function (result) {
+                                                        //console.log(result);
+                                                    }
+
+                                                });
+
+                                                $('#datetimepickerMotion').change(function () {
+                                                    //debugger;
+                                                    var startDate = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                    var startTime = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                    //console.log('@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/None');
+                                                    $.ajax({
+                                                        type: 'GET',
+                                                        dataType: 'json',
+                                                        cache: false,
+                                                        url: '@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/None',
+                                                        contentType: 'application/json; charset=utf-8',
+                                                        success: function (result) {
+                                                            //console.log(result);
+                                                            setupMotionChart(result);
+                                                        },
+                                                        error: function (result) {
+                                                            //console.log(result);
+                                                        }
+                                                    });
+                                                });
+                                            });
+                                        </script>
+
                                     </div>
+                                    <script>
+                                        function setupMotionChart(data) {
+                                            var startDate = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                            var startTime = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'hh:mm tt');
+
+                                            //console.log('Loading ... ');
+                                            // Set up the chart
+                                            var chart = new Highcharts.Chart({
+                                                chart: {
+                                                    renderTo: 'motionChart',
+                                                    type: 'column',
+                                                    options3d: {
+                                                        enabled: true,
+                                                        alpha: 15,
+                                                        beta: 15,
+                                                        depth: 50,
+                                                        viewDistance: 25
+                                                    }
+                                                },
+                                                title: {
+                                                    text: 'Motion detection between ' + startDate + ' ' + startTime + ' And Now'
+                                                },
+                                                plotOptions: {
+                                                    column: {
+                                                        depth: 25
+                                                    }
+                                                },
+                                                series: [{
+                                                    data: data.map(a => a.quantity)
+                                                }]
+                                            });
+
+                                            function showValues() {
+                                                $('#alpha-value').html(chart.options.chart.options3d.alpha);
+                                                $('#beta-value').html(chart.options.chart.options3d.beta);
+                                                $('#depth-value').html(chart.options.chart.options3d.depth);
+                                            }
+
+                                            // Activate the sliders
+                                            $('#sliders input').on('input change', function () {
+                                                chart.options.chart.options3d[this.id] = parseFloat(this.value);
+                                                showValues();
+                                                chart.redraw(false);
+                                            });
+
+                                            showValues();
+                                        }
+
+                                    </script>
                                 </div>
                             </div>
                         </div>
+                        @* End Motion Chart *@
 
+                        @* Camera Chart *@
                         <div class="col-md-8">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title">Users Behavior</h4>
-                                    <p class="category">24 Hours performance</p>
+                                    <h4 class="title">Camera Chart</h4>
                                 </div>
                                 <div class="content">
-                                    <div id="chartHours" class="ct-chart"></div>
-                                    <div class="footer">
-                                        <div class="legend">
-                                            <i class="fa fa-circle text-info"></i> Open
-                                            <i class="fa fa-circle text-danger"></i> Click
-                                            <i class="fa fa-circle text-warning"></i> Click Second Time
+                                    <div id="cameraChart"></div>
+
+                                    <div id="example">
+
+                                        <div class="demo-section k-content">
+                                            <div style="display: inline-block; width: 100%">
+                                                <input id="datetimepickerCamera1" title="datetimepickerCamera1" style="width: 50%; float: left;" />
+                                                <input id="datetimepickerCamera2" title="datetimepickerCamera2" style="width: 50%; float: right;" />
+                                            </div>
                                         </div>
-                                        <hr>
-                                        <div class="stats">
-                                            <i class="fa fa-history"></i> Updated 3 minutes ago
-                                        </div>
+
+                                        <script>
+                                            $(document).ready(function () {
+                                                // create DateTimePicker from input HTML element
+                                                $("#datetimepickerCamera1").kendoDateTimePicker({
+                                                    value: new Date(),
+                                                    dateInput: true
+                                                });
+                                                $("#datetimepickerCamera2").kendoDateTimePicker({
+                                                    value: new Date(),
+                                                    dateInput: true
+                                                });
+
+                                                // prototype replace all
+
+                                                String.prototype.replaceAll = function (search, replacement) {
+                                                    var target = this;
+                                                    return target.replace(new RegExp(search, 'g'), replacement);
+                                                };
+
+                                                var startDate = kendo.toString($("#datetimepickerCamera1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                var startTime = kendo.toString($("#datetimepickerCamera1").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                var endDate = kendo.toString($("#datetimepickerCamera2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                var endTime = kendo.toString($("#datetimepickerCamera2").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                //console.log(startDate.replaceAll('/', '-') + ' ' + startTime);
+                                                //console.log(endDate.replaceAll('/', '-') + ' ' + endTime);
+                                                //console.log('@ipAddress:5002/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime);
+                                                //debugger;
+                                                $.ajax({
+                                                    type: 'GET',
+                                                    dataType: 'json',
+                                                    cache: false,
+                                                    url: '@ipAddress:5002/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                    contentType: 'application/json; charset=utf-8',
+                                                    success: function (result) {
+                                                        //console.log(result);
+                                                        setUpCameraChart(result);
+                                                    },
+                                                    error: function (result) {
+                                                        //console.log(result);
+                                                    }
+
+                                                });
+
+                                                $('#datetimepickerCamera1, #datetimepickerCamera2').change(function () {
+                                                    //debugger;
+                                                    var startDate = kendo.toString($("#datetimepickerCamera1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                    var startTime = kendo.toString($("#datetimepickerCamera1").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                    var endDate = kendo.toString($("#datetimepickerCamera2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                    var endTime = kendo.toString($("#datetimepickerCamera2").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                    //console.log(startDate + ' ' + startTime + ' ' + endDate + ' ' + endTime);
+                                                    //console.log('@ipAddress:5002/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime);
+                                                    $.ajax({
+                                                        type: 'GET',
+                                                        dataType: 'json',
+                                                        cache: false,
+                                                        url: '@ipAddress:5002/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                        contentType: 'application/json; charset=utf-8',
+                                                        success: function (result) {
+                                                            //console.log(result);
+                                                            setUpCameraChart(result);
+                                                        },
+                                                        error: function (result) {
+                                                            //console.log(result);
+                                                        }
+                                                    });
+                                                });
+                                            });
+                                        </script>
+
                                     </div>
+
+                                    <script>
+                                        function setUpCameraChart(data) {
+                                            var startDate = kendo.toString($("#datetimepickerCamera1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                            var startTime = kendo.toString($("#datetimepickerCamera1").data("kendoDateTimePicker").value(), 'hh:mm tt');
+                                            var endDate = kendo.toString($("#datetimepickerCamera2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                            var endTime = kendo.toString($("#datetimepickerCamera2").data("kendoDateTimePicker").value(), 'hh:mm tt');
+
+                                            Highcharts.chart('cameraChart', {
+                                                chart: {
+                                                    type: 'area'
+                                                },
+                                                title: {
+                                                    text: 'Camera Detection Between ' + startDate + ' ' + startTime + ' And ' + endDate + ' ' + endTime
+                                                },
+                                                xAxis: {
+                                                    allowDecimals: false,
+                                                    labels: {
+                                                        formatter: function () {
+                                                            return this.value; // clean, unformatted number for year
+                                                        }
+                                                    }
+                                                },
+                                                yAxis: {
+                                                    title: {
+                                                        text: 'Camera Detection Times'
+                                                    },
+                                                    labels: {
+                                                        formatter: function () {
+                                                            return this.value;
+                                                        }
+                                                    }
+                                                },
+                                                tooltip: {
+                                                    pointFormat: '{series.name} had <b>{point.y:,.0f}</b><br/>time in {point.x}'
+                                                },
+                                                plotOptions: {
+                                                    area: {
+                                                        pointStart: 0,
+                                                        marker: {
+                                                            enabled: false,
+                                                            symbol: 'circle',
+                                                            radius: 2,
+                                                            states: {
+                                                                hover: {
+                                                                    enabled: true
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                series: [{
+                                                    name: 'Camera Detection',
+                                                    data: data.map(a => a.Parameter),
+                                                    color: 'rgba(244, 91, 91, 0.75);'
+                                                }]
+                                            });
+                                        }
+                                    </script>
                                 </div>
                             </div>
                         </div>
+                        @* End Camera Chart *@
                     </div>
 
 
-
                     <div class="row">
+                        @* Sound Sensor Chart *@
                         <div class="col-md-6">
                             <div class="card ">
                                 <div class="header">
-                                    <h4 class="title">2014 Sales</h4>
-                                    <p class="category">All products including Taxes</p>
-                                </div>
-                                <div class="content">
-                                    <div id="chartActivity" class="ct-chart"></div>
+                                    <h4 class="title">Sound Chart</h4>
+                                    <p class="category">Sound Detection</p>
+                                    <div id="soundChart"></div>
+                                    <div id="example">
 
-                                    <div class="footer">
-                                        <div class="legend">
-                                            <i class="fa fa-circle text-info"></i> Tesla Model S
-                                            <i class="fa fa-circle text-danger"></i> BMW 5 Series
+                                        <div class="demo-section k-content">
+                                            <div style="display: inline-block; width: 100%">
+                                                <input id="datetimepickerSound1" title="datetimepickerSound1" style="width: 50%; float: left;" />
+                                                <input id="datetimepickerSound2" title="datetimepickerSound2" style="width: 50%; float: right;" />
+                                            </div>
                                         </div>
-                                        <hr>
-                                        <div class="stats">
-                                            <i class="fa fa-check"></i> Data information certified
-                                        </div>
+
+                                        <script>
+                                            $(document).ready(function () {
+                                                // create DateTimePicker from input HTML element
+                                                $("#datetimepickerSound1").kendoDateTimePicker({
+                                                    value: new Date(),
+                                                    dateInput: true
+                                                });
+
+                                                $("#datetimepickerSound2").kendoDateTimePicker({
+                                                    value: new Date(),
+                                                    dateInput: true
+                                                });
+
+                                                String.prototype.replaceAll = function (search, replacement) {
+                                                    var target = this;
+                                                    return target.replace(new RegExp(search, 'g'), replacement);
+                                                };
+
+                                                var startDate = kendo.toString($("#datetimepickerSound1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                var startTime = kendo.toString($("#datetimepickerSound1").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                var endDate = kendo.toString($("#datetimepickerSound2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                var endTime = kendo.toString($("#datetimepickerSound2").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                //console.log('@ipAddress:5002/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime);
+
+                                                //debugger;
+                                                $.ajax({
+                                                    type: 'GET',
+                                                    dataType: 'json',
+                                                    cache: false,
+                                                    url: '@ipAddress:5002/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                    contentType: 'application/json; charset=utf-8',
+                                                    success: function (result) {
+                                                        //console.log(result);
+                                                        setUpSoundChart(result);
+                                                    },
+                                                    error: function (result) {
+                                                        //console.log(result);
+                                                    }
+
+                                                });
+
+                                                $('#datetimepickerSound1, #datetimepickerSound2').change(function () {
+                                                    //debugger;
+                                                    var startDate = kendo.toString($("#datetimepickerSound1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                    var startTime = kendo.toString($("#datetimepickerSound1").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                    var endDate = kendo.toString($("#datetimepickerSound2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                    var endTime = kendo.toString($("#datetimepickerSound2").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                    //console.log(startDate + ' ' + startTime + ' ' + endDate + ' ' + endTime);
+                                                    //console.log('@ipAddress:5002/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime);
+                                                    $.ajax({
+                                                        type: 'GET',
+                                                        dataType: 'json',
+                                                        cache: false,
+                                                        url: '@ipAddress:5002/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                        contentType: 'application/json; charset=utf-8',
+                                                        success: function (result) {
+                                                            //console.log(result);
+                                                            setUpSoundChart(result);
+                                                        },
+                                                        error: function (result) {
+                                                            //console.log(result);
+                                                        }
+                                                    });
+                                                });
+                                            });
+                                        </script>
+
                                     </div>
                                 </div>
+                                <script>
+                                    function setUpSoundChart(data) {
+                                        var startDate = kendo.toString($("#datetimepickerSound1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                        var startTime = kendo.toString($("#datetimepickerSound1").data("kendoDateTimePicker").value(), 'hh:mm tt');
+                                        var endDate = kendo.toString($("#datetimepickerSound2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                        var endTime = kendo.toString($("#datetimepickerSound2").data("kendoDateTimePicker").value(), 'hh:mm tt');
+
+
+                                        Highcharts.chart('soundChart', {
+                                            chart: {
+                                                type: 'line'
+                                            },
+                                            title: {
+                                                text: 'Sound Sensor Between ' + startDate + ' ' + startTime + ' And ' + endDate + ' ' + endTime
+                                            },
+                                            xAxis: {
+                                                categories: data.map(a => a.TimeStart.split(' ')[1].toString('hh:MM:ss TT'))
+                                            },
+                                            yAxis: {
+                                                title: {
+                                                    text: 'Sound Sensor Times'
+                                                }
+                                            },
+                                            plotOptions: {
+                                                line: {
+                                                    dataLabels: {
+                                                        enabled: true
+                                                    },
+                                                    enableMouseTracking: false
+                                                }
+                                            },
+                                            series: [{
+                                                name: 'Sound Sensor',
+                                                data: data.map(a => a.Parameter),
+                                                color: 'rgb(169, 255, 151)'
+                                            }]
+                                        });
+                                    }
+                                </script>
                             </div>
                         </div>
+                        @* End Sensor Sound Chart *@
 
+                        @* Combination Chart *@
                         <div class="col-md-6">
                             <div class="card ">
                                 <div class="header">
-                                    <h4 class="title">Tasks</h4>
-                                    <p class="category">Backend development</p>
+                                    <h4 class="title">Combination Chart</h4>
                                 </div>
-                                <div class="content">
+                                <div class="content" style="height: 462px">
                                     <div class="table-full-width">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="checkbox">
-                                                            <input id="checkbox1" type="checkbox">
-                                                            <label for="checkbox1"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="checkbox">
-                                                            <input id="checkbox2" type="checkbox" checked>
-                                                            <label for="checkbox2"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="checkbox">
-                                                            <input id="checkbox3" type="checkbox">
-                                                            <label for="checkbox3"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                                                    </td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="checkbox">
-                                                            <input id="checkbox4" type="checkbox" checked>
-                                                            <label for="checkbox4"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="checkbox">
-                                                            <input id="checkbox5" type="checkbox">
-                                                            <label for="checkbox5"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Read "Following makes Medium better"</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="checkbox">
-                                                            <input id="checkbox6" type="checkbox" checked>
-                                                            <label for="checkbox6"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Unfollow 5 enemies from twitter</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                        <div id="combinationChart"></div>
 
-                                    <div class="footer">
-                                        <hr>
-                                        <div class="stats">
-                                            <i class="fa fa-history"></i> Updated 3 minutes ago
+                                        <div id="example">
+
+                                            <div class="demo-section k-content">
+                                                <div style="display: inline-block; width: 100%">
+                                                    <input id="datetimepickerCombination1" title="datetimepickerCombination1" style="width: 50%; float: left;" />
+                                                    <input id="datetimepickerCombination2" title="datetimepickerCombination2" style="width: 50%; float: right;" />
+                                                </div>
+                                            </div>
+
+                                            <script>
+                                                $(document).ready(function () {
+                                                    // create DateTimePicker from input HTML element
+                                                    $("#datetimepickerCombination1").kendoDateTimePicker({
+                                                        value: new Date(),
+                                                        dateInput: true
+                                                    });
+
+                                                    $("#datetimepickerCombination2").kendoDateTimePicker({
+                                                        value: new Date(),
+                                                        dateInput: true
+                                                    });
+
+                                                    var startDate = kendo.toString($("#datetimepickerCombination1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                    var startTime = kendo.toString($("#datetimepickerCombination1").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                    var endDate = kendo.toString($("#datetimepickerCombination2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                    var endTime = kendo.toString($("#datetimepickerCombination2").data("kendoDateTimePicker").value(), 'HH:mm');
+
+                                                    //#region CHANGE
+                                                    $("#datetimepickerCombination1, #datetimepickerCombination2").change(function () {
+                                                        startDate = kendo.toString($("#datetimepickerCombination1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                        startTime = kendo.toString($("#datetimepickerCombination1").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                        endDate = kendo.toString($("#datetimepickerCombination2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                        endTime = kendo.toString($("#datetimepickerCombination2").data("kendoDateTimePicker").value(), 'HH:mm');
+
+                                                        var dataResult = []
+
+                                                        // Get Data Of Sound Sensor
+                                                        $.ajax({
+                                                            type: 'GET',
+                                                            dataType: 'json',
+                                                            cache: false,
+                                                            async: false,
+                                                            url: '@ipAddress:5002/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                            contentType: 'application/json; charset=utf-8',
+                                                            success: function (result) {
+                                                                //console.log(result.length);
+                                                                Array.prototype.sum = function (prop) {
+                                                                    var total = 0
+                                                                    for (var i = 0, _len = this.length; i < _len; i++) {
+                                                                        total += this[i][prop]
+                                                                    }
+                                                                    return total
+                                                                }
+                                                                var total = result.sum("Parameter");
+                                                                //console.log(total);
+                                                                dataResult.push({ "Sound": total });
+                                                            },
+                                                            error: function (result) {
+                                                                console.log(result);
+                                                            }
+
+                                                        });
+                                                        // Get Data Of Camera
+                                                        $.ajax({
+                                                            type: 'GET',
+                                                            dataType: 'json',
+                                                            cache: false,
+                                                            async: false,
+                                                            url: '@ipAddress:5002/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                            contentType: 'application/json; charset=utf-8',
+                                                            success: function (result) {
+                                                                //console.log(result.length);
+                                                                Array.prototype.sum = function (prop) {
+                                                                    var total = 0
+                                                                    for (var i = 0, _len = this.length; i < _len; i++) {
+                                                                        total += this[i][prop]
+                                                                    }
+                                                                    return total
+                                                                }
+                                                                var total = result.sum("Parameter");
+                                                                //console.log(total);
+                                                                dataResult.push({"Camera" : total});
+                                                            },
+                                                            error: function (result) {
+                                                                console.log(result);
+                                                            }
+                                                        });
+                                                        // Get Data Of Motion Sensor
+                                                        $.ajax({
+                                                            type: 'GET',
+                                                            dataType: 'json',
+                                                            cache: false,
+                                                            async: false,
+                                                            url: '@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/None',
+                                                            contentType: 'application/json; charset=utf-8',
+                                                            success: function (result) {
+                                                                //console.log(result.length);
+                                                                Array.prototype.sum = function (prop) {
+                                                                    var total = 0
+                                                                    for (var i = 0, _len = this.length; i < _len; i++) {
+                                                                        total += this[i][prop]
+                                                                    }
+                                                                    return total
+                                                                }
+                                                                var total = result.sum("quantity");
+                                                                //console.log(total);
+                                                                dataResult.push({ "Motion": total });
+                                                            },
+                                                            error: function (result) {
+                                                                console.log(result);
+                                                            }
+                                                        });
+
+                                                        debugger;
+                                                        console.log(dataResult);
+                                                        var result = Calculation(dataResult);
+                                                        if (result === -1) {
+                                                            return;
+                                                        }
+                                                        setUpCombinationChart(result);
+                                                        return;
+                                                    })
+                                                    //#endregion
+
+                                                    //#region NORMAL
+
+                                                    var dataResult = [];
+                                                    // Get Data Of Sound Sensor
+                                                    $.ajax({
+                                                        type: 'GET',
+                                                        dataType: 'json',
+                                                        cache: false,
+                                                        async: false,
+                                                        url: '@ipAddress:5002/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                        contentType: 'application/json; charset=utf-8',
+                                                        success: function (result) {
+                                                            //console.log(result.length);
+                                                            Array.prototype.sum = function (prop) {
+                                                                var total = 0
+                                                                for (var i = 0, _len = this.length; i < _len; i++) {
+                                                                    total += this[i][prop]
+                                                                }
+                                                                return total
+                                                            }
+                                                            var total = result.sum("Parameter");
+                                                            //console.log(total);
+                                                            dataResult.push({ "Sound": total });
+                                                        },
+                                                        error: function (result) {
+                                                            console.log(result);
+                                                        }
+
+                                                    });
+                                                    // Get Data Of Camera
+                                                    $.ajax({
+                                                        type: 'GET',
+                                                        dataType: 'json',
+                                                        cache: false,
+                                                        async: false,
+                                                        url: '@ipAddress:5002/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                        contentType: 'application/json; charset=utf-8',
+                                                        success: function (result) {
+                                                            //console.log(result.length);
+                                                            Array.prototype.sum = function (prop) {
+                                                                var total = 0
+                                                                for (var i = 0, _len = this.length; i < _len; i++) {
+                                                                    total += this[i][prop]
+                                                                }
+                                                                return total
+                                                            }
+                                                            var total = result.sum("Parameter");
+                                                            //console.log(total);
+                                                            dataResult.push({ "Camera": total });
+                                                        },
+                                                        error: function (result) {
+                                                            console.log(result);
+                                                        }
+                                                    });
+                                                    // Get Data Of Motion Sensor
+                                                    $.ajax({
+                                                        type: 'GET',
+                                                        dataType: 'json',
+                                                        cache: false,
+                                                        async: false,
+                                                        url: '@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/None',
+                                                        contentType: 'application/json; charset=utf-8',
+                                                        success: function (result) {
+                                                            //console.log(result.length);
+                                                            Array.prototype.sum = function (prop) {
+                                                                var total = 0
+                                                                for (var i = 0, _len = this.length; i < _len; i++) {
+                                                                    total += this[i][prop]
+                                                                }
+                                                                return total
+                                                            }
+                                                            var total = result.sum("quantity");
+                                                            //console.log(total);
+                                                            dataResult.push({ "Motion": total });
+                                                        },
+                                                        error: function (result) {
+                                                            console.log(result);
+                                                        }
+                                                    });
+
+                                                    var result = Calculation(dataResult);
+                                                    if (result === -1) {
+                                                            return;
+                                                        }
+                                                    setUpCombinationChart(result);
+                                                    //#endregion NORMAL
+                                                });
+                                                //#region Calculation Result
+                                                function Calculation(dataResult) {
+                                                    if (dataResult.length === 0) {
+                                                        return -1;
+                                                    }
+                                                    // Calculate average of them
+                                                    var total = dataResult[0]["Sound"] + dataResult[1]["Camera"] + dataResult[2]["Motion"];
+                                                    var arrResult =
+                                                        [
+                                                            {
+                                                                name: "Motion",
+                                                                y: total / dataResult[0]["Sound"]
+                                                            },
+                                                            {
+                                                                name: "Camera",
+                                                                y: total / dataResult[1]["Camera"]
+                                                            },
+                                                            {
+                                                                name: "Sound",
+                                                                y: total / dataResult[2]["Motion"]
+                                                            }
+                                                        ]
+                                                    dataResult = 0;
+                                                    return arrResult;
+                                                }
+                                                //#endregion Calculation Result
+                                            </script>
+
                                         </div>
                                     </div>
                                 </div>
+                                <script>
+                                    function setUpCombinationChart(data) {
+                                        var startDate = kendo.toString($("#datetimepickerCombination1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                        var startTime = kendo.toString($("#datetimepickerCombination1").data("kendoDateTimePicker").value(), 'hh:mm tt');
+                                        var endDate = kendo.toString($("#datetimepickerCombination2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                        var endTime = kendo.toString($("#datetimepickerCombination2").data("kendoDateTimePicker").value(), 'hh:mm tt');
+
+                                        Highcharts.chart('combinationChart', {
+                                            chart: {
+                                                plotBackgroundColor: null,
+                                                plotBorderWidth: null,
+                                                plotShadow: false,
+                                                type: 'pie'
+                                            },
+                                            title: {
+                                                text: 'Combination 2 Sensors And A Camera Between ' + startDate + ' ' + startTime + ' And ' + endDate + ' ' + endTime
+                                            },
+                                            tooltip: {
+                                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                            },
+                                            plotOptions: {
+                                                pie: {
+                                                    allowPointSelect: true,
+                                                    cursor: 'pointer',
+                                                    dataLabels: {
+                                                        enabled: true,
+                                                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                                        style: {
+                                                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            series: [{
+                                                name: 'Brands',
+                                                colorByPoint: true,
+                                                data: data
+                                            }]
+                                        });
+
+                                    }
+                                </script>
                             </div>
+                        </div>
+                        @* End Combination Chart *@
+
+                        <div id="advicePopUp" style="min-height:800px; display: none;">
+                            <div id="window">
+                                <h4>ADVICE FOR PARENTS</h4>
+                                <p>1. Invest in blackout curtains or make your own. You might not need them during the newborn stage, but they’ll be so worth it later on.</p>
+                                <p>2. Some parents swear by infant massage strokes and even gently swiping a tissue over baby’s face to help calm them down and make them sleep— hey, whatever works!</p>
+                                <p>3. Muffle that maddening door click by looping a thick rubber band between both door knobs to form an X shape over the latch. Stealthy!</p>
+                                <p>
+                                    4. Move baby to a crib without waking them:
+                                    <br />
+                                    — Watch their eyes. If your baby’s eyes are darting under their lids, they’re in deep sleep. Wait until their muscles are relaxed and they’re breathing deeply. Then administer the floppy-arm test: Lift up an arm and drop it. If baby doesn’t stir, you’re good to go.
+                                    <br />
+                                    — As you ever-so-gently lay them in their crib, keep one hand on their back and the other on their tummy. That continued pressure will ease the transition. If they startle, try patting their belly before you slink away.
+                                    <br />
+                                    — Try to maintain whatever position they’re in as you pick them up and put them down. Lay your baby flat (not head first) into the crib. Use a step-stool if you need the extra lift.
+                                </p>
+                                <p>5. Watch for newborns’ wakeful periods. They’re usually only 30 to 60 minutes in the first four months of life; put them to sleep as soon as they seem tired.</p>
+                                <p>6. Change your baby’s diaper before the nighttime feed to minimize arousing them. And unless your baby has pooped or soaked through their diaper, you probably don’t want to change them at all in the middle of the night, to keep them in that sleepy state—especially if they’re only waking to feed..</p>
+                                <p>7. When you get up for a nighttime feed, don’t turn on the bright lights. Buy an LED push night light that operates on batteries (so you can put it wherever you need it) and turns on with a quick touch. This also helps reduce the “wake-up” signals going to the parent and baby’s brains so it’s easier to fall back to sleep after feeding.</p>
+                                <p>8. Put a hot water bottle in the bassinet or crib, which will warm it up and can sometimes make the transfer from your arms to bed a little easier. (Don’t forget to remove the hot water bottle before the baby is in!)</p>
+                                <p>9. Babies are born without a well-developed circadian rhythm— they’re awake in the middle of the night, and you can’t fix that, at least for the first few months. Plan for this by sleeping in shifts with your partner or support person.</p>
+                                <p>10. If your baby is sleeping in your room (as per the Canadian Paediatric Society recommendation), you’ll want to be able to get yourself into bed without waking them up. Use a white noise machine, and do all your bedtime prep out of the bedroom, “so you’re just ninja-ing in.”</p>
+                                <p>11. If they fall asleep in your arms during the day, don’t worry about putting them in a crib or bassinet. Put them down somewhere safe, which may even be the floor. (Not applicable if you have dogs or toddlers at home with you!) And if you’re feeling very tired, be careful you don’t fall asleep with baby on you.</p>
+                                <p>12. Enjoy this period of portable naps. Sit at the coffee shop with your baby sleeping at your feet. “Enjoy your mobility while you can, because there will be three years after that when you can’t.”</p>
+                                <p style="color: fuchsia">10 Top Sleep Tips For New Parents<a> www.todaysparent.com</a></p>
+                            </div>
+
+                            <span id="undo" style="display:none; text-align: center;position: absolute;white-space: nowrap;padding: 1em;cursor: pointer;" class="k-button hide-on-narrow">Click here to open the window.</span>
+
+                            <div class="responsive-message"></div>
+
+                            <script>
+                                $(document).ready(function () {
+                                    $('#adviceClick').click(function () {
+                                        if (true) {
+
+                                        }
+                                        var myWindow = $("#window"),
+                                            undo = $("#undo");
+
+                                        undo.click(function () {
+                                            myWindow.data("kendoWindow").open();
+                                            undo.fadeOut();
+                                        });
+
+                                        function onClose() {
+                                            undo.fadeIn();
+                                        }
+
+                                        myWindow.kendoWindow({
+                                            width: "800px",
+                                            title: "ADIVCE POPUP",
+                                            visible: false,
+                                            actions: [
+                                                "Pin",
+                                                "Minimize",
+                                                "Maximize",
+                                                "Close"
+                                            ],
+                                            close: onClose
+                                        }).data("kendoWindow").center().open();
+                                    })
+
+                                });
+                            </script>
+
+                            <style>
+                                .armchair img {
+                                    
+                                }
+                                .k-window-content a {
+                                    color: #BBB;
+                                }
+                                .k-window-content p {
+                                    margin-bottom: 1em;
+                                }
+                            </style>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-            <footer class="footer">
-                <div class="container-fluid">
-                    <nav class="pull-left">
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Company
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Portfolio
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Blog
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <p class="copyright pull-right">
-                        &copy;
-                        <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-                    </p>
-                </div>
-            </footer>
-
         </div>
     </div>
+    <!--   Core JS Files   -->
+    <script src="~/assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+    <script src="~/assets/js/bootstrap.min.js" type="text/javascript"></script>
 
+    <!--  Charts Plugin -->
+    <script src="~/assets/js/chartist.min.js"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="~/assets/js/bootstrap-notify.js"></script>
+
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdanJlxl4OLIxvUC5IXfH2E-rYKuROMwU"></script>
+
+    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+    <script src="~/assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+
+    <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+    <script src="~/assets/js/demo.js"></script>
 
 </body>
-
-<!--   Core JS Files   -->
-<script src="~/assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
-<script src="~/assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-<!--  Charts Plugin -->
-<script src="~/assets/js/chartist.min.js"></script>
-
-<!--  Notifications Plugin    -->
-<script src="~/assets/js/bootstrap-notify.js"></script>
-
-<!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdanJlxl4OLIxvUC5IXfH2E-rYKuROMwU"></script>
-
-<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-<script src="~/assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
-
-<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-<script src="~/assets/js/demo.js"></script>
-
-<script type="text/javascript">
-        $(document).ready(function(){
-
-            demo.initChartist();
-
-            $.notify({
-                icon: 'pe-7s-gift',
-                message: "Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer."
-
-            },{
-                type: 'info',
-                timer: 4000
-            });
-
-        });
-</script>
-
 </html>

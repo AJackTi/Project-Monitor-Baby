@@ -10,10 +10,19 @@ from bottle import post, request
 import ast
 import db
 import socket
+from flask_cors import CORS
+from OpenSSL import SSL
+context = SSL.Context(SSL.SSLv23_METHOD)
+context.use_privatekey_file('server.key')
+context.use_certificate_file('server.crt')
 
 db_connect = create_engine('sqlite:///test.db')
 app = Flask(__name__)
 api = Api(app)
+hostName = socket.gethostbyname(socket.gethostname()) + ":5002"
+CORS(app, origins=hostName, allow_headers=[
+    "Content-Type", "Authorization", "Access-Control-Allow-Credentials"],
+    supports_credentials=True)
 
 # region Camera
 # http://localhost:5002/cameras
@@ -31,22 +40,21 @@ class Cameras(Resource):
             subResult['Parameter'] = i[4]
             lstReturn.append(subResult)
             subResult = {}
-        return [i for i in lstReturn]
+        return jsonify(lstReturn)
 
-# http://localhost:5002/camera/6/20190303/20190404/5500
 class Camera(Resource):
-    def get(self, id, timestart, timeend, parameter):
-        lstResult = db.Camera().getSpecificDataCamera(id, timestart, timeend, parameter)
+    def get(self, timestart, timeend):
+        lstResult = db.Camera().getSpecificDataCamera(timestart, timeend)
         lstReturn = []
         subResult = {}
         for i in lstResult:
             subResult['ID'] = i[0]
             subResult['TimeStart'] = i[1]
             subResult['TimeEnd'] = i[2]
-            subResult['Parameter'] = i[3]
+            subResult['Parameter'] = i[4]
             lstReturn.append(subResult)
             subResult = {}
-        return [i for i in lstReturn]
+        return jsonify(lstReturn)
 
 # http://localhost:5002/postcamera/10/20190303/20190404/0000/5500
 # http://localhost:5002/postcamera/None/20190303_3030/20190404_3030/0000/5500
@@ -184,7 +192,7 @@ class Music(Resource):
 
 class Musics(Resource):
     def get(self):
-        lstResult = db.Music().getDataMusic()()
+        lstResult = db.Music().getDataMusic()
         lstReturn = []
         subResult = {}
         for i in lstResult:
@@ -194,7 +202,8 @@ class Musics(Resource):
             subResult['IsDelete'] = i[3]
             lstReturn.append(subResult)
             subResult = {}
-        return [i for i in lstReturn]
+        print lstReturn
+        return jsonify(lstReturn)
 
 class postMusic(Resource):
     def post(self, id, name, duration, isdelete):
@@ -233,8 +242,9 @@ class SensorMotions(Resource):
         return [i for i in lstReturn]
 
 class SensorMotion(Resource):
-    def get(self, id, timestart, timeend, quantity):
-        lstResult = db.SensorMotion().getSpecificDataSensorMotion(id, timestart, timeend, quantity)
+    def get(self, timestart, timeend):
+        print 'Time: ', timestart, timeend
+        lstResult = db.SensorMotion().getSpecificDataSensorMotion(timestart, timeend)
         lstReturn = []
         subResult = {}
         for i in lstResult:
@@ -244,7 +254,7 @@ class SensorMotion(Resource):
             subResult['quantity'] = i[3]
             lstReturn.append(subResult)
             subResult = {}
-        return [i for i in lstReturn]
+        return jsonify(lstReturn)
 
 class postSensorMotion(Resource):
     def post(self, id, timestart, timeend, quantity):
@@ -284,8 +294,8 @@ class SensorSounds(Resource):
         return [i for i in lstReturn]
 
 class SensorSound(Resource):
-    def get(self, id, timestart, timeend, parameter):
-        lstResult = db.SensorSound().getSpecificSensorSound(id, timestart, timeend, parameter)
+    def get(self, timestart, timeend):
+        lstResult = db.SensorSound().getSpecificSensorSound(timestart, timeend)
         lstReturn = []
         subResult = {}
         for i in lstResult:
@@ -325,44 +335,44 @@ class Enum:
 
 # region API
 # region Camera
-api.add_resource(Cameras, '/cameras')  
-api.add_resource(Camera, '/camera/<id>/<timestart>/<timeend>/<parameter>')  
-api.add_resource(postCamera, '/postcamera/<id>/<timestart>/<timeend>/<videolink>/<parameter>')  
-api.add_resource(deleteCamera, '/deleteCamera/<id>')  
+api.add_resource(Cameras, '/api/cameras')  
+api.add_resource(Camera, '/api/camera/<timestart>/<timeend>')  
+api.add_resource(postCamera, '/api/postcamera/<id>/<timestart>/<timeend>/<videolink>/<parameter>')  
+api.add_resource(deleteCamera, '/api/deleteCamera/<id>')  
 # endregion
 
 # region Music
-api.add_resource(Musics, '/musics')
-api.add_resource(Music, '/music/<id>/<name>/duration/<isdelete>')
-api.add_resource(postMusic, '/postMusic/<id>/<name>/duration/<isdelete>')
-api.add_resource(deleteMusic, '/deleteCamera/<id>')
+api.add_resource(Musics, '/api/musics')
+api.add_resource(Music, '/api/music/<id>/<name>/duration/<isdelete>')
+api.add_resource(postMusic, '/api/postMusic/<id>/<name>/duration/<isdelete>')
+api.add_resource(deleteMusic, '/api/deleteCamera/<id>')
 # endregion
 
 # region SensorMotion
-api.add_resource(SensorMotions, '/sensormotions')  
-api.add_resource(SensorMotion, '/sensormotion/<id>/<timestart>/<timeend>/<quantity>')  
-api.add_resource(postSensorMotion, '/postsensormotion/<id>/<timestart>/<timeend>/<quantity>')  
-api.add_resource(deleteSensorMotion, '/deletesensormotion/<id>')  
+api.add_resource(SensorMotions, '/api/sensormotions')  
+api.add_resource(SensorMotion, '/api/sensormotion/<timestart>/<timeend>')  
+api.add_resource(postSensorMotion, '/api/postsensormotion/<id>/<timestart>/<timeend>/<quantity>')  
+api.add_resource(deleteSensorMotion, '/api/deletesensormotion/<id>')
 # endregion
 
 # region DeviceRas
-api.add_resource(DeviceRass, '/devicerass')  
-api.add_resource(DeviceRas, '/deviceras/<id>/<name>')  
-api.add_resource(postDeviceRas, '/postcamera/<id>/<name>')  
-api.add_resource(deleteDeviceRas, '/deleteCamera/<id>')  
+api.add_resource(DeviceRass, '/api/devicerass')  
+api.add_resource(DeviceRas, '/api/deviceras/<id>/<name>')  
+api.add_resource(postDeviceRas, '/api/postcamera/<id>/<name>')  
+api.add_resource(deleteDeviceRas, '/api/deleteCamera/<id>')  
 # endregion
 
 # region Information
-api.add_resource(postInformation, '/postinformation/<username>/<password>/<email>')
-api.add_resource(Informations, '/informations')
-api.add_resource(Information, '/information/<username>/<password>')
+api.add_resource(postInformation, '/api/postinformation/<username>/<password>/<email>')
+api.add_resource(Informations, '/api/informations')
+api.add_resource(Information, '/api/information/<username>/<password>')
 # endregion
 
 # region SensorSound
-api.add_resource(SensorSounds, '/sensorsounds')  
-api.add_resource(SensorSound, '/sensorsound/<id>/<timestart>/<timeend>/<parameter>')  
-api.add_resource(postSensorSound, '/postsensorsound/<id>/<timestart>/<timeend>/<parameter>')  
-api.add_resource(deleteSensorSound, '/deletesensorsound/<id>')  
+api.add_resource(SensorSounds, '/api/sensorsounds')  
+api.add_resource(SensorSound, '/api/sensorsound/<timestart>/<timeend>')  
+api.add_resource(postSensorSound, '/api/postsensorsound/<id>/<timestart>/<timeend>/<parameter>')  
+api.add_resource(deleteSensorSound, '/api/deletesensorsound/<id>')  
 # endregion
 
 # endregion
@@ -411,4 +421,7 @@ def writeLog(enumNumber, content):
 
 
 if __name__ == '__main__':
-    app.run(host=socket.gethostbyname(socket.gethostname()), port='5002')
+    cors = CORS(app, resources={r"/api/*": {"origins": "*"}}, support_credentials=True)
+    context = ('server.crt', 'server.key')
+    app.run(host=socket.gethostbyname(socket.gethostname()), port='5002', ssl_context=context, threaded=True, debug=True)
+    

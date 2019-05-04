@@ -1,8 +1,9 @@
 ﻿<Properties StartupConfiguration="{47B6B66D-DA3E-4C5C-A9C4-1240763E5B54}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="WebApp/Views/Home/Login.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WebApp/Views/Home/Dashboard.cshtml">
     <Files>
       <File FileName="WebApp/Views/Home/Login.cshtml" Line="144" Column="72" />
       <File FileName="WebApp/Controllers/HomeController.cs" Line="39" Column="41" />
+      <File FileName="WebApp/Views/Home/Dashboard.cshtml" Line="185" Column="76" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,10 +12,9 @@
             <Node name="WebApp" expanded="True">
               <Node name="Controllers" expanded="True" />
               <Node name="Views" expanded="True">
-                <Node name="Home" expanded="True">
-                  <Node name="Login.cshtml" selected="True" />
-                </Node>
+                <Node name="Home" expanded="True" />
               </Node>
+              <Node name="wwwroot" expanded="True" selected="True" />
             </Node>
           </Node>
         </State>
