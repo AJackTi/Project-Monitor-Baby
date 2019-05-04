@@ -62,3 +62,4 @@ C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApp\WebApp\obj\Debug\
 C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApp\WebApp\obj\Debug\netcoreapp2.2\WebApp.dll
 C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApp\WebApp\obj\Debug\netcoreapp2.2\WebApp.pdb
 C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApp\WebApp\obj\Debug\netcoreapp2.2\WebApp.csproj.CopyComplete
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApp\WebApp\obj\Debug\netcoreapp2.2\Razor\Views\Home\Transform.g.cshtml.cs

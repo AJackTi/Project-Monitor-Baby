@@ -73,11 +73,13 @@ class Camera:
 class Music:
     def __init__(self):
         self.conn = sqlite3.connect(database)
+
     # Music().getDataMusic()
     def getDataMusic(self):
         cur = self.conn.cursor()
         cur.execute("SELECT * FROM music")
         return cur.fetchall()
+        
     # Music().getSpecificDataMusic(1)
     def getSpecificDataMusic(self, ID=None, Name=None, Duration=None, IsDelete=None):
         cur = self.conn.cursor()
@@ -162,8 +164,8 @@ class SensorMotion:
         cur = self.conn.cursor()
         if ID == None:  # Not Exist
             try:
-                query = ''' INSERT INTO SensorMotion(Name, TimeStart, TimeEnd, Quantity) VALUES(?,?,?) '''
-                data = (Name, TimeStart, TimeEnd, Quantity)
+                query = ''' INSERT INTO SensorMotion(TimeStart, TimeEnd, Quantity) VALUES(?,?,?) '''
+                data = (TimeStart, TimeEnd, Quantity)
                 cur.execute(query, data)
             except:
                 return False
@@ -391,6 +393,7 @@ def main():
     # Information().insertSpecificInformation('ductrong123','123123','admin@hotmail.com')
     # print SensorMotion().getSpecificDataSensorMotion('2019-04-10 14:30', None)
     # Information().getSpecificInformation('ductrong', '123123')
+    # Music().getDataMusic()
 
 if __name__ == '__main__':
     main()

@@ -192,7 +192,7 @@ class Music(Resource):
 
 class Musics(Resource):
     def get(self):
-        lstResult = db.Music().getDataMusic()()
+        lstResult = db.Music().getDataMusic()
         lstReturn = []
         subResult = {}
         for i in lstResult:
@@ -202,7 +202,8 @@ class Musics(Resource):
             subResult['IsDelete'] = i[3]
             lstReturn.append(subResult)
             subResult = {}
-        return [i for i in lstReturn]
+        print lstReturn
+        return jsonify(lstReturn)
 
 class postMusic(Resource):
     def post(self, id, name, duration, isdelete):

@@ -44,7 +44,7 @@ def callback(channelSoundSensor):
 
 
 def SavingData(countSound, countMotion, countCamera, minutes):
-    print 'Saving Data To DB ' + '*'*20
+    print 'Saving Data To DB ' + '*'*50
     SensorMotion().insertSpecificDataSensorMotion(None, str(datetime.datetime.now() - datetime.timedelta(minutes=minutes)), str(datetime.datetime.now()), countMotion)
     SensorSound().insertSpecificSensorSound(None, str(datetime.datetime.now() - datetime.timedelta(minutes=minutes)), str(datetime.datetime.now()), countSound)
     Camera().insertSpecificDataCamera(None, str(datetime.datetime.now() - datetime.timedelta(minutes=minutes)), str(datetime.datetime.now()), '_', countCamera)
@@ -87,7 +87,7 @@ def Process(minutes=1):
                 elif ((countMotion >= 50 and countMotion <= 100) or (countSound <= 80 and countSound >= 40)) or (motiontrack.countCamera <= 120 and motiontrack.countCamera >= 80):
                     Thread(target=playMusic, args=[minutes]).start()
                     Thread(target=servoControl, args=[minutes]).start()
-                    SavingData(countSound, countMotion, motiontrack.countCamera)
+                    SavingData(countSound, countMotion, motiontrack.countCamera, minutes)
                     countMotion = 0
                     countSound = 0
                     motiontrack.countCamera = 0
@@ -96,7 +96,7 @@ def Process(minutes=1):
                     minutes = 2
                     Thread(target=playMusic, args=[minutes]).start()
                     Thread(target=servoControl, args=[minutes]).start()
-                    SavingData(countSound, countMotion, motiontrack.countCamera)
+                    SavingData(countSound, countMotion, motiontrack.countCamera, minutes)
                     countMotion = 0
                     countSound = 0
                     motiontrack.countCamera = 0
@@ -106,7 +106,7 @@ def Process(minutes=1):
                     # Alert to parent
                     Thread(target=playMusic, args=[3]).start()
                     Thread(target=servoControl, args=[3]).start()
-                    SavingData(countSound, countMotion, motiontrack.countCamera, minutes)
+                    SavingData(countSound, countMotion, motiontrack.countCamera, minutes, minutes)
                     countMotion = 0
                     countSound = 0
                     motiontrack.countCamera = 0
