@@ -82,13 +82,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://localhost:44319/Home/Login">
+                        <a href="https://localhost:8080/Home/Login">
                             <i class="pe-7s-user"></i>
                             <p>User Profile</p>
                         </a>
                     </li>
                     <li>
-                        <a id="adviceClick">
+                        <a id="adviceClick" style="cursor: pointer">
                             <i class="pe-7s-note2"></i>
                             <p>Advice</p>
                         </a>
@@ -100,7 +100,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://localhost:44319/Home/Transform">
+                        <a href="https://localhost:8080/Home/Transform">
                             <i class="pe-7s-refresh"></i>
                             <p>Transform</p>
                         </a>
@@ -120,7 +120,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         @* Motion Chart *@
-                        <div class="col-md-4" style="width: 353px;">
+                        <div class="col-md-6">
                             <div class="card">
 
                                 <div class="header">
@@ -131,13 +131,19 @@
                                     <div id="example">
 
                                         <div class="demo-section k-content">
-                                            <input id="datetimepickerMotion" title="datetimepickerMotion" style="width: 100%;" />
+                                            <input id="datetimepickerMotion1" title="datetimepickerMotion1" style="width: 50%; float: left;" />
+                                            <input id="datetimepickerMotion2" title="datetimepickerMotion2" style="width: 50%; float: left;" />
                                         </div>
 
                                         <script>
                                             $(document).ready(function () {
                                                 // create DateTimePicker from input HTML element
-                                                $("#datetimepickerMotion").kendoDateTimePicker({
+                                                $("#datetimepickerMotion1").kendoDateTimePicker({
+                                                    value: new Date(),
+                                                    dateInput: true
+                                                });
+
+                                                $("#datetimepickerMotion2").kendoDateTimePicker({
                                                     value: new Date(),
                                                     dateInput: true
                                                 });
@@ -150,15 +156,17 @@
                                                     return target.replace(new RegExp(search, 'g'), replacement);
                                                 };
 
-                                                var startDate = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
-                                                var startTime = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                var startDate = kendo.toString($("#datetimepickerMotion1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                var startTime = kendo.toString($("#datetimepickerMotion1").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                var endDate = kendo.toString($("#datetimepickerMotion2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                var endTime = kendo.toString($("#datetimepickerMotion2").data("kendoDateTimePicker").value(), 'HH:mm');
                                                 //console.log(startDate.replaceAll('/', '-') + ' ' + startTime);
                                                 //debugger;
                                                 $.ajax({
                                                     type: 'GET',
                                                     dataType: 'json',
                                                     cache: false,
-                                                    url: '@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/None',
+                                                    url: '@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
                                                     contentType: 'application/json; charset=utf-8',
                                                     success: function (result) {
                                                         //console.log(result);
@@ -170,16 +178,18 @@
 
                                                 });
 
-                                                $('#datetimepickerMotion').change(function () {
+                                                $('#datetimepickerMotion1, #datetimepickerMotion2').change(function () {
                                                     //debugger;
-                                                    var startDate = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
-                                                    var startTime = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                    var startDate = kendo.toString($("#datetimepickerMotion1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                    var startTime = kendo.toString($("#datetimepickerMotion1").data("kendoDateTimePicker").value(), 'HH:mm');
+                                                    var endDate = kendo.toString($("#datetimepickerMotion2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                                    var endTime = kendo.toString($("#datetimepickerMotion2").data("kendoDateTimePicker").value(), 'HH:mm');
                                                     //console.log('@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/None');
                                                     $.ajax({
                                                         type: 'GET',
                                                         dataType: 'json',
                                                         cache: false,
-                                                        url: '@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/None',
+                                                        url: '@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
                                                         contentType: 'application/json; charset=utf-8',
                                                         success: function (result) {
                                                             //console.log(result);
@@ -194,11 +204,11 @@
                                         </script>
 
                                     </div>
-                                    <script>
-                                        function setupMotionChart(data) {
-                                            var startDate = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
-                                            var startTime = kendo.toString($("#datetimepickerMotion").data("kendoDateTimePicker").value(), 'hh:mm tt');
-
+                                    <script>function setupMotionChart(data) {
+                                            var startDate = kendo.toString($("#datetimepickerMotion1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                            var startTime = kendo.toString($("#datetimepickerMotion1").data("kendoDateTimePicker").value(), 'hh:mm tt');
+                                            var endDate = kendo.toString($("#datetimepickerMotion2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
+                                            var endTime = kendo.toString($("#datetimepickerMotion2").data("kendoDateTimePicker").value(), 'hh:mm tt');
                                             //console.log('Loading ... ');
                                             // Set up the chart
                                             var chart = new Highcharts.Chart({
@@ -214,7 +224,7 @@
                                                     }
                                                 },
                                                 title: {
-                                                    text: 'Motion detection between ' + startDate + ' ' + startTime + ' And Now'
+                                                    text: 'Motion detection between ' + startDate + ' ' + startTime + ' And ' + endDate + ' ' + endTime
                                                 },
                                                 plotOptions: {
                                                     column: {
@@ -240,16 +250,14 @@
                                             });
 
                                             showValues();
-                                        }
-
-                                    </script>
+                                        }</script>
                                 </div>
                             </div>
                         </div>
                         @* End Motion Chart *@
 
                         @* Camera Chart *@
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title">Camera Chart</h4>

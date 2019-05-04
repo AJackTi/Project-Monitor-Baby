@@ -423,5 +423,4 @@ def writeLog(enumNumber, content):
 if __name__ == '__main__':
     cors = CORS(app, resources={r"/api/*": {"origins": "*"}}, support_credentials=True)
     context = ('server.crt', 'server.key')
-    app.run(host=socket.gethostbyname(socket.gethostname()), port='5002', ssl_context=context, threaded=True, debug=True)
-    
+    app.run(host=socket.gethostbyname(socket.gethostname()), port='5002', ssl_context=context, threaded=True, debug=False)
