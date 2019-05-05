@@ -36,5 +36,9 @@ namespace WebApp.Controllers
         {
             return View();
         }
+        public IActionResult Index()
+        {
+            return View();
+        }
     }
 }

@@ -83,9 +83,9 @@ class deleteCamera(Resource):
 # endregion
 # region DeviceRas
 class DeviceRas(Resource):
-    # get all data
-    def get(self, id, name):
-        lstResult = db.DeviceRas().getSpecificDataDeviceRas(id, name)
+    def get(self, ipaddress):
+        lstResult = db.DeviceRas().getSpecificDataDeviceRas(ipaddress)
+        print lstResult
         lstReturn = []
         subResult = {}
         for i in lstResult:
@@ -93,7 +93,19 @@ class DeviceRas(Resource):
             subResult['Name'] = i[1]
             lstReturn.append(subResult)
             subResult = {}
-        return [i for i in lstReturn]
+        return jsonify(lstReturn)
+
+class DeviceRasFull(Resource):
+    def get(self, ipaddress, macaddress):
+        lstResult = db.DeviceRas().getFullSpecificDataDeviceRas(ipaddress, macaddress)
+        lstReturn = []
+        subResult = {}
+        for i in lstResult:
+            subResult['ID'] = i[0]
+            subResult['Name'] = i[1]
+            lstReturn.append(subResult)
+            subResult = {}
+        return jsonify(lstReturn)
 
 class DeviceRass(Resource):
     def get(self):
@@ -357,7 +369,8 @@ api.add_resource(deleteSensorMotion, '/api/deletesensormotion/<id>')
 
 # region DeviceRas
 api.add_resource(DeviceRass, '/api/devicerass')  
-api.add_resource(DeviceRas, '/api/deviceras/<id>/<name>')  
+api.add_resource(DeviceRas, '/api/deviceras/<ipaddress>')
+api.add_resource(DeviceRasFull, '/api/devicerasfull/<ipaddress>/<macaddress>')  
 api.add_resource(postDeviceRas, '/api/postcamera/<id>/<name>')  
 api.add_resource(deleteDeviceRas, '/api/deleteCamera/<id>')  
 # endregion

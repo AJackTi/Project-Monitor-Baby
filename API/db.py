@@ -209,11 +209,21 @@ class DeviceRas:
 
         return cur.fetchall()
 
-    def getSpecificDataDeviceRas(self, ID=None, Name=None):
+    # Only Get IpAddress When Having douple Ip Address => check MAC Address
+    def getSpecificDataDeviceRas(self, ipAddress):
         cur = self.conn.cursor()
         try:
-            cur.execute("SELECT * FROM DeviceRas where Id = ? or Name = ?",
-                        (ID, Name,))
+            cur.execute("SELECT * FROM DeviceRas where IPAddress = ?",(ipAddress,))
+        except:
+            return False
+
+        return cur.fetchall()
+    
+    # Get Full To Check Correctly Device
+    def getFullSpecificDataDeviceRas(self, ipAddress, macAddress):
+        cur = self.conn.cursor()
+        try:
+            cur.execute("SELECT * FROM DeviceRas where IPAddress = ? and MACAddress = ?",(ipAddress,macAddress,))
         except:
             return False
 
