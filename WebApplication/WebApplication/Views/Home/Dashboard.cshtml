@@ -1,4 +1,4 @@
-﻿@using WebApp.Common;
+﻿@using WebApplication.Common;
 @{
     Layout = null;
 }
@@ -58,7 +58,7 @@
 </head>
 <body>
     @{
-        var ipAddress = "https://" + Common.ipRas;
+    var ipAddress = "https://" + Common.ipRas;
 
     }
     <div class="wrapper">
@@ -169,7 +169,7 @@
                                                     url: '@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
                                                     contentType: 'application/json; charset=utf-8',
                                                     success: function (result) {
-                                                        //console.log(result);
+                                                        console.log(result);
                                                         setupMotionChart(result);
                                                     },
                                                     error: function (result) {
@@ -179,12 +179,12 @@
                                                 });
 
                                                 $('#datetimepickerMotion1, #datetimepickerMotion2').change(function () {
-                                                    //debugger;
+                                                    debugger;
                                                     var startDate = kendo.toString($("#datetimepickerMotion1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
                                                     var startTime = kendo.toString($("#datetimepickerMotion1").data("kendoDateTimePicker").value(), 'HH:mm');
                                                     var endDate = kendo.toString($("#datetimepickerMotion2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
                                                     var endTime = kendo.toString($("#datetimepickerMotion2").data("kendoDateTimePicker").value(), 'HH:mm');
-                                                    //console.log('@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/None');
+                                                    //console.log('@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime);
                                                     $.ajax({
                                                         type: 'GET',
                                                         dataType: 'json',
@@ -204,7 +204,8 @@
                                         </script>
 
                                     </div>
-                                    <script>function setupMotionChart(data) {
+                                    <script>
+                                        function setupMotionChart(data) {
                                             var startDate = kendo.toString($("#datetimepickerMotion1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
                                             var startTime = kendo.toString($("#datetimepickerMotion1").data("kendoDateTimePicker").value(), 'hh:mm tt');
                                             var endDate = kendo.toString($("#datetimepickerMotion2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
@@ -345,7 +346,8 @@
 
                                     </div>
 
-                                    <script>function setUpCameraChart(data) {
+                                    <script>
+                                        function setUpCameraChart(data) {
                                             var startDate = kendo.toString($("#datetimepickerCamera1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
                                             var startTime = kendo.toString($("#datetimepickerCamera1").data("kendoDateTimePicker").value(), 'hh:mm tt');
                                             var endDate = kendo.toString($("#datetimepickerCamera2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
@@ -494,7 +496,8 @@
 
                                     </div>
                                 </div>
-                                <script>function setUpSoundChart(data) {
+                                <script>
+                                    function setUpSoundChart(data) {
                                         var startDate = kendo.toString($("#datetimepickerSound1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
                                         var startTime = kendo.toString($("#datetimepickerSound1").data("kendoDateTimePicker").value(), 'hh:mm tt');
                                         var endDate = kendo.toString($("#datetimepickerSound2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
@@ -787,7 +790,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <script>function setUpCombinationChart(data) {
+                                <script>
+                                    function setUpCombinationChart(data) {
                                         var startDate = kendo.toString($("#datetimepickerCombination1").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
                                         var startTime = kendo.toString($("#datetimepickerCombination1").data("kendoDateTimePicker").value(), 'hh:mm tt');
                                         var endDate = kendo.toString($("#datetimepickerCombination2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
@@ -861,7 +865,8 @@
 
                             <div class="responsive-message"></div>
 
-                            <script>$(document).ready(function () {
+                            <script>
+                                $(document).ready(function () {
                                     $('#adviceClick').click(function () {
                                         if (true) {
 

@@ -34,10 +34,11 @@ class Cameras(Resource):
         subResult = {}
         for i in lstResult:
             subResult['ID'] = i[0]
-            subResult['TimeStart'] = i[1]
-            subResult['TimeEnd'] = i[2]
-            subResult['VideoLink'] = i[3]
-            subResult['Parameter'] = i[4]
+            subResult['CodeCamera'] = i[1]
+            subResult['TimeStart'] = i[2]
+            subResult['TimeEnd'] = i[3]
+            subResult['VideoLink'] = i[4]
+            subResult['Parameter'] = i[5]
             lstReturn.append(subResult)
             subResult = {}
         return jsonify(lstReturn)
@@ -49,9 +50,11 @@ class Camera(Resource):
         subResult = {}
         for i in lstResult:
             subResult['ID'] = i[0]
-            subResult['TimeStart'] = i[1]
-            subResult['TimeEnd'] = i[2]
-            subResult['Parameter'] = i[4]
+            subResult['CodeCamera'] = i[1]
+            subResult['TimeStart'] = i[2]
+            subResult['TimeEnd'] = i[3]
+            subResult['VideoLink'] = i[4]
+            subResult['Parameter'] = i[5]
             lstReturn.append(subResult)
             subResult = {}
         return jsonify(lstReturn)
@@ -103,6 +106,8 @@ class DeviceRasFull(Resource):
         for i in lstResult:
             subResult['ID'] = i[0]
             subResult['Name'] = i[1]
+            subResult['IPAddress'] = i[2]
+            subResult['MACAddress'] = i[3]
             lstReturn.append(subResult)
             subResult = {}
         return jsonify(lstReturn)
@@ -115,6 +120,8 @@ class DeviceRass(Resource):
         for i in lstResult:
             subResult['ID'] = i[0]
             subResult['Name'] = i[1]
+            subResult['IPAddress'] = i[2]
+            subResult['MACAddress'] = i[3]
             lstReturn.append(subResult)
             subResult = {}
         return [i for i in lstReturn]
@@ -149,8 +156,9 @@ class Informations(Resource):
         subResult = {}
         for i in lstResult:
             subResult['ID'] = i[0]
-            subResult['Username'] = i[1]
-            subResult['Password'] = i[2]
+            subResult['CodeInfo'] = i[1]
+            subResult['Username'] = i[2]
+            subResult['Password'] = i[3]
             lstReturn.append(subResult)
             subResult = {}
         return [i for i in lstReturn]
@@ -162,8 +170,8 @@ class Information(Resource):
         lstReturn = []
         subResult = {}
         for i in lstResult:
-            subResult['Username'] = i[0]
-            subResult['Password'] = i[1]
+            subResult['Username'] = i[2]
+            subResult['Password'] = i[3]
             lstReturn.append(subResult)
             subResult = {}
         if len(lstReturn) == 0:
@@ -195,9 +203,10 @@ class Music(Resource):
         subResult = {}
         for i in lstResult:
             subResult['ID'] = i[0]
-            subResult['Name'] = i[1]
-            subResult['Duration'] = i[2]
-            subResult['IsDelete'] = i[3]
+            subResult['CodeMusic'] = i[1]
+            subResult['Name'] = i[2]
+            subResult['Duration'] = i[3]
+            subResult['IsDelete'] = i[4]
             lstReturn.append(subResult)
             subResult = {}
         return [i for i in lstReturn]
@@ -209,9 +218,10 @@ class Musics(Resource):
         subResult = {}
         for i in lstResult:
             subResult['ID'] = i[0]
-            subResult['Name'] = i[1]
-            subResult['Duration'] = i[2]
-            subResult['IsDelete'] = i[3]
+            subResult['CodeMusic'] = i[1]
+            subResult['Name'] = i[2]
+            subResult['Duration'] = i[3]
+            subResult['IsDelete'] = i[4]
             lstReturn.append(subResult)
             subResult = {}
         print lstReturn
@@ -246,9 +256,10 @@ class SensorMotions(Resource):
         subResult = {}
         for i in lstResult:
             subResult['ID'] = i[0]
-            subResult['TimeStart'] = i[1]
-            subResult['TimeEnd'] = i[2]
-            subResult['Quantity'] = i[3]
+            subResult['CodeMotion'] = i[1]
+            subResult['TimeStart'] = i[2]
+            subResult['TimeEnd'] = i[3]
+            subResult['quantity'] = i[4]
             lstReturn.append(subResult)
             subResult = {}
         return [i for i in lstReturn]
@@ -261,9 +272,10 @@ class SensorMotion(Resource):
         subResult = {}
         for i in lstResult:
             subResult['ID'] = i[0]
-            subResult['TimeStart'] = i[1]
-            subResult['TimeEnd'] = i[2]
-            subResult['quantity'] = i[3]
+            subResult['CodeMotion'] = i[1]
+            subResult['TimeStart'] = i[2]
+            subResult['TimeEnd'] = i[3]
+            subResult['quantity'] = i[4]
             lstReturn.append(subResult)
             subResult = {}
         return jsonify(lstReturn)
@@ -298,9 +310,10 @@ class SensorSounds(Resource):
         subResult = {}
         for i in lstResult:
             subResult['ID'] = i[0]
-            subResult['TimeStart'] = i[1]
-            subResult['TimeEnd'] = i[2]
-            subResult['Parameter'] = i[3]
+            subResult['CodeSound'] = i[1]
+            subResult['TimeStart'] = i[2]
+            subResult['TimeEnd'] = i[3]
+            subResult['Parameter'] = i[4]
             lstReturn.append(subResult)
             subResult = {}
         return [i for i in lstReturn]
@@ -312,9 +325,10 @@ class SensorSound(Resource):
         subResult = {}
         for i in lstResult:
             subResult['ID'] = i[0]
-            subResult['TimeStart'] = i[1]
-            subResult['TimeEnd'] = i[2]
-            subResult['Parameter'] = i[3]
+            subResult['CodeSound'] = i[1]
+            subResult['TimeStart'] = i[2]
+            subResult['TimeEnd'] = i[3]
+            subResult['Parameter'] = i[4]
             lstReturn.append(subResult)
             subResult = {}
         return [i for i in lstReturn]

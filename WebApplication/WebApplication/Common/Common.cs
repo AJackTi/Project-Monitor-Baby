@@ -1,8 +1,7 @@
-﻿using System;
-namespace WebApplication.Common
+﻿namespace WebApplication.Common
 {
     public static class Common
     {
-        public static string ipRas = "192.168.1.8";
+        public static string ipRas = "192.168.0.105";
     }
 }
