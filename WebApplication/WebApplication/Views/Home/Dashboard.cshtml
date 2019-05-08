@@ -169,7 +169,7 @@
                                                     url: '@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
                                                     contentType: 'application/json; charset=utf-8',
                                                     success: function (result) {
-                                                        console.log(result);
+                                                        //console.log(result);
                                                         setupMotionChart(result);
                                                     },
                                                     error: function (result) {
@@ -606,7 +606,7 @@
                                                                 dataResult.push({ "Sound": total });
                                                             },
                                                             error: function (result) {
-                                                                console.log(result);
+                                                                //console.log(result);
                                                             }
 
                                                         });
@@ -632,7 +632,7 @@
                                                                 dataResult.push({"Camera" : total});
                                                             },
                                                             error: function (result) {
-                                                                console.log(result);
+                                                                //console.log(result);
                                                             }
                                                         });
                                                         // Get Data Of Motion Sensor
@@ -657,12 +657,12 @@
                                                                 dataResult.push({ "Motion": total });
                                                             },
                                                             error: function (result) {
-                                                                console.log(result);
+                                                                //console.log(result);
                                                             }
                                                         });
 
-                                                        debugger;
-                                                        console.log(dataResult);
+                                                        //debugger;
+                                                        //console.log(dataResult);
                                                         var result = Calculation(dataResult);
                                                         if (result === -1) {
                                                             return;
@@ -697,7 +697,7 @@
                                                             dataResult.push({ "Sound": total });
                                                         },
                                                         error: function (result) {
-                                                            console.log(result);
+                                                            //console.log(result);
                                                         }
 
                                                     });
@@ -723,7 +723,7 @@
                                                             dataResult.push({ "Camera": total });
                                                         },
                                                         error: function (result) {
-                                                            console.log(result);
+                                                            //console.log(result);
                                                         }
                                                     });
                                                     // Get Data Of Motion Sensor
@@ -748,7 +748,7 @@
                                                             dataResult.push({ "Motion": total });
                                                         },
                                                         error: function (result) {
-                                                            console.log(result);
+                                                            //console.log(result);
                                                         }
                                                     });
 

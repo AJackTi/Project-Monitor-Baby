@@ -28,6 +28,7 @@
 
     <!-- Main Stylesheet File -->
     <link href="~/css/styleindex.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
@@ -117,13 +118,54 @@
                     <p class="section-description">Set Up Your API On Raspberry Pi Now</p>
                 </div>
                 <div class="row">
-                    <div id="groupAPI" style="display: flex;">
-                        <input type="text" class="form-control" id="usr" style="width: 500px">
-                        <button type="button" class="btn btn-success">Get It Now</button>
+                    <div class="col-lg-12 col-sm-12">
+                        <div id="groupAPI">
+                            <input type="text" class="form-control" id="txtAPI"
+                                   style="width: 500px; margin-bottom: 10px; border-color: blueviolet; border-radius: 5px;"
+                                   minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$">
+                            <button type="button" class="btn btn-success" id="btnAPI">Get It Now</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <script>
+            $(document).ready(function () {
+                $('#btnAPI').click(function () {
+                    if ($('#txtAPI').val() === "") {
+                        return;
+                    }
+                    $.ajax({
+                        type: 'GET',
+                        dataType: 'json',
+                        cache: false,
+                        url: 'https://'+ $('#txtAPI').val() + ':5002/api/informations',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (result) {
+                            if (result.length > 1) {
+                                console.log("okok");
+                                SaveJson({ "ipaddress": $('#txtAPI').val(), "time": new Date().toLocaleString() })
+                                window.location.href = "https://localhost:44319/Home/Login";
+                            }
+                            //console.log(result);
+                        },
+                        error: function (result) {
+                            //console.log(result);
+                        }
+
+                    });
+                })
+
+                function SaveJson(data) {
+                    var fs = require('fs');
+                    fs.writeFile("ipapi.json", data, function (err) {
+                        if (err) {
+                            console.log(err);
+                        }
+                    });
+                }
+            });
+        </script>
         <!-- #services -->
         <div style="padding-bottom: 400px;"></div>
         <!--==========================
@@ -201,7 +243,7 @@
     <a href="# " class="back-to-top "><i class="fa fa-chevron-up "></i></a>
 
     <!-- JavaScript Libraries -->
-    <script src="~/lib/jquery/jquery.min.js "></script>
+    <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/jquery/jquery-migrate.min.js "></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js "></script>
     <script src="~/lib/easing/easing.min.js "></script>
@@ -210,10 +252,11 @@
     <script src="~/lib/counterup/counterup.min.js "></script>
     <script src="~/lib/superfish/hoverIntent.js "></script>
     <script src="~/lib/superfish/superfish.min.js "></script>
+    <script src="~/js/require.js"></script>
 
     <!-- Template Main Javascript File -->
     <script src="~/js/main.js "></script>
-
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </body>
 
 </html>
