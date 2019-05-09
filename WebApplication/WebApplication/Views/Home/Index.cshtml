@@ -99,9 +99,9 @@
 
                     <div class="col-lg-6 background order-lg-2 order-1 wow fadeInRight"></div>
                 </div>
-                <div class="row" style="padding-top: 10px; margin: 0 auto;">
-                    <div class="col-lg-12 col-sm-12">
-                        <button type="button" href="#services" class="btn btn-success">Explore It Now</button>
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12" id="groupExplore">
+                        <button type="button" href="#services" class="btn btn-success btn-explore">Explore It Now</button>
                     </div>
                 </div>
             </div>
@@ -121,9 +121,10 @@
                     <div class="col-lg-12 col-sm-12">
                         <div id="groupAPI">
                             <input type="text" class="form-control" id="txtAPI"
-                                   style="width: 500px; margin-bottom: 10px; border-color: blueviolet; border-radius: 5px;"
                                    minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$">
-                            <button type="button" class="btn btn-success" id="btnAPI">Get It Now</button>
+                            <div class="box">
+                                <a href="#" class="btn btn-white btn-animation-1 btn-get" style="margin-top: 50px;">Get It Now</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -139,13 +140,13 @@
                         type: 'GET',
                         dataType: 'json',
                         cache: false,
-                        url: 'https://'+ $('#txtAPI').val() + ':5002/api/informations',
+                        url: 'https://' + $('#txtAPI').val() + ':5002/api/informations',
                         contentType: 'application/json; charset=utf-8',
                         success: function (result) {
                             if (result.length > 1) {
                                 console.log("okok");
-                                SaveJson({ "ipaddress": $('#txtAPI').val(), "time": new Date().toLocaleString() })
-                                window.location.href = "https://localhost:44319/Home/Login";
+                                //SaveJson({ "ipaddress": $('#txtAPI').val(), "time": new Date().toLocaleString() })
+                                window.location.href = "https://localhost:44377/Home/Login";
                             }
                             //console.log(result);
                         },
