@@ -1,12 +1,19 @@
 ﻿<Properties StartupConfiguration="{11D31DF6-979C-4C56-B35C-788E9CD9A1A4}|Default">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="WebApplication/Views/Home/Dashboard.cshtml">
+    <Files>
+      <File FileName="WebApplication/Views/Home/Index.cshtml" Line="146" Column="35" />
+      <File FileName="WebApplication/Controllers/api/IpAddressController.cs" Line="10" Column="2" />
+      <File FileName="WebApplication/Views/Home/Dashboard.cshtml" Line="176" Column="70" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="WebApplication" expanded="True">
             <Node name="WebApplication" expanded="True">
               <Node name="Common" expanded="True" />
-              <Node name="Controllers" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="api" expanded="True" />
+              </Node>
               <Node name="Views" expanded="True">
                 <Node name="Home" expanded="True">
                   <Node name="Dashboard.cshtml" selected="True" />
@@ -22,7 +29,9 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/ajackti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/Controllers/api/IpAddressController.cs" relfile="WebApplication/Controllers/api/IpAddressController.cs" line="38" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

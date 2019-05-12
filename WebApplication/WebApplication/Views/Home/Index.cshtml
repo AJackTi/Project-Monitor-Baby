@@ -131,40 +131,34 @@
             </div>
         </section>
         <script>
-            $(document).ready(function () {
-                $('#btnAPI').click(function () {
+$(document).ready(function () {
+
+                $('.btn-get').click(function () {
+                    debugger;
                     if ($('#txtAPI').val() === "") {
                         return;
                     }
+                    var name = { name: $('#txtAPI').val()};
+                    name = JSON.stringify(name);
                     $.ajax({
-                        type: 'GET',
+                        type: 'POST',
                         dataType: 'json',
-                        cache: false,
-                        url: 'https://' + $('#txtAPI').val() + ':5002/api/informations',
+                        data: name,
+                        url: 'https://localhost:5001/api/IpAddress',
                         contentType: 'application/json; charset=utf-8',
                         success: function (result) {
-                            if (result.length > 1) {
+                            @*if (result.length > 1) {
                                 console.log("okok");
                                 //SaveJson({ "ipaddress": $('#txtAPI').val(), "time": new Date().toLocaleString() })
                                 window.location.href = "https://localhost:44377/Home/Login";
-                            }
-                            //console.log(result);
+                            }*@
+                            console.log(result);
                         },
                         error: function (result) {
-                            //console.log(result);
+                            console.log(result);
                         }
-
                     });
                 })
-
-                function SaveJson(data) {
-                    var fs = require('fs');
-                    fs.writeFile("ipapi.json", data, function (err) {
-                        if (err) {
-                            console.log(err);
-                        }
-                    });
-                }
             });
         </script>
         <!-- #services -->

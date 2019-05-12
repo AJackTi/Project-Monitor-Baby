@@ -184,7 +184,7 @@
                                                     var startTime = kendo.toString($("#datetimepickerMotion1").data("kendoDateTimePicker").value(), 'HH:mm');
                                                     var endDate = kendo.toString($("#datetimepickerMotion2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
                                                     var endTime = kendo.toString($("#datetimepickerMotion2").data("kendoDateTimePicker").value(), 'HH:mm');
-                                                    //console.log('@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime);
+                                                    console.log('@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime);
                                                     $.ajax({
                                                         type: 'GET',
                                                         dataType: 'json',
