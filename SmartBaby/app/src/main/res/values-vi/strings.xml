@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SmartBaby</string>
+    <string name="title_activity_menu_main">MenuMainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Cài đặt</string>
+
+    <string name="menu_chart_motion">Biểu đồ chuyển động</string>
+    <string name="menu_chart_sound">Biểu đồ âm thanh</string>
+    <string name="menu_chart_camera">Biểu đồ chuyển động camera</string>
+    <string name="menu_tools">Cài đặt</string>
+    <string name="menu_share">Chia sẻ</string>
+    <string name="menu_send">Gửi</string>
+
+    <!--login-->
+    <string name="login">Đăng nhập</string>
+    <string name="username">Người dùng</string>
+    <string name="password">Mật khẩu</string>
+    <string name="login_success">Đăng nhập thành công</string>
+    <string name="login_fail">Đăng nhập thất bại</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="admin">Người dùng</string>
+    <string name="time_start">Ngày bắt đầu</string>
+    <string name="time_end">Ngày kết thúc</string>
+    <string name="view">Xem</string>
+    <string name="chart_motion">Biều đồ chuyển động</string>
+
+    <string name="subtitle">Thiết kế: Nguyễn Nhân</string>
+    <string name="number_of_motion">Số lần chuyển động</string>
+    <string name="motion">Chuyển động</string>
+
+    <string name="notify_date_time">Bạn chưa chọn ngày giờ</string>
+    <string name="number_of_sound">Số lần khóc</string>
+    <string name="sound">Âm thanh</string>
+
+    <string name="number_of_motion_camera">Số lần chuyển động</string>
+</resources>

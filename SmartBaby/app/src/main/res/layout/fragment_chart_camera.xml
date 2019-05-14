@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ChartCameraFragment">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:width="150dp"
+            android:text="@string/time_start"
+            android:textColor="@color/colorTeal"
+            android:id="@+id/txtTimeStart"
+            android:layout_gravity="center"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:width="150dp"
+            android:text="@string/time_end"
+            android:textColor="@color/colorTeal"
+            android:id="@+id/txtTimeEnd"
+            android:layout_gravity="center"/>
+
+
+
+        <Button
+            android:id="@+id/btnXem"
+            android:text="@string/view"
+            android:background="@color/colorBackRound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <com.highsoft.highcharts.core.HIChartView
+        android:id="@+id/hc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.highsoft.highcharts.core.HIChartView>
+
+</LinearLayout>
