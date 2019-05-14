@@ -28,40 +28,6 @@
 /Users/ajackti/Projects/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.dll
 /Users/ajackti/Projects/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.pdb
 /Users/ajackti/Projects/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.csproj.CopyComplete
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.csprojAssemblyReference.cache
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.csproj.CoreCompileInputs.cache
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.RazorAssemblyInfo.cache
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.RazorAssemblyInfo.cs
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.AssemblyInfoInputs.cache
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.AssemblyInfo.cs
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.TagHelpers.input.cache
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.TagHelpers.output.cache
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.RazorCoreGenerate.cache
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/Razor/Views/Home/Dashboard.g.cshtml.cs
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/Razor/Views/Home/Index.g.cshtml.cs
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/Razor/Views/Home/Login.g.cshtml.cs
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/Razor/Views/Home/Privacy.g.cshtml.cs
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/Razor/Views/Home/SignUp.g.cshtml.cs
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/Razor/Views/Home/Transform.g.cshtml.cs
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/Razor/Views/Shared/Error.g.cshtml.cs
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/Razor/Views/Shared/_CookieConsentPartial.g.cshtml.cs
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/Razor/Views/Shared/_Layout.g.cshtml.cs
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/Razor/Views/Shared/_ValidationScriptsPartial.g.cshtml.cs
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/Razor/Views/_ViewImports.g.cshtml.cs
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/Razor/Views/_ViewStart.g.cshtml.cs
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.RazorTargetAssemblyInfo.cache
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.RazorTargetAssemblyInfo.cs
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.dll
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.pdb
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/bin/Debug/netcoreapp2.2/WebApplication.deps.json
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/bin/Debug/netcoreapp2.2/WebApplication.runtimeconfig.json
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/bin/Debug/netcoreapp2.2/WebApplication.runtimeconfig.dev.json
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/bin/Debug/netcoreapp2.2/WebApplication.dll
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/bin/Debug/netcoreapp2.2/WebApplication.pdb
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/bin/Debug/netcoreapp2.2/WebApplication.Views.dll
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/bin/Debug/netcoreapp2.2/WebApplication.Views.pdb
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.Views.pdb
-C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.csproj.CopyComplete
 /Users/ajackti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/bin/Debug/netcoreapp2.2/WebApplication.deps.json
 /Users/ajackti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/bin/Debug/netcoreapp2.2/WebApplication.runtimeconfig.json
 /Users/ajackti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/bin/Debug/netcoreapp2.2/WebApplication.runtimeconfig.dev.json
@@ -96,3 +62,37 @@ C:/Users/AJack Ti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplic
 /Users/ajackti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.pdb
 /Users/ajackti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.csproj.CopyComplete
 /Users/ajackti/Documents/GitHub/Project-Monitor-Baby/WebApplication/WebApplication/obj/Debug/netcoreapp2.2/WebApplication.csprojAssemblyReference.cache
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\bin\Debug\netcoreapp2.2\WebApplication.deps.json
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\bin\Debug\netcoreapp2.2\WebApplication.runtimeconfig.json
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\bin\Debug\netcoreapp2.2\WebApplication.runtimeconfig.dev.json
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\bin\Debug\netcoreapp2.2\WebApplication.dll
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\bin\Debug\netcoreapp2.2\WebApplication.pdb
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\bin\Debug\netcoreapp2.2\WebApplication.Views.dll
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\bin\Debug\netcoreapp2.2\WebApplication.Views.pdb
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.csprojAssemblyReference.cache
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.csproj.CoreCompileInputs.cache
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.RazorAssemblyInfo.cache
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.RazorAssemblyInfo.cs
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.AssemblyInfoInputs.cache
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.AssemblyInfo.cs
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.TagHelpers.input.cache
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.TagHelpers.output.cache
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.RazorCoreGenerate.cache
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\Razor\Views\Home\Dashboard.g.cshtml.cs
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\Razor\Views\Home\Login.g.cshtml.cs
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy.g.cshtml.cs
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\Razor\Views\Home\SignUp.g.cshtml.cs
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\Razor\Views\Home\Transform.g.cshtml.cs
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Layout.g.cshtml.cs
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\Razor\Views\_ViewImports.g.cshtml.cs
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\Razor\Views\_ViewStart.g.cshtml.cs
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.RazorTargetAssemblyInfo.cache
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.RazorTargetAssemblyInfo.cs
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.Views.pdb
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.dll
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.pdb
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.csproj.CopyComplete

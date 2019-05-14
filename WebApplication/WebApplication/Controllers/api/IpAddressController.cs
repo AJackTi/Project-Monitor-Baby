@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,8 +29,9 @@ namespace WebApplication.Controllers.api
 
         public class IpAddress
         {
-            public string ipAddress;
-            public DateTime timeRegist;
+            public string ipAddress { get; set; }
+            public int port { get; set; }
+            public DateTime timeRegist { get; set; }
             public int frequency { get; set; }
         }
 
@@ -38,29 +40,34 @@ namespace WebApplication.Controllers.api
         public bool Post([FromBody]string name)
         {
             var data = new IpAddress();
-            data.ipAddress = name;
+            data.ipAddress = name.Split(":")[0];
             data.timeRegist = DateTime.Now;
             data.frequency = 1;
-
+            data.port = int.Parse(name.Split(":")[1]);
+            if (CheckDuplicateJson("data.json", name.Split(":")[0]))
+            {
+                // cộng thêm vào số lần(frequency)
+                // lấy số lần hiện tại += 1
+                data.frequency = PlusFrequency("data.json", data.ipAddress) + 1;
+                
+            }
             WriteToJsonFile("data.json", data, true);
-            if (System.IO.File.Exists("data.json"))
+            return CheckExistFile("data.json");
+        }
+        /// <summary>
+        /// Check file exist
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public static bool CheckExistFile(string filePath)
+        {
+            if (System.IO.File.Exists(filePath))
             {
                 return true;
             }
             return false;
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
         /// <summary>
         /// Writes the given object instance to a Json file.
         /// <para>Object type must have a parameterless constructor.</para>
@@ -85,6 +92,58 @@ namespace WebApplication.Controllers.api
                 if (writer != null)
                     writer.Close();
             }
+        }
+
+        /// <summary>
+        /// Check duplicate frequency with this ip in file
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public static bool CheckDuplicateJson(string filePath, string ipAddress)
+        {
+            var data = GetIpaddressJsonFile(filePath);
+            if (data.Any())
+            {
+                return data.Contains(ipAddress);
+            }
+            return false;
+        }
+
+        public static List<string> GetIpaddressJsonFile(string filePath)
+        {
+            if (!CheckExistFile(filePath))
+            {
+                return new List<string>();
+            }
+            using (StreamReader r = new StreamReader(filePath))
+            {
+                string json = r.ReadToEnd();
+                var items = JsonConvert.DeserializeObject<RootObject>(json);
+                return items.ipAddresses.Select(t => t.ipAddress).ToList();
+            }
+        }
+
+        public static int PlusFrequency(string filePath, string ipAddress)
+        {
+            using (StreamReader r = new StreamReader(filePath))
+            {
+                string json = r.ReadToEnd();
+                var items = JsonConvert.DeserializeObject<RootObject>(json);
+                try
+                {
+                    return items.ipAddresses.ToList().Where(t => t.ipAddress == ipAddress).FirstOrDefault().frequency;
+                }
+                catch (Exception)
+                {
+                    return -1;
+                }
+            }
+            return -1;
+        }
+
+        public class RootObject
+        {
+            public List<IpAddress> ipAddresses { get; set; }
         }
 
         /// <summary>

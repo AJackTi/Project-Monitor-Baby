@@ -120,8 +120,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-sm-12">
                         <div id="groupAPI">
-                            <input type="text" class="form-control" id="txtAPI"
-                                   minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$">
+                            <input type="text" class="form-control" id="txtAPI">
                             <div class="box">
                                 <a href="#" class="btn btn-white btn-animation-1 btn-get" style="margin-top: 50px;">Get It Now</a>
                             </div>
@@ -143,8 +142,8 @@ $(document).ready(function () {
                     $.ajax({
                         type: 'POST',
                         dataType: 'json',
-                        data: name,
-                        url: 'https://localhost:5001/api/IpAddress',
+                        data: JSON.stringify($('#txtAPI').val()),
+                        url: 'https://localhost:44377/api/IpAddress',
                         contentType: 'application/json; charset=utf-8',
                         success: function (result) {
                             @*if (result.length > 1) {
