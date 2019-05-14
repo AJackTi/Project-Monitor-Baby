@@ -13,11 +13,17 @@ namespace WebApplication.Controllers.api
     [Route("api/[controller]")]
     public class IpAddressController : Controller
     {
-        // GET: api/values
+        /// <summary>
+        /// Get lastest Ipaddress
+        /// </summary>
+        /// <returns></returns>
+        // GET: api/value/
         [HttpGet]
-        public IEnumerable<string> Get()
+        public string Get()
         {
-            return new string[] { "value1", "value2" };
+            var jsonText = System.IO.File.ReadAllText("data.json").ToList();
+            var date = jsonText.Cast<IpAddress>().ToList().Select(t => t.timeRegist).ToList();
+            return "value2" ;
         }
 
         // GET api/values/5
@@ -42,15 +48,21 @@ namespace WebApplication.Controllers.api
             var data = new IpAddress();
             data.ipAddress = name.Split(":")[0];
             data.timeRegist = DateTime.Now;
-            data.frequency = 1;
+            
             data.port = int.Parse(name.Split(":")[1]);
-            if (CheckDuplicateJson("data.json", name.Split(":")[0]))
-            {
-                // cộng thêm vào số lần(frequency)
-                // lấy số lần hiện tại += 1
-                data.frequency = PlusFrequency("data.json", data.ipAddress) + 1;
-                
-            }
+            //if (CheckDuplicateJson("data.json", name.Split(":")[0]))
+            //{
+            //    // cộng thêm vào số lần(frequency)
+            //    // lấy số lần hiện tại += 1
+            //    data.frequency = PlusFrequency("data.json", data.ipAddress) + 1;
+
+            //}
+            //var items = JsonConvert.DeserializeObject<List<IpAddress>>(System.IO.File.ReadAllText("data.json")).ToList();
+            //if (items.Select(t=>t.ipAddress).ToList().Contains(data.ipAddress))
+            //{
+            //    data.frequency = int.Parse(items.Where(t=>t.ipAddress == data.ipAddress).Select(t=>t.frequency).ToString()) + 1;
+            //}
+            data.frequency = 1;
             WriteToJsonFile("data.json", data, true);
             return CheckExistFile("data.json");
         }
@@ -115,12 +127,17 @@ namespace WebApplication.Controllers.api
             {
                 return new List<string>();
             }
-            using (StreamReader r = new StreamReader(filePath))
-            {
-                string json = r.ReadToEnd();
-                var items = JsonConvert.DeserializeObject<RootObject>(json);
-                return items.ipAddresses.Select(t => t.ipAddress).ToList();
-            }
+            StreamReader r = new StreamReader(filePath);
+            RootObject items = JsonConvert.DeserializeObject<RootObject>(r.ReadToEnd());
+            return new List<string>();
+            //using (StreamReader r = new StreamReader(filePath))
+            //{
+            //    string json = r.ReadToEnd();
+            //    var items =  JsonConvert.DeserializeObject<IEnumerable<IpAddress>>(json);
+            //    //return new List<string>();
+
+            //    return items.Select(t=>t.ipAddress).ToList();
+            //}
         }
 
         public static int PlusFrequency(string filePath, string ipAddress)
@@ -138,7 +155,6 @@ namespace WebApplication.Controllers.api
                     return -1;
                 }
             }
-            return -1;
         }
 
         public class RootObject

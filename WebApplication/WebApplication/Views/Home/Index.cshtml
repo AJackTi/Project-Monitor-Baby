@@ -29,6 +29,13 @@
     <!-- Main Stylesheet File -->
     <link href="~/css/styleindex.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.material.mobile.min.css" />
+
+    <script src="https://kendo.cdn.telerik.com/2019.1.220/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2019.1.220/js/kendo.all.min.js"></script>
 </head>
 
 <body>
@@ -128,16 +135,39 @@
                     </div>
                 </div>
             </div>
+            <span id="popupNotification"></span>
+            <span id="staticNotification"></span>
         </section>
         <script>
-$(document).ready(function () {
+            $(document).ready(function () {
+                //$(window).load(function() {
+                //      $.ajax({
+                //        type: 'GET',
+                //        dataType: 'json',
+                //        data: JSON.stringify($('#txtAPI').val()),
+                //        url: 'https://localhost:44377/api/IpAddress',
+                //        contentType: 'application/json; charset=utf-8',
+                //        success: function (result) {
+                //            //@*if (result.length > 1) {
+                //            //    console.log("okok");
+                //            //    //SaveJson({ "ipaddress": $('#txtAPI').val(), "time": new Date().toLocaleString() })
+                //            //    window.location.href = "https://localhost:44377/Home/Login";
+                //            //}*@
+                //            //console.log(result);
+                //        },
+                //        error: function (result) {
+                //            console.log(result);
+                //        }
+                //    });
+                //});
 
+                var popupNotification = $("#popupNotification").kendoNotification().data("kendoNotification");
                 $('.btn-get').click(function () {
                     debugger;
                     if ($('#txtAPI').val() === "") {
                         return;
                     }
-                    var name = { name: $('#txtAPI').val()};
+                    var name = { name: $('#txtAPI').val() };
                     name = JSON.stringify(name);
                     $.ajax({
                         type: 'POST',
@@ -146,18 +176,43 @@ $(document).ready(function () {
                         url: 'https://localhost:44377/api/IpAddress',
                         contentType: 'application/json; charset=utf-8',
                         success: function (result) {
-                            @*if (result.length > 1) {
-                                console.log("okok");
-                                //SaveJson({ "ipaddress": $('#txtAPI').val(), "time": new Date().toLocaleString() })
-                                window.location.href = "https://localhost:44377/Home/Login";
-                            }*@
-                            console.log(result);
+                            if (result.length > 1) {
+                                if (TestAPI('https://' + $('#txtAPI').val())) {
+                                    window.location.href = "https://localhost:44377/Home/Login";
+                                }
+                                else {
+                                    popupNotification.show("Error when using API" + $('#txtAPI').val());
+                                }
+                            }
+                            else {
+                                popupNotification.show("Error when using API" + $('#txtAPI').val());
+                            }
                         },
                         error: function (result) {
                             console.log(result);
                         }
                     });
                 })
+
+                function TestAPI(api) {
+                    $.ajax({
+                        type: 'GET',
+                        dataType: 'json',
+                        url: api + '/api/informations',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (result) {
+                            if (result.length > 1) {
+                                return true;
+                            }
+                            else {
+                                return false;
+                            }
+                        },
+                        error: function (result) {
+                            return false;
+                        }
+                    });
+                }
             });
         </script>
         <!-- #services -->
