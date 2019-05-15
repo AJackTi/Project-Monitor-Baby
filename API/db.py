@@ -91,22 +91,32 @@ class Music:
 
         return cur.fetchall()
 
+    # Get music with music IsDelete and IsSelected
+    def getMusicSelected(self):
+        cur = self.conn.cursor()
+        try:
+            cur.execute("SELECT * FROM music where IsDelete is null and IsSelected = 1")
+        except:
+            return False
+        
+        return cur.fetchall()
+
     # Update or Insert
     # Music().insertSpecificDataMusic(1,'xyz','15:00')
     # Music().insertSpecificDataMusic(None,'xyz','15:00')
-    def insertSpecificDataMusic(self, ID, Name=None, Duration=None, IsDelete=None):
+    def insertSpecificDataMusic(self, Name=None, Duration=None, IsDelete=None, IsSelected=None):
         cur = self.conn.cursor()
-        if ID == None:  # Not Exist
+        if Name == None:  # Not Exist
             try:
-                query = ''' INSERT INTO music(Name, Duration, IsDelete) VALUES(?,?,?) '''
-                data = (Name, Duration, IsDelete)
+                query = ''' INSERT INTO music(Name, Duration, IsDelete, IsSelected) VALUES(?,?,?,?,) '''
+                data = (Name, Duration, IsDelete, IsSelected)
                 cur.execute(query, data)
             except:
                 return False
         else:  # Exist - Update
             try:
-                query = ''' UPDATE MUSIC SET Name = ?, Duration = ?, IsDelete = ? WHERE ID = ? '''
-                data = (Name, Duration, IsDelete, ID)
+                query = ''' UPDATE MUSIC SET Duration = ?, IsDelete = ?, IsSelected = ? WHERE Name = ? '''
+                data = (Duration, IsDelete, IsSelected)
                 cur.execute(query, data)
             except:
                 return False
