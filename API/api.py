@@ -227,6 +227,23 @@ class Musics(Resource):
         print lstReturn
         return jsonify(lstReturn)
 
+class SelectedMusic(Resource):
+    def get(self):
+        lstResult = db.Music().getMusicSelected()
+        lstReturn = []
+        subResult = {}
+        for i in lstResult:
+            subResult['ID'] = i[0]
+            subResult['CodeMusic'] = i[1]
+            subResult['Name'] = i[2]
+            subResult['Duration'] = i[3]
+            subResult['IsDelete'] = i[4]
+            subResult['IsSelected'] = i[5]
+            lstReturn.append(subResult)
+            subResult = {}
+        print lstReturn
+        return jsonify(lstReturn)
+
 class postMusic(Resource):
     def post(self, id, name, duration, isdelete):
         if ast.literal_eval(id) is None:
@@ -369,6 +386,7 @@ api.add_resource(deleteCamera, '/api/deleteCamera/<id>')
 
 # region Music
 api.add_resource(Musics, '/api/musics')
+api.add_resource(SelectedMusic, '/api/selectedmusic')
 api.add_resource(Music, '/api/music/<id>/<name>/duration/<isdelete>')
 api.add_resource(postMusic, '/api/postMusic/<id>/<name>/duration/<isdelete>')
 api.add_resource(deleteMusic, '/api/deleteCamera/<id>')

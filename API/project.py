@@ -62,14 +62,16 @@ def Process(minutes=1):
     try:
         while True:
             try:
-                if GPIO.input(channelMotionSensor) == True:
+                if GPIO.input(channelMotionSensor):
+                    print 'Sound Detected!'
                     countMotion += 1
 
                 try:
                     time.sleep(1)
                     GPIO.add_event_detect(channelSoundSensor, GPIO.BOTH, bouncetime=300)
-                    # GPIO.remove_event_callback(channelSoundSensor)
                     GPIO.add_event_callback(channelSoundSensor, callback)
+                    GPIO.remove_event_callback(channelSoundSensor)
+                    time.sleep(1)
                 except:
                     pass
 
@@ -88,6 +90,7 @@ def Process(minutes=1):
                         continue
 
                     elif ((countMotion >= 50 and countMotion <= 100) or (countSound <= 80 and countSound >= 40)) or (motiontrack.countCamera <= 120 and motiontrack.countCamera >= 80):
+                        minutes = 1
                         print 'Playing Music 1 minute ' + '*'*20
                         Thread(target=playMusic, args=[minutes]).start()
                         Thread(target=servoControl, args=[minutes]).start()
@@ -110,8 +113,8 @@ def Process(minutes=1):
                         minutes = 3
                         print 'Playing Music 3 minute ' + '*'*20
                         # Alert to parent
-                        Thread(target=playMusic, args=[3]).start()
-                        Thread(target=servoControl, args=[3]).start()
+                        Thread(target=playMusic, args=[minutes]).start()
+                        Thread(target=servoControl, args=[minutes]).start()
                         SavingData(countSound, countMotion, motiontrack.countCamera, minutes)
                         countMotion = 0
                         countSound = 0
@@ -132,7 +135,7 @@ def Process(minutes=1):
 
 
 def playMusic(minutes):
-    playmusic.main("1.mp3", minutes)
+    playmusic.main(str(list(Music().getMusicSelected()[0])[2]), minutes)
 
 
 def servoControl(minutes):
