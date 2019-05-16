@@ -161,7 +161,7 @@
                 //    });
                 //});
 
-                var popupNotification = $("#popupNotification").kendoNotification().data("kendoNotification");
+                //var popupNotification = $("#popupNotification").kendoNotification().data("kendoNotification");
                 $('.btn-get').click(function () {
                     debugger;
                     if ($('#txtAPI').val() === "") {
@@ -176,25 +176,28 @@
                         url: 'https://localhost:44377/api/IpAddress',
                         contentType: 'application/json; charset=utf-8',
                         success: function (result) {
-                            if (result.length > 1) {
+                            debugger;
+                            if (result == true) {
                                 if (TestAPI('https://' + $('#txtAPI').val())) {
                                     window.location.href = "https://localhost:44377/Home/Login";
                                 }
                                 else {
-                                    popupNotification.show("Error when using API" + $('#txtAPI').val());
+                                    //popupNotification.show("Error when using API" + $('#txtAPI').val());
                                 }
                             }
                             else {
-                                popupNotification.show("Error when using API" + $('#txtAPI').val());
+                                //popupNotification.show("Error when using API" + $('#txtAPI').val());
                             }
                         },
                         error: function (result) {
+                            debugger;
                             console.log(result);
                         }
                     });
                 })
 
                 function TestAPI(api) {
+                    debugger;
                     $.ajax({
                         type: 'GET',
                         dataType: 'json',
