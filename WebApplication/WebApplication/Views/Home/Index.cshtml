@@ -140,26 +140,30 @@
         </section>
         <script>
             $(document).ready(function () {
-                //$(window).load(function() {
-                //      $.ajax({
-                //        type: 'GET',
-                //        dataType: 'json',
-                //        data: JSON.stringify($('#txtAPI').val()),
-                //        url: 'https://localhost:44377/api/IpAddress',
-                //        contentType: 'application/json; charset=utf-8',
-                //        success: function (result) {
-                //            //@*if (result.length > 1) {
-                //            //    console.log("okok");
-                //            //    //SaveJson({ "ipaddress": $('#txtAPI').val(), "time": new Date().toLocaleString() })
-                //            //    window.location.href = "https://localhost:44377/Home/Login";
-                //            //}*@
-                //            //console.log(result);
-                //        },
-                //        error: function (result) {
-                //            console.log(result);
-                //        }
-                //    });
-                //});
+                function SaveJsonFile(data) {
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        async: false,
+                        data: JSON.stringify(data),
+                        url: 'https://localhost:44377/api/IpAddress',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (result) {
+                            if (result == true) {
+                                console.log('okok');
+                            }
+                            else {
+                                console.log('Error');
+                                //popupNotification.show("Error when using API" + $('#txtAPI').val());
+                            }
+                        },
+                        error: function (result) {
+                            console.log(result);
+                            popupNotification.show("Error when using API");
+                        }
+                    });
+
+                }
 
                 //var popupNotification = $("#popupNotification").kendoNotification().data("kendoNotification");
                 $('.btn-get').click(function () {
@@ -167,55 +171,29 @@
                     if ($('#txtAPI').val() === "") {
                         return;
                     }
-                    var name = { name: $('#txtAPI').val() };
-                    name = JSON.stringify(name);
                     $.ajax({
-                        type: 'POST',
+                        type: 'GET',
                         dataType: 'json',
-                        data: JSON.stringify($('#txtAPI').val()),
-                        url: 'https://localhost:44377/api/IpAddress',
+                        async: false,
+                        url: 'https://' + $('#txtAPI').val() + '/api/informations',
                         contentType: 'application/json; charset=utf-8',
                         success: function (result) {
-                            debugger;
-                            if (result == true) {
-                                if (TestAPI('https://' + $('#txtAPI').val())) {
-                                    window.location.href = "https://localhost:44377/Home/Login";
-                                }
-                                else {
-                                    //popupNotification.show("Error when using API" + $('#txtAPI').val());
-                                }
+                            if (Object.keys(result).length > 1) {
+                                console.log('Final');
+                                window.location.href = "https://localhost:44377/Home/Login";
                             }
                             else {
-                                //popupNotification.show("Error when using API" + $('#txtAPI').val());
+                                console.log('Error');
+                                popupNotification.show("Error when using API" + $('#txtAPI').val());
                             }
                         },
                         error: function (result) {
-                            debugger;
                             console.log(result);
+                            popupNotification.show("Error when using API");
                         }
                     });
                 })
 
-                function TestAPI(api) {
-                    debugger;
-                    $.ajax({
-                        type: 'GET',
-                        dataType: 'json',
-                        url: api + '/api/informations',
-                        contentType: 'application/json; charset=utf-8',
-                        success: function (result) {
-                            if (result.length > 1) {
-                                return true;
-                            }
-                            else {
-                                return false;
-                            }
-                        },
-                        error: function (result) {
-                            return false;
-                        }
-                    });
-                }
             });
         </script>
         <!-- #services -->
