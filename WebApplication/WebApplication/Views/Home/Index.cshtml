@@ -140,38 +140,29 @@
         </section>
         <script>
             $(document).ready(function () {
-                function callback(a = 2) {
-                    if (a == 1) {
-                        return true;
-                    }
-                    else {
-                        return false;
-                    }
-                }
-
-                function TestAPI(api, callback) {
+                function SaveJsonFile(data) {
                     $.ajax({
-                        type: 'GET',
+                        type: 'POST',
                         dataType: 'json',
                         async: false,
-                        cache: false,
-                        timeout: 30000,
-                        url: api + '/api/informations',
+                        data: JSON.stringify(data),
+                        url: 'https://localhost:44377/api/IpAddress',
                         contentType: 'application/json; charset=utf-8',
                         success: function (result) {
-                            if (result.length > 1) {
-                                console.log('test api success');
-                                callback(1);
-                                return true;
+                            if (result == true) {
+                                console.log('okok');
                             }
                             else {
-                                return false;
+                                console.log('Error');
+                                //popupNotification.show("Error when using API" + $('#txtAPI').val());
                             }
                         },
                         error: function (result) {
-                            return false;
+                            console.log(result);
+                            popupNotification.show("Error when using API");
                         }
                     });
+
                 }
 
                 //var popupNotification = $("#popupNotification").kendoNotification().data("kendoNotification");
@@ -180,37 +171,25 @@
                     if ($('#txtAPI').val() === "") {
                         return;
                     }
-
-                    if (callback()) {
-                        console.log('callback success');
-                    }
-
-                    var name = { name: $('#txtAPI').val() };
-                    name = JSON.stringify(name);
                     $.ajax({
-                        type: 'POST',
+                        type: 'GET',
                         dataType: 'json',
                         async: false,
-                        data: JSON.stringify($('#txtAPI').val()),
-                        url: 'https://localhost:44377/api/IpAddress',
+                        url: 'https://' + $('#txtAPI').val() + '/api/informations',
                         contentType: 'application/json; charset=utf-8',
                         success: function (result) {
-                            if (result == true) {
-                                var aaa = TestAPI('https://' + $('#txtAPI').val());
-                                $.when(TestAPI('https://' + $('#txtAPI').val())).done(function (a1) {
-                                    //debugger;
-                                    //console.log(a1);
-                                    //window.location.href = "https://localhost:44377/Home/Login";
-                                });
+                            if (Object.keys(result).length > 1) {
+                                console.log('Final');
+                                window.location.href = "https://localhost:44377/Home/Login";
                             }
-
                             else {
                                 console.log('Error');
-                                //popupNotification.show("Error when using API" + $('#txtAPI').val());
+                                popupNotification.show("Error when using API" + $('#txtAPI').val());
                             }
                         },
                         error: function (result) {
                             console.log(result);
+                            popupNotification.show("Error when using API");
                         }
                     });
                 })
