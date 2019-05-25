@@ -77,7 +77,7 @@ class Music:
     # Music().getDataMusic()
     def getDataMusic(self):
         cur = self.conn.cursor()
-        cur.execute("SELECT * FROM music")
+        cur.execute("SELECT * FROM music ORDER BY IsSelected DESC")
         return cur.fetchall()
         
     # Music().getSpecificDataMusic(1)

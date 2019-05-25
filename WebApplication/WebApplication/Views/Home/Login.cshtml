@@ -1,4 +1,5 @@
 ﻿@using WebApplication.Common;
+@using System.Web;
 
 @{
     Layout = null;
@@ -37,7 +38,7 @@
 <body>
     @{
         var ipAddress = Common.ipRas;
-
+        //var localPort = HttpContext.Connection.LocalPort;
     }
 
     <div class="limiter">
@@ -154,22 +155,62 @@
                     $.ajax({
                         url: api_url,
                         type: 'GET',
+                        async: false,
+                        contentType: 'application/json; charset=utf-8',
+                        datatype: "json",
+                        success: function (result) {
+                            debugger;
+                            console.log(result);
+                            if (result["status"] == 'success') {
+                                debugger;
+                                AddSession(username);
+                                return false;
+                            }
+                        },
+                        error: function (result) {
+                            console.log(result);
+                            alert("Error When Logging In");
+                            location.reload();
+                            return false;
+                        }
+                    })
+                }
+                return false;
+            })
+
+            function AddSession(value) {
+                if (value) {
+                    debugger;
+                    $.ajax({
+                        url: 'https://localhost:44377/api/Login/',
+                        type: 'POST',
+                        data: JSON.stringify(value),
                         cache: false,
                         async: false,
                         contentType: 'application/json; charset=utf-8',
                         datatype: "json",
                         success: function (result) {
-                            console.log(result);
-                            window.location.href = "https://localhost:44319/Home/Dashboard";
+                            debugger;
+                            if (result) {
+                                window.location.href = "/Home/Dashboard";
+                                return true;
+                            }
+                            else {
+                                alert("You must be logged out");
+                                return false;
+                            }
                         },
                         error: function (result) {
-                            console.log(result);
                             alert("Error When Logging In");
-                            continue;
+                            location.reload();
+                            return false;
                         }
-                    })
+                    });
                 }
-            })
+                else {
+                    return false;
+                }
+            }
         });</script>
 </body>
 </html>

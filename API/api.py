@@ -222,6 +222,7 @@ class Musics(Resource):
             subResult['Name'] = i[2]
             subResult['Duration'] = i[3]
             subResult['IsDelete'] = i[4]
+            subResult['IsSelected'] = i[5]
             lstReturn.append(subResult)
             subResult = {}
         print lstReturn
@@ -386,6 +387,7 @@ api.add_resource(deleteCamera, '/api/deleteCamera/<id>')
 
 # region Music
 api.add_resource(Musics, '/api/musics')
+api.add_resource(postMusic, '/api/postmusic/<id>')
 api.add_resource(SelectedMusic, '/api/selectedmusic')
 api.add_resource(Music, '/api/music/<id>/<name>/duration/<isdelete>')
 api.add_resource(postMusic, '/api/postMusic/<id>/<name>/duration/<isdelete>')

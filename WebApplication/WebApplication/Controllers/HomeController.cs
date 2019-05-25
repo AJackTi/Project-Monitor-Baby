@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using WebApplication.Controllers.api;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
     public class HomeController : Controller
     {
+        public HomeController()
+        {
+        
+        }
         public IActionResult Privacy()
         {
             return View();
@@ -17,6 +20,7 @@ namespace WebApplication.Controllers
 
         public IActionResult Login()
         {
+            //ViewBag.sessionv = HttpContext.Session.SetString("username");
             return View();
         }
 
@@ -33,7 +37,12 @@ namespace WebApplication.Controllers
 
         public IActionResult Dashboard()
         {
-            return View();
+            var aaa = LoginController.listUserSession.ToList();
+            if (aaa.Any())
+            {
+                return View();
+            }
+            return RedirectToAction("ErrorPage");
         }
 
         public IActionResult Transform()
@@ -42,6 +51,11 @@ namespace WebApplication.Controllers
         }
 
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult ErrorPage()
         {
             return View();
         }

@@ -9,9 +9,17 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="WebApiContrib.Formatting.JavaScriptSerializer" Version="0.9.4" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\api\" />
+    <Reference Include="System.Web">
+      <HintPath>..\..\..\..\..\Desktop\System.Web\System.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <HintPath>..\..\..\..\..\Desktop\System.Web.Extensions\System.Web.Extensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

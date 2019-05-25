@@ -146,13 +146,15 @@
                         dataType: 'json',
                         async: false,
                         data: JSON.stringify(data),
-                        url: 'https://localhost:44377/api/IpAddress',
+                        url: '/api/IpAddress',
                         contentType: 'application/json; charset=utf-8',
                         success: function (result) {
                             if (result == true) {
+                                debugger;
                                 console.log('okok');
                             }
                             else {
+                                debugger;
                                 console.log('Error');
                                 //popupNotification.show("Error when using API" + $('#txtAPI').val());
                             }
@@ -178,9 +180,12 @@
                         url: 'https://' + $('#txtAPI').val() + '/api/informations',
                         contentType: 'application/json; charset=utf-8',
                         success: function (result) {
+                            debugger;
                             if (Object.keys(result).length > 1) {
+                                debugger;
                                 console.log('Final');
-                                window.location.href = "https://localhost:44377/Home/Login";
+                                SaveJsonFile($('#txtAPI').val());
+                                window.location.href = "/Home/Login";
                             }
                             else {
                                 console.log('Error');
@@ -193,7 +198,6 @@
                         }
                     });
                 })
-
             });
         </script>
         <!-- #services -->

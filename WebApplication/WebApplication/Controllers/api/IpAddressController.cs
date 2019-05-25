@@ -47,7 +47,9 @@ namespace WebApplication.Controllers.api
         {
             var data = new IpAddress();
             data.ipAddress = name.Split(":")[0];
-            data.timeRegist = DateTime.Now;
+            var src = DateTime.Now;
+            var hm = new DateTime(src.Year, src.Month, src.Day, src.Hour, src.Minute, 0);
+            data.timeRegist = hm;
             
             data.port = int.Parse(name.Split(":")[1]);
             //if (CheckDuplicateJson("data.json", name.Split(":")[0]))
@@ -64,6 +66,7 @@ namespace WebApplication.Controllers.api
             //}
             data.frequency = 1;
             WriteToJsonFile("data.json", data, true);
+            WebApplication.Common.Common.ipRas = data.ipAddress;
             return CheckExistFile("data.json");
         }
         /// <summary>

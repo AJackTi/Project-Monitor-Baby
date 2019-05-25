@@ -69,7 +69,6 @@ C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplic
 C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\bin\Debug\netcoreapp2.2\WebApplication.pdb
 C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\bin\Debug\netcoreapp2.2\WebApplication.Views.dll
 C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\bin\Debug\netcoreapp2.2\WebApplication.Views.pdb
-C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.csprojAssemblyReference.cache
 C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.csproj.CoreCompileInputs.cache
 C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.RazorAssemblyInfo.cache
 C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.RazorAssemblyInfo.cs
@@ -96,3 +95,5 @@ C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplic
 C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.dll
 C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.pdb
 C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.csproj.CopyComplete
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\Razor\Views\Home\ErrorPage.g.cshtml.cs
+C:\Users\AJack Ti\Documents\GitHub\Project-Monitor-Baby\WebApplication\WebApplication\obj\Debug\netcoreapp2.2\WebApplication.csprojAssemblyReference.cache
