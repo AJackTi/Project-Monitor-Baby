@@ -38,7 +38,7 @@
 <body>
     @{
         var ipAddress = Common.ipRas;
-        //var localPort = HttpContext.Connection.LocalPort;
+        var port = Common.port;
     }
 
     <div class="limiter">
@@ -150,7 +150,7 @@
                     var username = $('#txtUsername').val();
                     var password = $('#txtPassword').val();
                     var ipAddress = "@ipAddress";
-                    var api_url = 'https://' + ipAddress + ':5002/api/information/' + username + '/' + password;
+                    var api_url = 'https://' + ipAddress + ':@port/api/information/' + username + '/' + password;
                     console.log(api_url);
                     $.ajax({
                         url: api_url,

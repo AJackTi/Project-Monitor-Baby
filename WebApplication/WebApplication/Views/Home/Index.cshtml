@@ -99,26 +99,106 @@
                         <div class="icon-box wow fadeInUp" data-wow-delay="0.4s">
                             <div class="icon" style="cursor: pointer;"><i class="fa fa-bar-chart"></i></div>
                             <h4 class="title"><a href="">Biểu Đồ</a></h4>
-                            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                            <p class="description">Hiển thị số liệu của các cảm biến sau khi đo được.</p>
                         </div>
 
                     </div>
 
                     <div class="col-lg-6 background order-lg-2 order-1 wow fadeInRight"></div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-12 col-sm-12" id="groupExplore">
-                        <button type="button" href="#services" class="btn btn-success btn-explore">Explore It Now</button>
+                <div class="button" style="margin-top: 10px;">
+                    <p class="btnText" style="margin-top: 14px;">
+                        <a href="#services" style="color: white; font-weight: bold;">Explore It Now</a>
+                    </p>
+                    <div class="btnTwo">
+                        <p class="btnText2" style="color: white; font-weight: bold;">GO!</p>
                     </div>
                 </div>
+                <style>
+                    import url(https://fonts.googleapis.com/css?family=Roboto:700);
+                    html, body {
+                        background: #FBC02D;
+                        font-family: Roboto;
+                        height: 100%;
+                        width: 100%;
+                        margin: 0;
+                    }
+
+                    #holder {
+                        -webkit-user-select: none;
+                        background: white;
+                        padding: 10px;
+                        width: 250px;
+                        margin: 0 auto;
+                        position: relative;
+                        top: 50%;
+                        transform: translateY(-65%);
+                        box-shadow: 0px 3px 8px rgba(0,0,0,0.25);
+                        border-radius: 2px;
+                    }
+
+                    .button {
+                        background: #3D4C53;
+                        margin: 20px auto;
+                        width: 200px;
+                        height: 50px;
+                        overflow: hidden;
+                        text-align: center;
+                        transition: .2s;
+                        cursor: pointer;
+                        border-radius: 3px;
+                        box-shadow: 0px 1px 2px rgba(0,0,0,.2);
+                    }
+
+                    .btnTwo {
+                        position: relative;
+                        width: 200px;
+                        height: 100px;
+                        margin-top: -100px;
+                        padding-top: 2px;
+                        background: #26A69A;
+                        left: -250px;
+                        transition: .3s;
+                    }
+
+                    .btnText {
+                        color: white;
+                        transition: .3s;
+                    }
+
+                    .btnText2 {
+                        margin-top: 44px;
+                        margin-right: -130px;
+                        color: #FFF;
+                    }
+
+                    .button:hover .btnTwo {
+                        left: -130px;
+                    }
+
+                    .button:hover .btnText {
+                        margin-left: 65px;
+                    }
+
+                    .button:active {
+                        box-shadow: 0px 5px 6px rgba(0,0,0,0.3);
+                    }
+                </style>
+                @*<div class="row" style="        margin-top: -10px;">
+                        <div class="col-lg-12 col-sm-12" id="groupExplore">
+                            <button type="button" class="btn btn-success btn-explore" style="        color: white;">
+                                <a href="#services" style="        color: white;">Explore It Now</a>
+                            </button>
+                        </div>
+                    </div>*@
             </div>
         </section>
         <!-- #about -->
-        <div style="padding-bottom: 300px;"></div>
+        <div style="        padding-bottom: 300px;"></div>
         <!--==========================
           Services Section
         ============================-->
-        <section id="services" style="margin: 0 auto;">
+        <section id="services" style="        margin: 0 auto;">
             <div class="container wow fadeIn">
                 <div class="section-header">
                     <h3 class="section-title">Services</h3>
@@ -128,8 +208,9 @@
                     <div class="col-lg-12 col-sm-12">
                         <div id="groupAPI">
                             <input type="text" class="form-control" id="txtAPI">
-                            <div class="box">
-                                <a href="#" class="btn btn-white btn-animation-1 btn-get" style="margin-top: 50px;">Get It Now</a>
+                            <div class="box" style="        margin-top: 30px;">
+                                <a href="#" class="btn btn-white btn-animation-1 btn-get" style="        margin-top: 50px;
+        width: 300px;">Get It Now</a>
                             </div>
                         </div>
                     </div>
@@ -201,7 +282,7 @@
             });
         </script>
         <!-- #services -->
-        <div style="padding-bottom: 400px;"></div>
+        <div style="        padding-bottom: 400px;"></div>
         <!--==========================
           Team Section
         ============================-->
@@ -210,11 +291,15 @@
                 <div class="section-header">
                     <h3 class="section-title">My Team</h3>
                 </div>
-                <div style="padding-bottom: 100px;"></div>
+                <div style="        padding-bottom: 100px;"></div>
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="member">
-                            <div class="pic"><img src="~/img/team-2.png" alt="" style="width: 200px; height: 200px; border-radius: 50%;"></div>
+                            <div class="pic">
+                                <img src="~/img/team-2.png" alt="" style="        width: 200px;
+        height: 200px;
+        border-radius: 50%;">
+                            </div>
                             <h4>Đặng Võ Đức Trọng</h4>
                             <span>Sinh Viên 1</span>
                             <div class="social">
@@ -228,7 +313,11 @@
 
                     <div class="col-lg-6">
                         <div class="member">
-                            <div class="pic"><img src="~/img/team-3.jpg" alt="" style="width: 200px; height: 200px; border-radius: 50%;"></div>
+                            <div class="pic">
+                                <img src="~/img/team-3.jpg" alt="" style="        width: 200px;
+        height: 200px;
+        border-radius: 50%;">
+                            </div>
                             <h4>Nguyễn Thành Nhân</h4>
                             <span>Sinh Viên 2</span>
                             <div class="social">
@@ -244,7 +333,7 @@
             </div>
         </section>
         <!-- #team -->
-        <div style="padding-bottom: 300px;"></div>
+        <div style="        padding-bottom: 300px;"></div>
     </main>
 
     <!--==========================
@@ -255,12 +344,14 @@
             <div class="container">
 
                 <div id="row">
-                    <div class="col-lg-12" style="text-align: center; vertical-align: middle;">
+                    <div class="col-lg-12" style="        text-align: center;
+        vertical-align: middle;">
                         <h2>
                             Trường Đại học Công Nghiệp TPHCM
                         </h2>
                     </div>
-                    <div class="col-lg-12" style="text-align: center; vertical-align: middle;">
+                    <div class="col-lg-12" style="        text-align: center;
+        vertical-align: middle;">
                         <h4>
                             Khoa Công nghệ thông tin
                         </h4>

@@ -245,6 +245,14 @@ class SelectedMusic(Resource):
         print lstReturn
         return jsonify(lstReturn)
 
+class postSelectedMusic(Resource):
+    def post(self, id):
+        print id
+        if db.Music().updateSelectedMusic(id):
+            return {'status': 'success'}
+        else:
+            return {'status': 'fail'}
+
 class postMusic(Resource):
     def post(self, id, name, duration, isdelete):
         if ast.literal_eval(id) is None:
@@ -388,9 +396,10 @@ api.add_resource(deleteCamera, '/api/deleteCamera/<id>')
 # region Music
 api.add_resource(Musics, '/api/musics')
 api.add_resource(postMusic, '/api/postmusic/<id>')
+api.add_resource(postSelectedMusic, '/api/postselectedmusic/<id>')
 api.add_resource(SelectedMusic, '/api/selectedmusic')
 api.add_resource(Music, '/api/music/<id>/<name>/duration/<isdelete>')
-api.add_resource(postMusic, '/api/postMusic/<id>/<name>/duration/<isdelete>')
+# api.add_resource(postMusic, '/api/postMusic/<id>/<name>/duration/<isdelete>')
 api.add_resource(deleteMusic, '/api/deleteCamera/<id>')
 # endregion
 

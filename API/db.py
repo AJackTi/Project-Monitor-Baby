@@ -124,6 +124,25 @@ class Music:
         self.conn.commit()   
         
         return True
+    
+    def updateSelectedMusic(self, ID):
+        cur = self.conn.cursor()
+        try:
+            query1 = ''' UPDATE Music SET IsSelected = 1 WHERE ID = ? '''
+            data1 = (str(ID))
+            cur.execute(query1, data1)
+
+            query2 = ''' UPDATE Music SET IsSelected = 0 WHERE ID != ? '''
+            data2 = (str(ID))
+            cur.execute(query2, data2)
+        except Exception as e:
+            print str(e)
+            return False
+
+        self.conn.commit()
+
+        return True
+
     # Music().deleteSpecificDataMusic(2)
     def deleteSpecificDataMusic(self, ID):
         cur = self.conn.cursor()
@@ -414,6 +433,6 @@ def main():
     # print SensorMotion().getSpecificDataSensorMotion('2019-04-10 14:30', None)
     # Information().getSpecificInformation('ductrong', '123123')
     # Music().getDataMusic()
-
+    Music().updateSelectedMusic(2)
 if __name__ == '__main__':
     main()

@@ -58,8 +58,8 @@
 </head>
 <body>
     @{
-    var ipAddress = "https://" + Common.ipRas;
-
+        var ipAddress = "https://" + Common.ipRas;
+        var port = Common.port;
     }
     <div class="wrapper">
         <div class="sidebar" data-color="purple" data-image="/assets/img/sidebar-5.jpg">
@@ -79,12 +79,6 @@
                         <a href="https://localhost:44377/Home/Dashboard">
                             <i class="pe-7s-graph"></i>
                             <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://localhost:44377/Home/Login">
-                            <i class="pe-7s-user"></i>
-                            <p>User Profile</p>
                         </a>
                     </li>
                     <li>
@@ -109,6 +103,15 @@
                         <a href="notifications.html">
                             <i class="pe-7s-bell"></i>
                             <p>Notifications</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://localhost:44377/Home/Login">
+                            <i class="pe-7s-user"></i>
+                            @{
+                                Common.userLogin.RemoveAt(Common.userLogin.Count-1);
+                            }
+                            <p>Log out</p>
                         </a>
                     </li>
                 </ul>
@@ -166,7 +169,7 @@
                                                     type: 'GET',
                                                     dataType: 'json',
                                                     cache: false,
-                                                    url: '@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                    url: '@ipAddress:@port/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
                                                     contentType: 'application/json; charset=utf-8',
                                                     success: function (result) {
                                                         //console.log(result);
@@ -184,12 +187,12 @@
                                                     var startTime = kendo.toString($("#datetimepickerMotion1").data("kendoDateTimePicker").value(), 'HH:mm');
                                                     var endDate = kendo.toString($("#datetimepickerMotion2").data("kendoDateTimePicker").value(), 'yyyy/MM/dd');
                                                     var endTime = kendo.toString($("#datetimepickerMotion2").data("kendoDateTimePicker").value(), 'HH:mm');
-                                                    console.log('@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime);
+                                                    console.log('@ipAddress:@port/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime);
                                                     $.ajax({
                                                         type: 'GET',
                                                         dataType: 'json',
                                                         cache: false,
-                                                        url: '@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                        url: '@ipAddress:@port/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
                                                         contentType: 'application/json; charset=utf-8',
                                                         success: function (result) {
                                                             //console.log(result);
@@ -306,7 +309,7 @@
                                                     type: 'GET',
                                                     dataType: 'json',
                                                     cache: false,
-                                                    url: '@ipAddress:5002/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                    url: '@ipAddress:@port/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
                                                     contentType: 'application/json; charset=utf-8',
                                                     success: function (result) {
                                                         //console.log(result);
@@ -330,7 +333,7 @@
                                                         type: 'GET',
                                                         dataType: 'json',
                                                         cache: false,
-                                                        url: '@ipAddress:5002/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                        url: '@ipAddress:@port/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
                                                         contentType: 'application/json; charset=utf-8',
                                                         success: function (result) {
                                                             //console.log(result);
@@ -456,7 +459,7 @@
                                                     type: 'GET',
                                                     dataType: 'json',
                                                     cache: false,
-                                                    url: '@ipAddress:5002/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                    url: '@ipAddress:@port/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
                                                     contentType: 'application/json; charset=utf-8',
                                                     success: function (result) {
                                                         //console.log(result);
@@ -480,7 +483,7 @@
                                                         type: 'GET',
                                                         dataType: 'json',
                                                         cache: false,
-                                                        url: '@ipAddress:5002/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                        url: '@ipAddress:@port/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
                                                         contentType: 'application/json; charset=utf-8',
                                                         success: function (result) {
                                                             //console.log(result);
@@ -590,7 +593,7 @@
                                                             dataType: 'json',
                                                             cache: false,
                                                             async: false,
-                                                            url: '@ipAddress:5002/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                            url: '@ipAddress:@port/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
                                                             contentType: 'application/json; charset=utf-8',
                                                             success: function (result) {
                                                                 //console.log(result.length);
@@ -616,7 +619,7 @@
                                                             dataType: 'json',
                                                             cache: false,
                                                             async: false,
-                                                            url: '@ipAddress:5002/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                            url: '@ipAddress:@port/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
                                                             contentType: 'application/json; charset=utf-8',
                                                             success: function (result) {
                                                                 //console.log(result.length);
@@ -641,7 +644,7 @@
                                                             dataType: 'json',
                                                             cache: false,
                                                             async: false,
-                                                            url: '@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/None',
+                                                            url: '@ipAddress:@port/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/None',
                                                             contentType: 'application/json; charset=utf-8',
                                                             success: function (result) {
                                                                 //console.log(result.length);
@@ -681,7 +684,7 @@
                                                         dataType: 'json',
                                                         cache: false,
                                                         async: false,
-                                                        url: '@ipAddress:5002/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                        url: '@ipAddress:@port/api/sensorsound/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
                                                         contentType: 'application/json; charset=utf-8',
                                                         success: function (result) {
                                                             //console.log(result.length);
@@ -707,7 +710,7 @@
                                                         dataType: 'json',
                                                         cache: false,
                                                         async: false,
-                                                        url: '@ipAddress:5002/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
+                                                        url: '@ipAddress:@port/api/camera/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/' + endDate.replaceAll('/', '-') + ' ' + endTime,
                                                         contentType: 'application/json; charset=utf-8',
                                                         success: function (result) {
                                                             //console.log(result.length);
@@ -732,7 +735,7 @@
                                                         dataType: 'json',
                                                         cache: false,
                                                         async: false,
-                                                        url: '@ipAddress:5002/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/None',
+                                                        url: '@ipAddress:@port/api/sensormotion/' + startDate.replaceAll('/', '-') + ' ' + startTime + '/None',
                                                         contentType: 'application/json; charset=utf-8',
                                                         success: function (result) {
                                                             //console.log(result.length);

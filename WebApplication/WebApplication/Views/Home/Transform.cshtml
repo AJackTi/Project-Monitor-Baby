@@ -50,6 +50,7 @@
 <body>
     @{
         var ipAddress = "https://" + Common.ipRas;
+        var port = Common.port;
     }
     <div class="wrapper">
         <div class="sidebar" data-color="purple" data-image="/assets/img/sidebar-5.jpg">
@@ -111,19 +112,20 @@
                     <input id="music" value="1" style="width: 100%;" />
 
                     <h5><label>IpAddress API</label></h5>
-                    <input type="text" value="@Common.ipRas" style="width: 100%;" />
+                    <input type="text" value="@Common.ipRas" class="form-control" style="width: 100%;" />
 
                     <h5><label>Port API</label></h5>
-                    <input type="text" value="@Common.port" style="width: 100%;" />
+                    <input type="text" value="@Common.port"class="form-control" style="width: 100%;" />
 
-                    <button class="k-button k-primary" id="save" style="margin-top: 2em; float: right;">Save</button>
-                    <button class="k-button k-primary" id="delete" style="margin-top: 2em; float: right;">Delete</button>
-                    <button class="k-button k-primary" id="exit" style="margin-top: 2em; float: right;">Exit</button>
+                    <button class="k-button k-outline" id="save" style="margin-right: 10px; margin-top: 2em; float: right;">Save</button>
+                    <button class="k-button k-primary" id="delete" style="background: red; margin-right: 10px; margin-top: 2em; float: right;">Delete</button>
+                    <button class="k-button k-primary" id="exit" style="margin-right: 10px; margin-top: 2em; float: right;">Exit</button>
                 </div>
                 <script>
                     $(document).ready(function () {
                         var ipAddress = "@ipAddress";
-                        var api_url = ipAddress + ':5002/api/musics';
+                        var port = "@port";
+                        var api_url = ipAddress + ':' + port + '/api/musics';
                         console.log(api_url);
                         $.ajax({
                             url: api_url,
@@ -165,8 +167,10 @@
                         $('#save').click(function () {
                             debugger;
                             var data = $("#music").data("kendoDropDownList").value();
+                            console.log(data);
                             var ipAddress = "@ipAddress";
-                            var api_url = ipAddress + ':5002/api/postmusic';
+                            var port = "@port";
+                            var api_url = ipAddress + ':' + port + '/api/postselectedmusic/' + data;
                             $.ajax({
                                 url: api_url,
                                 data: JSON.stringify(),
@@ -177,10 +181,11 @@
                                 datatype: "json",
                                 success: function (result) {
                                     debugger;
-                                    SetUpDropdownList(result)
+                                    console.log(result);
                                 },
                                 error: function (result) {
                                     debugger;
+                                    console.log(result);
                                 }
                             });
                         });

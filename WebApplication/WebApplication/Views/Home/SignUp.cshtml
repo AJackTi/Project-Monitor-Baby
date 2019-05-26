@@ -20,6 +20,7 @@
 <body>
     @{
         var ipAddress = "https://" + Common.ipRas;
+        var port = Common.port;
 
     }
     <div class="main">
@@ -82,7 +83,7 @@
                     var email = $('#txtEmail').val();
                     var password = $('#password').val();
                     var re_password = $('#re_password').val();
-                    var api_url = '@ipAddress:5002/api/postInformation/' + username + '/' + password + '/' + email;
+                    var api_url = '@ipAddress:@port/api/postInformation/' + username + '/' + password + '/' + email;
                     console.log(api_url);
                     $.ajax({
                         url: api_url,
