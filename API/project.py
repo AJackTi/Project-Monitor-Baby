@@ -92,8 +92,8 @@ def Process(minutes=1):
                     elif ((countMotion >= 50 and countMotion <= 100) or (countSound <= 80 and countSound >= 40)) or (motiontrack.countCamera <= 120 and motiontrack.countCamera >= 80):
                         minutes = 1
                         print 'Playing Music 1 minute ' + '*'*20
-                        Thread(target=playMusic, args=[minutes]).start()
-                        Thread(target=servoControl, args=[minutes]).start()
+                        Thread(target=playMusic, args=[minutes-0.5]).start()
+                        Thread(target=servoControl, args=[minutes-0.5]).start()
                         SavingData(countSound, countMotion, motiontrack.countCamera, minutes)
                         countMotion = 0
                         countSound = 0
@@ -102,8 +102,8 @@ def Process(minutes=1):
                     elif ((countMotion >= 100 and countMotion <= 150) or (countSound <= 120 and countSound >= 80)) or (motiontrack.countCamera <= 150 and motiontrack.countCamera >= 120):
                         minutes = 2
                         print 'Playing Music 2 minutes ' + '*'*20
-                        Thread(target=playMusic, args=[minutes]).start()
-                        Thread(target=servoControl, args=[minutes]).start()
+                        Thread(target=playMusic, args=[minutes-0.5]).start()
+                        Thread(target=servoControl, args=[minutes-0.5]).start()
                         SavingData(countSound, countMotion, motiontrack.countCamera, minutes)
                         countMotion = 0
                         countSound = 0
@@ -113,8 +113,8 @@ def Process(minutes=1):
                         minutes = 3
                         print 'Playing Music 3 minute ' + '*'*20
                         # Alert to parent
-                        Thread(target=playMusic, args=[minutes]).start()
-                        Thread(target=servoControl, args=[minutes]).start()
+                        Thread(target=playMusic, args=[minutes-0.5]).start()
+                        Thread(target=servoControl, args=[minutes-0.5]).start()
                         SavingData(countSound, countMotion, motiontrack.countCamera, minutes)
                         countMotion = 0
                         countSound = 0
