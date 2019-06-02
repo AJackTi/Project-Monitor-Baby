@@ -221,6 +221,13 @@
         </section>
         <script>
             $(document).ready(function () {
+                const I = require('./node_modules/immutable');
+                const data = require('../../data.json');
+
+                const iData = I.List(data);
+
+
+
                 function SaveJsonFile(data) {
                     $.ajax({
                         type: 'POST',
